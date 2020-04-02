@@ -51,7 +51,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new EnvironmentPlugin(['NODE_ENV', 'BACKEND_URL']),
+    new EnvironmentPlugin(['NODE_ENV', 'BACKEND_URL', 'DISCORD_REDIRECT_URI', 'DISCORD_CLIENT_ID', 'GITHUB_CLIENT_ID']),
     new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html'

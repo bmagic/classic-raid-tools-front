@@ -25,7 +25,7 @@ AuthRedirect.propTypes = {
   dispatch: PropTypes.func,
   location: PropTypes.object,
   token: PropTypes.string,
-  service: PropTypes.service,
+  service: PropTypes.string,
   history: PropTypes.object
 }
 
