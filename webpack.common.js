@@ -1,5 +1,4 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin')
-const { EnvironmentPlugin } = require('webpack')
 
 module.exports = {
 
@@ -51,7 +50,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new EnvironmentPlugin(['NODE_ENV', 'BACKEND_URL', 'DISCORD_REDIRECT_URI', 'DISCORD_CLIENT_ID', 'GITHUB_CLIENT_ID']),
     new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html'
