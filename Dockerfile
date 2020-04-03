@@ -1,3 +1,4 @@
+# Build code with nodejs
 FROM node:alpine AS builder
 
 ARG NODE_ENV
@@ -18,6 +19,7 @@ COPY . .
 RUN npm install
 RUN npm run-script build
 
+# Serve code with nginx
 FROM nginx:stable-alpine
 
 RUN rm -rf /etc/nginx/conf.d
