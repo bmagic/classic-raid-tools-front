@@ -5,7 +5,9 @@ const initialState = {
   errors: [],
   user: null,
   userCharacters: [],
-  users: []
+  users: [],
+  nextRaids: [],
+  raid: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -49,6 +51,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         users: action.result
+      }
+    case 'GET_NEXT_RAIDS_SUCCESS':
+      console.log(action)
+      return {
+        ...state,
+        nextRaids: action.result
+      }
+    case 'GET_RAID_SUCCESS':
+      console.log(action)
+      return {
+        ...state,
+        raid: action.result
       }
     default:
       return state

@@ -15,6 +15,13 @@ import WarlockDD from '../../../static/Spells/Spell_Nature_Drowsy.png'
 import WarriorTank from '../../../static/Abilities/Ability_Warrior_DefensiveStance.png'
 import WarriorCaC from '../../../static/Abilities/Ability_SteelMelee.png'
 
+import Onyxia from '../../../static/Raids/wow_classic_logo_onyxia.png'
+import MoltenCore from '../../../static/Raids/wow_classic_logo_molten_core.png'
+import BlackwingLair from '../../../static/Raids/wow_classic_logo_blackwing_lair.png'
+import ZulGurub from '../../../static/Raids/wow_classic_logo_zul_gurub.png'
+import AhnQiraj from '../../../static/Raids/wow_classic_logo_ahn_qiraj.png'
+import Naxxramas from '../../../static/Raids/wow_classic_logo_naxxramas.png'
+
 export const wowClass = {
   druid:
     {
@@ -48,4 +55,14 @@ export const wowClass = {
     tank: WarriorTank,
     cac: WarriorCaC
   }
+}
+
+export const wowRaids = {
+  onyxia: Onyxia,
+  mc: MoltenCore,
+  bwl: BlackwingLair,
+  zg: ZulGurub,
+  aq20: AhnQiraj,
+  aq40: AhnQiraj,
+  naxxramas: Naxxramas
 }

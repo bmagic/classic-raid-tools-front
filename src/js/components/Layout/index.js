@@ -17,7 +17,7 @@ const Layout = ({ children }) => (
       </div>
     </main>
     <footer className='footer'>
-      Footer
+      Made by Bmagic
     </footer>
   </div>
 )

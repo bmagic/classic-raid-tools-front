@@ -28,12 +28,24 @@ function * deleteUserCharacter (action) {
   yield * deleteRequest(`/v1/user/characters/${action.id}`, 'GET_USER_CHARACTERS')
 }
 
-function * getUsers (action) {
+function * getUsers () {
   yield * getRequest('/v1/users', 'GET_USERS_SUCCESS')
 }
 
 function * updateRoles (action) {
   yield * postRequest('/v1/users/roles', 'GET_USERS', { roles: action.roles, id: action.id })
+}
+
+function * getNextRaids () {
+  yield * getRequest('/v1/raids/next', 'GET_NEXT_RAIDS_SUCCESS')
+}
+
+function * createRaid (action) {
+  yield * postRequest('/v1/raids', 'GET_NEXT_RAIDS', { date: action.date, instance: action.instance })
+}
+
+function * getRaid (action) {
+  yield * getRequest(`/v1/raids/${action.id}`, 'GET_RAID_SUCCESS')
 }
 
 function * getRequest (url, callback) {
@@ -113,4 +125,7 @@ export default function * rootSaga () {
   yield takeLeading('DELETE_USER_CHARACTER', deleteUserCharacter)
   yield takeLeading('GET_USERS', getUsers)
   yield takeLeading('UPDATE_ROLES', updateRoles)
+  yield takeLeading('GET_NEXT_RAIDS', getNextRaids)
+  yield takeLeading('CREATE_RAID', createRaid)
+  yield takeLeading('GET_RAID', getRaid)
 }
