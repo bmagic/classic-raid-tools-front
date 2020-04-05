@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../../components/Layout'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import OAuthStatusButton from '../../components/OAuthStatusButton'
 
 class User extends React.Component {
   componentDidMount () {
@@ -9,12 +10,35 @@ class User extends React.Component {
   }
 
   render () {
-    if (this.props.user === null) return <div>Loading</div>
+    const { user } = this.props
+    if (user === null) return <div>Loading</div>
     return (
       <Layout>
-        <h1 className='title'>Welcome {this.props.user.username}</h1>
-        {JSON.stringify(this.props.user)}
-
+        <h1 className='title'>Profile</h1>
+        <div className='level'>
+          <div className='level-left'>
+            <div className='level-item'>
+              Email: {user.email}
+            </div>
+          </div>
+        </div>
+        <div className='level'>
+          <div className='level-left'>
+            <div className='level-item'>
+              Roles: {user.roles.join(', ')}
+            </div>
+          </div>
+        </div>
+        <div className='level'>
+          <div className='level-left'>
+            <div className='level-item'>
+              <OAuthStatusButton service='discord' id={user.discordId} />
+            </div>
+            <div className='level-item'>
+              <OAuthStatusButton service='github' id={user.githubId} />
+            </div>
+          </div>
+        </div>
       </Layout>
     )
   }

@@ -1,5 +1,17 @@
 import axios from 'axios'
 
+export async function refreshToken (state) {
+  const headers = {}
+
+  const result = await axios({
+    url: `${process.env.BACKEND_URL}/v1/token`,
+    method: 'post',
+    data: { refreshToken: state.refreshToken },
+    headers
+  })
+  return result
+}
+
 export async function getUrl (url, state) {
   const headers = {}
 

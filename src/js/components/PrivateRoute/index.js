@@ -7,7 +7,7 @@ import Login from '../../pages/Login'
 
 class PrivateRoute extends React.Component {
   render () {
-    const { user, token, component: Component, ...rest } = this.props
+    const { user, token, dispatch, component: Component, roles, ...rest } = this.props
 
     if (user === null) {
       if (token) {
@@ -15,9 +15,20 @@ class PrivateRoute extends React.Component {
       } else {
         return <Login />
       }
-    }
+    } else {
+      if (roles) {
+        let access = false
 
-    if (user) {
+        for (const index in user.roles) {
+          const role = user.roles[index]
+          if (roles.includes(role)) access = true
+        }
+
+        if (!access) {
+          return <div>Access denied</div>
+        }
+      }
+
       return (
         <Route {...rest} render={
           (props) => {
@@ -34,7 +45,7 @@ PrivateRoute.propTypes = {
   component: PropTypes.any,
   token: PropTypes.string,
   user: PropTypes.object,
-  permission: PropTypes.array
+  roles: PropTypes.array
 }
 
 function mapStateToProps (state) {

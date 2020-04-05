@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import LogoutButton from '../LogoutButton'
+import AdminMenu from '../AdminMenu'
 
 class Header extends React.Component {
   constructor (props) {
@@ -30,7 +31,9 @@ class Header extends React.Component {
             </div>
             <div id="navbar" className={`navbar-menu ${this.state.isOpen ? 'is-active' : ''}`}>
               <div className="navbar-end">
+                <Link to="/characters" className='navbar-item'>Characters</Link>
                 <Link to="/user" className="navbar-item">Profile</Link>
+                <AdminMenu/>
                 <div className='navbar-item'> <LogoutButton/></div>
               </div>
             </div>

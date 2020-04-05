@@ -1,9 +1,11 @@
 const initialState = {
   loading: false,
   token: null,
+  refreshToken: null,
   errors: [],
   user: null,
-  talks: []
+  userCharacters: [],
+  users: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -22,24 +24,31 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         token: null,
+        refreshToken: null,
         user: null
       }
     case 'GET_USER_SUCCESS':
       return {
         ...state,
-        user: action.user
+        user: action.result
       }
     case 'REGISTER_SUCCESS':
     case 'LOGIN_SUCCESS':
     case 'GET_TOKEN_SUCCESS':
       return {
         ...state,
-        token: action.token
+        token: action.token,
+        refreshToken: action.refreshToken
       }
-    case 'GET_USER_TALKS_SUCCESS':
+    case 'GET_USER_CHARACTERS_SUCCESS':
       return {
         ...state,
-        talks: action.talks
+        userCharacters: action.result
+      }
+    case 'GET_USERS_SUCCESS':
+      return {
+        ...state,
+        users: action.result
       }
     default:
       return state

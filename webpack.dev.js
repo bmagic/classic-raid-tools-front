@@ -12,7 +12,7 @@ module.exports = merge(common, {
     new EnvironmentPlugin({
       NODE_ENV: 'production',
       BACKEND_URL: 'http://localhost:3000',
-      DISCORD_REDIRECT_URI: 'https://localhost:8080/auth-discord',
+      DISCORD_REDIRECT_URI: 'http://localhost:8080/auth-discord',
       DISCORD_CLIENT_ID: '682243386228473873',
       GITHUB_CLIENT_ID: '5183c8d1fe3cd5ecce7b'
     })

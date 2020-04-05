@@ -1,25 +1,39 @@
+$druid:#FF7D0A;
+$hunt:#ABD473;
+$mage:#69CCF0;
+$priest:#FFFFFF;
+$rogue:#FFF569;
+$shaman:#0070DE;
+$warlock:#9482C9;
+$warrior:#C79C6E;
 
-.class-druid{
-  background-color:#FF7D0A;
+.bg-class-druid{
+  background-color:$druid;
 }
-.class-hunt{
-  background-color:#ABD473
+.bg-class-hunt{
+  background-color:$hunt;
 }
-.class-mage{
-  background-color:#69CCF0
+.bg-class-mage{
+  background-color:$mage
 }
-.class-priest{
-  background-color:#FFFFFF;
+.bg-class-priest{
+  background-color:$priest
 }
-.class-rogue{
-  background-color:#FFF569
+.bg-class-rogue{
+  background-color:$rogue;
 }
-.class-shaman{
-  background-color:#0070DE
+.bg-class-shaman{
+  background-color:$shaman;
 }
-.class-warlock{
-  background-color:#9482C9
+.bg-class-warlock{
+  background-color:$warlock;
 }
-.class-warrior{
-  background-color:#C79C6E
+.bg-class-warrior{
+  background-color:$warrior;
+}
+
+
+.level-is-shrinkable .level-left,
+.level-is-shrinkable .level-right {
+  flex-shrink: 1;
 }

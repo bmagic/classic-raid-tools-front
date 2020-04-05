@@ -1,92 +1,116 @@
-import { all, takeLatest, put, select } from 'redux-saga/effects'
-import { deleteUrl, getUrl, postUrl } from './request'
-
-function * getUser () {
-  const state = yield select()
-  try {
-    const result = yield getUrl(`${process.env.BACKEND_URL}/v1/user`, state)
-    yield put({ type: 'GET_USER_SUCCESS', user: result.data })
-  } catch (e) {
-    if (e.response.status === 401) {
-      yield put({ type: 'DISCONNECT' })
-    } else {
-
-    }
-
-    yield put({ type: 'ADD_ERROR', error: e.response.data })
-  }
-}
-
-function * createUser (action) {
-  const state = yield select()
-  try {
-    const result = yield postUrl(`${process.env.BACKEND_URL}/v1/user/register`, { email: action.email, password: action.password }, state)
-    yield put({ type: 'REGISTER_SUCCESS', token: result.data.token })
-    yield put({ type: 'GET_USER' })
-  } catch (e) {
-    yield put({ type: 'ADD_ERROR', error: e.response.data })
-  }
-}
-
-function * login (action) {
-  const state = yield select()
-  try {
-    const result = yield postUrl(`${process.env.BACKEND_URL}/v1/user/login`, { email: action.email, password: action.password }, state)
-    yield put({ type: 'LOGIN_SUCCESS', token: result.data.token })
-    yield put({ type: 'GET_USER' })
-  } catch (e) {
-    yield put({ type: 'ADD_ERROR', error: e.response.data })
-  }
-}
+import { takeLeading, put, select } from 'redux-saga/effects'
+import { deleteUrl, getUrl, postUrl, refreshToken } from './request'
 
 function * getToken (action) {
   const state = yield select()
   try {
     const result = yield getUrl(`${process.env.BACKEND_URL}/v1/oauth/${action.service}?code=${action.code}`, state)
-    yield put({ type: 'GET_TOKEN_SUCCESS', token: result.data.token })
+    yield put({ type: 'GET_TOKEN_SUCCESS', token: result.data.token, refreshToken: result.data.refreshToken })
     yield put({ type: 'GET_USER' })
   } catch (e) {
     yield put({ type: 'ADD_ERROR', error: e.response.data })
   }
 }
 
-function * getUserTalks () {
+function * getUser () {
+  yield * getRequest('/v1/user', 'GET_USER_SUCCESS')
+}
+
+function * getUserCharacters () {
+  yield * getRequest('/v1/user/characters', 'GET_USER_CHARACTERS_SUCCESS')
+}
+
+function * createUserCharacter (action) {
+  yield * postRequest('/v1/user/characters', 'GET_USER_CHARACTERS', { name: action.name, spec: action.spec, class: action.class })
+}
+
+function * deleteUserCharacter (action) {
+  yield * deleteRequest(`/v1/user/characters/${action.id}`, 'GET_USER_CHARACTERS')
+}
+
+function * getUsers (action) {
+  yield * getRequest('/v1/users', 'GET_USERS_SUCCESS')
+}
+
+function * updateRoles (action) {
+  yield * postRequest('/v1/users/roles', 'GET_USERS', { roles: action.roles, id: action.id })
+}
+
+function * getRequest (url, callback) {
   const state = yield select()
   try {
-    const result = yield getUrl(`${process.env.BACKEND_URL}/v1/user/talks`, state)
-    yield put({ type: 'GET_USER_TALKS_SUCCESS', talks: result.data })
+    const result = yield getUrl(`${process.env.BACKEND_URL}${url}`, state)
+    yield put({ type: callback, result: result.data })
   } catch (e) {
-    yield put({ type: 'ADD_ERROR', error: e.response.data })
+    if (e.response.status === 401) {
+      try {
+        const refreshResult = yield refreshToken(state)
+        yield put({ type: 'GET_TOKEN_SUCCESS', token: refreshResult.data.token, refreshToken: refreshResult.data.refreshToken })
+        state.token = refreshResult.data.token
+        state.refreshToken = refreshResult.data.refreshToken
+        const result2 = yield getUrl(`${process.env.BACKEND_URL}${url}`, state)
+        yield put({ type: callback, result: result2.data })
+      } catch (e) {
+        yield put({ type: 'DISCONNECT' })
+      }
+    } else {
+      yield put({ type: 'ADD_ERROR', error: e.response.data })
+    }
   }
 }
 
-function * addUserTalk (action) {
+function * postRequest (url, callback, body) {
   const state = yield select()
   try {
-    yield postUrl(`${process.env.BACKEND_URL}/v1/user/talks`, action.talk, state)
-    yield put({ type: 'GET_USER_TALKS' })
+    const result = yield postUrl(`${process.env.BACKEND_URL}${url}`, body, state)
+    yield put({ type: callback, result: result.data })
   } catch (e) {
-    yield put({ type: 'ADD_ERROR', error: e.response.data })
+    if (e.response.status === 401) {
+      try {
+        const refreshResult = yield refreshToken(state)
+        yield put({ type: 'GET_TOKEN_SUCCESS', token: refreshResult.data.token, refreshToken: refreshResult.data.refreshToken })
+        state.token = refreshResult.data.token
+        state.refreshToken = refreshResult.data.refreshToken
+        const result2 = yield postUrl(`${process.env.BACKEND_URL}${url}`, body, state)
+        yield put({ type: callback, result: result2.data })
+      } catch (e) {
+        yield put({ type: 'DISCONNECT' })
+      }
+    } else {
+      yield put({ type: 'ADD_ERROR', error: e.response.data })
+    }
   }
 }
-function * deleteUserTalk (action) {
+
+function * deleteRequest (url, callback) {
   const state = yield select()
   try {
-    yield deleteUrl(`${process.env.BACKEND_URL}/v1/talks/${action.talkId}`, state)
-    yield put({ type: 'GET_USER_TALKS' })
+    const result = yield deleteUrl(`${process.env.BACKEND_URL}${url}`, state)
+    yield put({ type: callback, result: result.data })
   } catch (e) {
-    yield put({ type: 'ADD_ERROR', error: e.response.data })
+    if (e.response.status === 401) {
+      try {
+        const refreshResult = yield refreshToken(state)
+        yield put({ type: 'GET_TOKEN_SUCCESS', token: refreshResult.data.token, refreshToken: refreshResult.data.refreshToken })
+        state.token = refreshResult.data.token
+        state.refreshToken = refreshResult.data.refreshToken
+        const result2 = yield deleteUrl(`${process.env.BACKEND_URL}${url}`, state)
+        yield put({ type: callback, result: result2.data })
+      } catch (e) {
+        yield put({ type: 'DISCONNECT' })
+      }
+    } else {
+      yield put({ type: 'ADD_ERROR', error: e.response.data })
+    }
   }
 }
 
 export default function * rootSaga () {
-  yield takeLatest('GET_USER', getUser)
-  yield takeLatest('REGISTER', createUser)
-  yield takeLatest('LOGIN', login)
-  yield takeLatest('GET_TOKEN', getToken)
-  yield takeLatest('GET_USER_TALKS', getUserTalks)
-  yield takeLatest('ADD_USER_TALK', addUserTalk)
-  yield takeLatest('DELETE_USER_TALK', deleteUserTalk)
-
-  yield all([])
+  yield takeLeading('GET_USER', getUser)
+  yield takeLeading('GET_TOKEN', getToken)
+  yield takeLeading('CREATE_USER_CHARACTER', createUserCharacter)
+  yield takeLeading('GET_USER_CHARACTERS', getUserCharacters)
+  yield takeLeading('DELETE_USER_CHARACTER', deleteUserCharacter)
+  yield takeLeading('GET_USERS', getUsers)
+  yield takeLeading('UPDATE_ROLES', updateRoles)
 }

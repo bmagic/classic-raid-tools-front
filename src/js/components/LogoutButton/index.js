@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-const LogoutButton = ({ history, dispatch }) => {
+const LogoutButton = ({ dispatch }) => {
   return (
     <div className='button' onClick={() => {
       dispatch({ type: 'DISCONNECT' })
@@ -13,7 +13,6 @@ const LogoutButton = ({ history, dispatch }) => {
   )
 }
 LogoutButton.propTypes = {
-  history: PropTypes.object,
   dispatch: PropTypes.func
 }
 

@@ -1,6 +1,8 @@
 # Classic Raid Tools Front
-!! WIP !!  
-
+Role : 
+  - Admin (Gestion des utilisateurs)
+  - Officier (Création et édition des raids + Création d'annonces)
+  - Membre (Inscription aux raids)
 
 ENV: 
 NODE_ENV
