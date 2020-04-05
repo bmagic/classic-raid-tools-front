@@ -52,14 +52,22 @@ const reducer = (state = initialState, action) => {
         ...state,
         users: action.result
       }
+    case 'GET_NEXT_RAIDS':
+      return {
+        ...state,
+        nextRaids: []
+      }
     case 'GET_NEXT_RAIDS_SUCCESS':
-      console.log(action)
       return {
         ...state,
         nextRaids: action.result
       }
+    case 'GET_RAID':
+      return {
+        ...state,
+        raid: null
+      }
     case 'GET_RAID_SUCCESS':
-      console.log(action)
       return {
         ...state,
         raid: action.result
