@@ -48,6 +48,13 @@ function * getRaid (action) {
   yield * getRequest(`/v1/raids/${action.id}`, 'GET_RAID_SUCCESS')
 }
 
+function * createRegistration (action) {
+  yield * postRequest('/v1/raids/registration', '', { characterId: action.characterId, raidId: action.raidId, status: action.status })
+}
+function * getRegistrations (action) {
+  yield * getRequest(`/v1/raids/${action.raidId}/registrations`, 'GET_REGISTRATIONS_SUCCESS')
+}
+
 function * getRequest (url, callback) {
   const state = yield select()
   try {
@@ -128,4 +135,6 @@ export default function * rootSaga () {
   yield takeLeading('GET_NEXT_RAIDS', getNextRaids)
   yield takeLeading('CREATE_RAID', createRaid)
   yield takeLeading('GET_RAID', getRaid)
+  yield takeLeading('CREATE_REGISTRATION', createRegistration)
+  yield takeLeading('GET_REGISTRATIONS', getRegistrations)
 }

@@ -3,10 +3,29 @@ import Layout from '../../components/Layout'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import WowRaidImage from '../../components/WowRaidImage'
+import io from 'socket.io-client'
+import CharactersSubscribeForm from '../../components/CharactersRegistrationForm'
+import CharactersRegistrationList from '../../components/CharactersRegistrationList'
 
 class Raid extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { socket: null }
+  }
+
   componentDidMount () {
+    const socket = io(process.env.BACKEND_URL)
+    this.setState({ socket })
+    socket.emit('room', this.props.match.params.id)
+    socket.on('ACTION', (data) => {
+      this.props.dispatch({ type: data.type, raidId: data.raidId })
+    })
+
     this.props.dispatch({ type: 'GET_RAID', id: this.props.match.params.id })
+  }
+
+  componentWillUnmount () {
+    this.state.socket.close()
   }
 
   render () {
@@ -30,16 +49,9 @@ class Raid extends React.Component {
             </p>
           </div>
           <div className='column is-4'>
-            <p className='content'>
-              Un formulaire d'inscription pour les personnages du joueur avec leur status
-              <ul>
-                <li>Inscrit</li>
-                <li>Absent</li>
-                <li>Présent mais pas chaud</li>
-              </ul>
-            </p>
+            <CharactersSubscribeForm raidId={this.props.match.params.id} />
+            <CharactersRegistrationList raidId={this.props.match.params.id} />
           </div>
-
         </div>
       </Layout>
     )

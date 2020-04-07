@@ -7,7 +7,8 @@ const initialState = {
   userCharacters: [],
   users: [],
   nextRaids: [],
-  raid: null
+  raid: null,
+  registrations: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -71,6 +72,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         raid: action.result
+      }
+    case 'GET_REGISTRATIONS_SUCCESS':
+      return {
+        ...state,
+        registrations: action.result
       }
     default:
       return state
