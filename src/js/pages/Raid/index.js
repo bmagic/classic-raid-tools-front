@@ -51,7 +51,7 @@ class Raid extends React.Component {
             Un joli tableau avec les places des gens dans le raid
             <hr/>
             <h2 className='subtitle'>Ragnaros</h2>
-            Position 2 (Info relative uniquement au joueur)
+            Position 2 (Info relative uniquement au joueur) avec l'image de la map ici.
             <hr/>
             <h2 className='subtitle'>Majordomo Example d'un joueur Mage Nuked (les autres ne le voit pas) </h2>
               Sheep carré<br/>
@@ -74,7 +74,7 @@ class Raid extends React.Component {
                 <li>Si il a un role précis sur le boss</li>
                 <li>etc etc</li>
               </ul>
-              Le tout est dynamique et se refresh en live si il y a un changement fait par un officier
+              Le tout est <strong>dynamique et se refresh en live</strong> si il y a un changement fait par un officier
             </p>
           </div>
           <div className='column is-4'>
