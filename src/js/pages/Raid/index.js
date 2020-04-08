@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import WowRaidImage from '../../components/WowRaidImage'
 import io from 'socket.io-client'
+import moment from 'moment'
+
+import './styles.scss'
 import CharactersSubscribeForm from '../../components/CharactersRegistrationForm'
 import CharactersRegistrationList from '../../components/CharactersRegistrationList'
 
@@ -33,10 +36,36 @@ class Raid extends React.Component {
     if (raid === null) return <Layout><div>Chargement en cours </div></Layout>
     return (
       <Layout>
-        <div className='columns'>
+        <div className='raid columns'>
           <div className='column is-8'>
-            <div><WowRaidImage instance={raid.instance} /></div>
-            <div> {raid.date}</div>
+            <div className='date is-size-4'> {moment(raid.date).format('dddd DD MMMM YYYY')}</div>
+            <hr/>
+            <h2 className='subtitle'>Infos</h2>
+            <div>Heure de départ: {moment(raid.date).format('HH')}h{moment(raid.date).format('mm')}</div>
+            <div>Groupage: 21h00 wisp Spoonk</div>
+            <div>TP: 21h00 </div>
+            <div>Raid Leader: Keywar</div>
+            <div>Logs : Url vers les logs</div>
+            <hr/>
+            <h2 className='subtitle'>Rooster</h2>
+            Un joli tableau avec les places des gens dans le raid
+            <hr/>
+            <h2 className='subtitle'>Ragnaros</h2>
+            Position 2 (Info relative uniquement au joueur)
+            <hr/>
+            <h2 className='subtitle'>Majordomo Example d'un joueur Mage Nuked (les autres ne le voit pas) </h2>
+              Sheep carré<br/>
+              Tu as l'infusion de Bmagic
+            <hr/>
+            <h2 className='subtitle'>Majordomo Example d'un joueur Heal Bmagic (les autres ne le voit pas) </h2>
+              Heal KeyWar (MT Majordomo)<br/>
+              Pose ton infusion sur Nuked
+            <hr/>
+            <h2 className='subtitle'>Majordomo Example Tank (les autres ne le voit pas)</h2>
+            MT1: Keywar<br/>
+            MT2: La Chaussette<br/>
+            MT3: Zw
+            <hr/>
             <p className='content'>
               L'objectif de cette page est de fournir sous forme de fiche les informations utiles pour le joueur uniquement :
               <ul>
@@ -49,6 +78,9 @@ class Raid extends React.Component {
             </p>
           </div>
           <div className='column is-4'>
+            <div className='logo has-text-centered'>
+              <WowRaidImage instance={raid.instance} />
+            </div>
             <CharactersSubscribeForm raidId={this.props.match.params.id} />
             <CharactersRegistrationList raidId={this.props.match.params.id} />
           </div>
