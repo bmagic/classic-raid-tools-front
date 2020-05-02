@@ -1,0 +1,13 @@
+.raid-info{
+  .info-item{
+    margin-bottom:10px
+  }
+  .edit-button{
+    display:none;
+  }
+  &:hover{
+    .edit-button{
+      display:block;
+    }
+  }
+}
