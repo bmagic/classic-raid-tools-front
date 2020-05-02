@@ -20,7 +20,7 @@ class RaidForm extends React.Component {
 
   onSubmit (e) {
     e.preventDefault()
-    this.props.dispatch({ type: 'CREATE_RAID', date: this.state.date, instance: this.state.instance })
+    this.props.dispatch({ type: 'CREATE_RAID', date: moment(this.state.date).toISOString(), instance: this.state.instance })
     this.setState({ date: moment().format('YYYY-MM-DDTHH:mm'), instance: 'mc' })
   }
 
