@@ -1,14 +1,13 @@
 const initialState = {
   loading: false,
-  token: null,
-  refreshToken: null,
   errors: [],
   user: null,
   userCharacters: [],
   users: [],
   nextRaids: [],
   raid: null,
-  registrations: []
+  registrations: [],
+  registrationLogs: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,25 +22,13 @@ const reducer = (state = initialState, action) => {
         ...state,
         errors: []
       }
-    case 'DISCONNECT':
-      return {
-        ...state,
-        token: null,
-        refreshToken: null,
-        user: null
-      }
+    case 'LOGOUT_SUCCESS':
+      return initialState
     case 'GET_USER_SUCCESS':
+
       return {
         ...state,
-        user: action.result
-      }
-    case 'REGISTER_SUCCESS':
-    case 'LOGIN_SUCCESS':
-    case 'GET_TOKEN_SUCCESS':
-      return {
-        ...state,
-        token: action.token,
-        refreshToken: action.refreshToken
+        user: action.result === '' ? null : action.result
       }
     case 'GET_USER_CHARACTERS_SUCCESS':
       return {
@@ -77,6 +64,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         registrations: action.result
+      }
+    case 'GET_REGISTRATION_LOGS_SUCCESS':
+      return {
+        ...state,
+        registrationLogs: action.result
       }
     default:
       return state

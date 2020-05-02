@@ -1,15 +1,12 @@
-import { takeLeading, put, select } from 'redux-saga/effects'
-import { deleteUrl, getUrl, postUrl, refreshToken } from './request'
+import { takeLeading, put } from 'redux-saga/effects'
+import { deleteUrl, getUrl, postUrl, putUrl } from './request'
 
-function * getToken (action) {
-  const state = yield select()
-  try {
-    const result = yield getUrl(`${process.env.BACKEND_URL}/v1/oauth/${action.service}?code=${action.code}`, state)
-    yield put({ type: 'GET_TOKEN_SUCCESS', token: result.data.token, refreshToken: result.data.refreshToken })
-    yield put({ type: 'GET_USER' })
-  } catch (e) {
-    yield put({ type: 'ADD_ERROR', error: e.response.data })
-  }
+function * login (action) {
+  yield * getRequest(`/v1/oauth/discord?code=${action.code}`, 'GET_USER')
+}
+
+function * logout (action) {
+  yield * getRequest('/v1/user/logout', 'LOGOUT_SUCCESS')
 }
 
 function * getUser () {
@@ -49,29 +46,25 @@ function * getRaid (action) {
 }
 
 function * createRegistration (action) {
-  yield * postRequest('/v1/raids/registration', '', { characterId: action.characterId, raidId: action.raidId, status: action.status })
+  yield * postRequest('/v1/raids/registration', '', { characterId: action.characterId, raidId: action.raidId, status: action.status, favorite: action.favorite })
 }
 function * getRegistrations (action) {
   yield * getRequest(`/v1/raids/${action.raidId}/registrations`, 'GET_REGISTRATIONS_SUCCESS')
 }
+function * getRegistrationLogs (action) {
+  yield * getRequest(`/v1/raids/${action.raidId}/registration-logs`, 'GET_REGISTRATION_LOGS_SUCCESS')
+}
+function * updateUser (action) {
+  yield * putRequest('/v1/user', 'GET_USER', action.user)
+}
 
 function * getRequest (url, callback) {
-  const state = yield select()
   try {
-    const result = yield getUrl(`${process.env.BACKEND_URL}${url}`, state)
+    const result = yield getUrl(`${process.env.BACKEND_URL}${url}`)
     yield put({ type: callback, result: result.data })
   } catch (e) {
     if (e.response.status === 401) {
-      try {
-        const refreshResult = yield refreshToken(state)
-        yield put({ type: 'GET_TOKEN_SUCCESS', token: refreshResult.data.token, refreshToken: refreshResult.data.refreshToken })
-        state.token = refreshResult.data.token
-        state.refreshToken = refreshResult.data.refreshToken
-        const result2 = yield getUrl(`${process.env.BACKEND_URL}${url}`, state)
-        yield put({ type: callback, result: result2.data })
-      } catch (e) {
-        yield put({ type: 'DISCONNECT' })
-      }
+      yield put({ type: 'DISCONNECT' })
     } else {
       yield put({ type: 'ADD_ERROR', error: e.response.data })
     }
@@ -79,22 +72,24 @@ function * getRequest (url, callback) {
 }
 
 function * postRequest (url, callback, body) {
-  const state = yield select()
   try {
-    const result = yield postUrl(`${process.env.BACKEND_URL}${url}`, body, state)
+    const result = yield postUrl(`${process.env.BACKEND_URL}${url}`, body)
     yield put({ type: callback, result: result.data })
   } catch (e) {
     if (e.response.status === 401) {
-      try {
-        const refreshResult = yield refreshToken(state)
-        yield put({ type: 'GET_TOKEN_SUCCESS', token: refreshResult.data.token, refreshToken: refreshResult.data.refreshToken })
-        state.token = refreshResult.data.token
-        state.refreshToken = refreshResult.data.refreshToken
-        const result2 = yield postUrl(`${process.env.BACKEND_URL}${url}`, body, state)
-        yield put({ type: callback, result: result2.data })
-      } catch (e) {
-        yield put({ type: 'DISCONNECT' })
-      }
+      yield put({ type: 'DISCONNECT' })
+    } else {
+      yield put({ type: 'ADD_ERROR', error: e.response.data })
+    }
+  }
+}
+function * putRequest (url, callback, body) {
+  try {
+    const result = yield putUrl(`${process.env.BACKEND_URL}${url}`, body)
+    yield put({ type: callback, result: result.data })
+  } catch (e) {
+    if (e.response.status === 401) {
+      yield put({ type: 'DISCONNECT' })
     } else {
       yield put({ type: 'ADD_ERROR', error: e.response.data })
     }
@@ -102,22 +97,12 @@ function * postRequest (url, callback, body) {
 }
 
 function * deleteRequest (url, callback) {
-  const state = yield select()
   try {
-    const result = yield deleteUrl(`${process.env.BACKEND_URL}${url}`, state)
+    const result = yield deleteUrl(`${process.env.BACKEND_URL}${url}`)
     yield put({ type: callback, result: result.data })
   } catch (e) {
     if (e.response.status === 401) {
-      try {
-        const refreshResult = yield refreshToken(state)
-        yield put({ type: 'GET_TOKEN_SUCCESS', token: refreshResult.data.token, refreshToken: refreshResult.data.refreshToken })
-        state.token = refreshResult.data.token
-        state.refreshToken = refreshResult.data.refreshToken
-        const result2 = yield deleteUrl(`${process.env.BACKEND_URL}${url}`, state)
-        yield put({ type: callback, result: result2.data })
-      } catch (e) {
-        yield put({ type: 'DISCONNECT' })
-      }
+      yield put({ type: 'DISCONNECT' })
     } else {
       yield put({ type: 'ADD_ERROR', error: e.response.data })
     }
@@ -126,7 +111,8 @@ function * deleteRequest (url, callback) {
 
 export default function * rootSaga () {
   yield takeLeading('GET_USER', getUser)
-  yield takeLeading('GET_TOKEN', getToken)
+  yield takeLeading('LOGIN', login)
+  yield takeLeading('LOGOUT', logout)
   yield takeLeading('CREATE_USER_CHARACTER', createUserCharacter)
   yield takeLeading('GET_USER_CHARACTERS', getUserCharacters)
   yield takeLeading('DELETE_USER_CHARACTER', deleteUserCharacter)
@@ -137,4 +123,6 @@ export default function * rootSaga () {
   yield takeLeading('GET_RAID', getRaid)
   yield takeLeading('CREATE_REGISTRATION', createRegistration)
   yield takeLeading('GET_REGISTRATIONS', getRegistrations)
+  yield takeLeading('GET_REGISTRATION_LOGS', getRegistrationLogs)
+  yield takeLeading('UPDATE_USER', updateUser)
 }

@@ -1,49 +1,38 @@
 import axios from 'axios'
 
-export async function refreshToken (state) {
-  const headers = {}
-
-  const result = await axios({
-    url: `${process.env.BACKEND_URL}/v1/token`,
-    method: 'post',
-    data: { refreshToken: state.refreshToken },
-    headers
-  })
-  return result
-}
-
-export async function getUrl (url, state) {
-  const headers = {}
-
-  if (state.token !== null) { headers.authorization = `Bearer ${state.token}` }
+export async function getUrl (url) {
   const result = await axios({
     url: url,
-    headers
+    withCredentials: true
   })
   return result
 }
 
-export async function postUrl (url, body, state) {
-  const headers = {}
-
-  if (state.token !== null) { headers.authorization = `Bearer ${state.token}` }
+export async function postUrl (url, body) {
   const result = await axios({
     url: url,
     method: 'post',
     data: body,
-    headers
+    withCredentials: true
   })
   return result
 }
 
-export async function deleteUrl (url, state) {
-  const headers = {}
+export async function putUrl (url, body) {
+  const result = await axios({
+    url: url,
+    method: 'put',
+    data: body,
+    withCredentials: true
+  })
+  return result
+}
 
-  if (state.token !== null) { headers.authorization = `Bearer ${state.token}` }
+export async function deleteUrl (url) {
   const result = await axios({
     url: url,
     method: 'delete',
-    headers
+    withCredentials: true
   })
   return result
 }

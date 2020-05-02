@@ -1,8 +1,8 @@
 import React from 'react'
-import Layout from '../../components/Layout'
+import Layout from '../../components/Common/Layout'
 
-import CharacterForm from '../../components/CharacterForm'
-import CharactersList from '../../components/CharactersList'
+import CharacterForm from '../../components/Character/CharacterForm'
+import CharactersList from '../../components/Character/CharactersList'
 
 class Characters extends React.Component {
   render () {

@@ -1,14 +1,16 @@
 import React from 'react'
-import Layout from '../../components/Layout'
+import Layout from '../../components/Common/Layout'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import WowRaidImage from '../../components/WowRaidImage'
+import WowRaidImage from '../../components/Common/WowRaidImage'
 import io from 'socket.io-client'
 import moment from 'moment'
+import CharactersSubscribeForm from '../../components/Raid/CharactersRegistrationForm'
+import CharactersRegistrationList from '../../components/Raid/CharactersRegistrationList'
+import CharactersRegistrationLogs from '../../components/Raid/CharactersRegistrationLogs'
 
 import './styles.scss'
-import CharactersSubscribeForm from '../../components/CharactersRegistrationForm'
-import CharactersRegistrationList from '../../components/CharactersRegistrationList'
+
 
 class Raid extends React.Component {
   constructor (props) {
@@ -32,57 +34,41 @@ class Raid extends React.Component {
   }
 
   render () {
-    const { user, raid } = this.props
+    const { raid } = this.props
     if (raid === null) return <Layout><div>Chargement en cours </div></Layout>
     return (
       <Layout>
-        <div className='raid columns'>
-          <div className='column is-8'>
-            <div className='date is-size-4'> {moment(raid.date).format('dddd DD MMMM YYYY')}</div>
-            <hr/>
-            <h2 className='subtitle'>Infos</h2>
-            <div>Heure de départ: {moment(raid.date).format('HH')}h{moment(raid.date).format('mm')}</div>
-            <div>Groupage: 21h00 wisp Spoonk</div>
-            <div>TP: 21h00 </div>
-            <div>Raid Leader: Keywar</div>
-            <div>Logs : Url vers les logs</div>
-            <hr/>
-            <h2 className='subtitle'>Rooster</h2>
-            Un joli tableau avec les places des gens dans le raid
-            <hr/>
-            <h2 className='subtitle'>Ragnaros</h2>
-            Position 2 (Info relative uniquement au joueur) avec l'image de la map ici.
-            <hr/>
-            <h2 className='subtitle'>Majordomo Example d'un joueur Mage Nuked (les autres ne le voit pas) </h2>
-              Sheep carré<br/>
-              Tu as l'infusion de Bmagic
-            <hr/>
-            <h2 className='subtitle'>Majordomo Example d'un joueur Heal Bmagic (les autres ne le voit pas) </h2>
-              Heal KeyWar (MT Majordomo)<br/>
-              Pose ton infusion sur Nuked
-            <hr/>
-            <h2 className='subtitle'>Majordomo Example Tank (les autres ne le voit pas)</h2>
-            MT1: Keywar<br/>
-            MT2: La Chaussette<br/>
-            MT3: Zw
-            <hr/>
-            <p className='content'>
-              L'objectif de cette page est de fournir sous forme de fiche les informations utiles pour le joueur uniquement :
-              <ul>
-                <li>La compo du raid (groupe par groupe)</li>
-                <li>Les buffs / débuff qu'il doit mettre et sur qui</li>
-                <li>Si il a un role précis sur le boss</li>
-                <li>etc etc</li>
-              </ul>
-              Le tout est <strong>dynamique et se refresh en live</strong> si il y a un changement fait par un officier
-            </p>
-          </div>
-          <div className='column is-4'>
-            <div className='logo has-text-centered'>
-              <WowRaidImage instance={raid.instance} />
+        <div className='raid'>
+          <div className='level'>
+
+            <div className='level-item'>
+              <div className='date is-size-4'> {moment(raid.date).format('dddd DD MMMM YYYY (HH:MM)')}</div>
+
             </div>
-            <CharactersSubscribeForm raidId={this.props.match.params.id} />
-            <CharactersRegistrationList raidId={this.props.match.params.id} />
+            <div className='level-item'>
+              <div className='logo'>
+                <WowRaidImage instance={raid.instance} />
+              </div>
+            </div>
+
+          </div>
+
+          <div className="tabs">
+            <ul>
+              <li className="is-active"><a>Inscriptions</a></li>
+              {/*<li><a>Infos</a></li>*/}
+              {/*<li><a>Loots</a></li>*/}
+            </ul>
+          </div>
+          <div className=' columns'>
+
+            <div className='column is-8'>
+              <CharactersRegistrationList raidId={this.props.match.params.id} />
+            </div>
+            <div className='column is-4'>
+              <CharactersSubscribeForm raidId={this.props.match.params.id} />
+              <CharactersRegistrationLogs raidId={this.props.match.params.id} />
+            </div>
           </div>
         </div>
       </Layout>
@@ -92,14 +78,12 @@ class Raid extends React.Component {
 
 Raid.propTypes = {
   dispatch: PropTypes.func,
-  user: PropTypes.object,
   match: PropTypes.object,
   raid: PropTypes.object
 }
 
 function mapStateToProps (state) {
   return {
-    user: state.user,
     raid: state.raid
   }
 }

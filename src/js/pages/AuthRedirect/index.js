@@ -4,34 +4,33 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import Error from '../../components/Error'
+import Error from '../../components/Common/Error'
 
 class AuthRedirect extends React.Component {
   componentDidMount () {
     const code = new URLSearchParams(this.props.location.search).get('code')
-    this.props.dispatch({ type: 'GET_TOKEN', code: code, service: this.props.service })
+    this.props.dispatch({ type: 'LOGIN', code: code })
   }
 
   render () {
-    const { token, history } = this.props
-    if (token) {
+    const { user, history } = this.props
+    if (user) {
       history.push('/')
     }
-    return <Error />
+    return <div>Loading...<Error /></div>
   }
 }
 AuthRedirect.propTypes = {
   component: PropTypes.any,
   dispatch: PropTypes.func,
   location: PropTypes.object,
-  token: PropTypes.string,
-  service: PropTypes.string,
+  user: PropTypes.object,
   history: PropTypes.object
 }
 
 function mapStateToProps (state) {
   return {
-    token: state.token
+    user: state.user
   }
 }
 

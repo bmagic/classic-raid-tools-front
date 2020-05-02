@@ -1,7 +1,7 @@
 import React from 'react'
-import Layout from '../../components/Layout'
-import NextRaidsList from '../../components/NextRaidsList'
-import RaidForm from '../../components/RaidForm'
+import Layout from '../../components/Common/Layout'
+import NextRaidsList from '../../components/Raid/NextRaidsList'
+import RaidForm from '../../components/Raid/RaidForm'
 
 const Home = () => {
   return (
