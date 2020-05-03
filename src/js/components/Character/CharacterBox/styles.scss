@@ -1,0 +1,8 @@
+.character-box{
+  .delete-button{
+    display:none;
+  }
+  &:hover .delete-button{
+    display: block;
+  }
+}

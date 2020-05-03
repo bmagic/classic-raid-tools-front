@@ -59,6 +59,9 @@ class RaidForm extends React.Component {
                   <label className="radio">
                     <input type="radio" name="instance" value="naxxramas" checked={this.state.instance === 'naxxramas'}/>Naxxramas
                   </label>
+                  <label className="radio">
+                    <input type="radio" name="instance" value="other" checked={this.state.instance === 'other'}/>Autre
+                  </label>
                 </div>
               </div>
 

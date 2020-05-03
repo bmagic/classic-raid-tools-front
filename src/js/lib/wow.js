@@ -21,6 +21,7 @@ import BlackwingLair from '../../../static/Raids/wow_classic_logo_blackwing_lair
 import ZulGurub from '../../../static/Raids/wow_classic_logo_zul_gurub.png'
 import AhnQiraj from '../../../static/Raids/wow_classic_logo_ahn_qiraj.png'
 import Naxxramas from '../../../static/Raids/wow_classic_logo_naxxramas.png'
+import Other from '../../../static/Raids/wow_classic_logo.png'
 
 export const wowClass = {
   druid:
@@ -64,5 +65,6 @@ export const wowRaids = {
   zg: ZulGurub,
   aq20: AhnQiraj,
   aq40: AhnQiraj,
-  naxxramas: Naxxramas
+  naxxramas: Naxxramas,
+  other: Other
 }

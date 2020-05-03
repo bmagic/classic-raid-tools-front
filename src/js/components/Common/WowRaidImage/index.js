@@ -4,7 +4,7 @@ import { wowRaids } from '../../../lib/wow'
 
 const WowRaidImage = ({ instance }) => {
   return (
-    <img src={wowRaids[instance]} />
+    <img src={wowRaids[instance] || wowRaids.other} />
   )
 }
 WowRaidImage.propTypes = {

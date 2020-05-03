@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import WowClassImage from '../../Common/WowClassImage'
 import { connect } from 'react-redux'
 
+import './styles.scss'
 const CharacterBox = ({ dispatch, name, wclass, spec, id }) => {
   return (
-    <div className={`box bg-class-${wclass}`}>
+    <div className={`box character-box bg-class-${wclass}`}>
       <div className="level">
         <div className="level-left">
           <div className='level-item'>
@@ -19,8 +20,10 @@ const CharacterBox = ({ dispatch, name, wclass, spec, id }) => {
         </div>
         <div className="level-right">
           <div className='level-item'>
-            <a onClick={() => {
-              dispatch({ type: 'DELETE_USER_CHARACTER', id: id })
+            <a className='delete-button' onClick={() => {
+              if (confirm('Confirmer la suppression du personnage')) {
+                dispatch({ type: 'DELETE_USER_CHARACTER', id: id })
+              }
             }}>
               <i className="fas fa-trash" aria-hidden="true"/>
             </a>

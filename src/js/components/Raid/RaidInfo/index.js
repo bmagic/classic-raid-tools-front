@@ -6,6 +6,7 @@ import moment from 'moment'
 import CharactersSubscribeForm from '../CharactersRegistrationForm'
 
 import './styles.scss'
+import { withRouter } from 'react-router-dom'
 class RaidInfo extends React.Component {
   constructor (props) {
     super(props)
@@ -35,7 +36,7 @@ class RaidInfo extends React.Component {
   }
 
   render () {
-    const { user, raid } = this.props
+    const { user, raid, dispatch, history } = this.props
     const { edit, title, main, date, logs, gdoc, infos } = this.state
     if (raid === null) {
       return <div className='box'>Chargement en cours...</div>
@@ -111,6 +112,20 @@ class RaidInfo extends React.Component {
                       <textarea className="textarea" placeholder="Qui groupe ? Qui TP ? Vers quelle heure ?" value={infos} onChange={(e) => this.onInputChange('infos', e)}/>
                     </div>
                   </div>
+                  <div className="field is-pulled-right ">
+
+                    <a onClick={() => {
+                      if (confirm('Confirmer la suppression du raid')) {
+                        history.push('/')
+                        dispatch({ type: 'DELETE_RAID', id: raid._id })
+                      }
+                    }} className="button is-danger">
+                      <span className="icon is-small">
+                        <i className='fas fa-trash'/>
+                      </span>
+                      <span>Supprimer</span>
+                    </a>
+                  </div>
                   <div className="field is-grouped">
                     <div className="control">
                       <button type='submit' className="button is-link">Sauvegarder</button>
@@ -141,7 +156,8 @@ class RaidInfo extends React.Component {
 RaidInfo.propTypes = {
   dispatch: PropTypes.func,
   user: PropTypes.object,
-  raid: PropTypes.object
+  raid: PropTypes.object,
+  history: PropTypes.object
 }
 
 function mapStateToProps (state) {
@@ -150,4 +166,4 @@ function mapStateToProps (state) {
     raid: state.raid
   }
 }
-export default connect(mapStateToProps)(RaidInfo)
+export default withRouter(connect(mapStateToProps)(RaidInfo))
