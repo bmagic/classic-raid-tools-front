@@ -3,9 +3,6 @@ import Layout from '../../components/Common/Layout'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import io from 'socket.io-client'
-import CharactersSubscribeForm from '../../components/Raid/CharactersRegistrationForm'
-import CharactersRegistrationList from '../../components/Raid/CharactersRegistrationList'
-import CharactersRegistrationLogs from '../../components/Raid/CharactersRegistrationLogs'
 import RaidInfo from '../../components/Raid/RaidInfo'
 
 import './styles.scss'
@@ -26,6 +23,7 @@ class Raid extends React.Component {
     })
 
     this.props.dispatch({ type: 'GET_RAID', id: this.props.match.params.id })
+    this.props.dispatch({ type: 'CHANGE_RAID_TAB', raidTab: 'infos' })
   }
 
   componentWillUnmount () {
@@ -39,11 +37,10 @@ class Raid extends React.Component {
         <div className='raid'>
           <div className="tabs">
             <ul>
-              <li className={raidTab==='infos'?'is-active':''} onClick={() => dispatch({ type: 'CHANGE_RAID_TAB', raidTab: 'infos' })}><a>Informations</a></li>
-              <li className={raidTab==='inscriptions'?'is-active':''} onClick={() => dispatch({ type: 'CHANGE_RAID_TAB', raidTab: 'inscriptions' })}><a>Inscriptions</a></li>
+              <li className={raidTab === 'infos' ? 'is-active' : ''} onClick={() => dispatch({ type: 'CHANGE_RAID_TAB', raidTab: 'infos' })}><a>Informations</a></li>
+              <li className={raidTab === 'inscriptions' ? 'is-active' : ''} onClick={() => dispatch({ type: 'CHANGE_RAID_TAB', raidTab: 'inscriptions' })}><a>Inscriptions</a></li>
             </ul>
           </div>
-
 
           {raidTab === 'infos' && <RaidInfo/>}
           {raidTab === 'inscriptions' && <RaidInscriptions/>}
