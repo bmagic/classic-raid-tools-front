@@ -69,6 +69,14 @@ function * deleteRaid (action) {
   yield * request('DELETE', `/v1/raids/${action.id}`, [{ type: 'GET_NEXT_RAIDS' }])
 }
 
+function * setUserMainCharacter (action) {
+  yield * request('PUT', `/v1/user/characters/main/${action.id}`, [{ type: 'GET_USER_CHARACTERS' }])
+}
+
+function * getRoster (action) {
+  yield * request('GET', '/v1/roster', [{ type: 'GET_ROSTER_SUCCESS' }])
+}
+
 function * request (type, url, actions, body) {
   try {
     let result
@@ -112,6 +120,7 @@ export default function * rootSaga () {
   yield takeLeading('CREATE_USER_CHARACTER', createUserCharacter)
   yield takeLeading('GET_USER_CHARACTERS', getUserCharacters)
   yield takeLeading('DELETE_USER_CHARACTER', deleteUserCharacter)
+  yield takeLeading('SET_USER_MAIN_CHARACTER', setUserMainCharacter)
   yield takeLeading('GET_USERS', getUsers)
   yield takeLeading('UPDATE_ROLES', updateRoles)
   yield takeLeading('GET_NEXT_RAIDS', getNextRaids)
@@ -123,4 +132,5 @@ export default function * rootSaga () {
   yield takeLeading('UPDATE_USER', updateUser)
   yield takeLeading('UPDATE_RAID', updateRaid)
   yield takeLeading('DELETE_RAID', deleteRaid)
+  yield takeLeading('GET_ROSTER', getRoster)
 }

@@ -8,7 +8,8 @@ const initialState = {
   raid: null,
   registrations: [],
   registrationLogs: [],
-  raidTab: 'infos'
+  raidTab: 'infos',
+  roster: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -70,6 +71,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         raidTab: action.raidTab
+      }
+    case 'GET_ROSTER_SUCCESS':
+      return {
+        ...state,
+        roster: action.result
       }
     default:
       return state

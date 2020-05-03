@@ -2,7 +2,14 @@
   .delete-button{
     display:none;
   }
-  &:hover .delete-button{
+  .main-tag{
+    display:none;
+    cursor:pointer;
+    &.is-main{
+      display:block;
+    }
+  }
+  &:hover .delete-button, &:hover .main-tag{
     display: block;
   }
 }
