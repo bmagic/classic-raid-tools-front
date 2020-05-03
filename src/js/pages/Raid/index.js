@@ -9,6 +9,7 @@ import CharactersRegistrationLogs from '../../components/Raid/CharactersRegistra
 import RaidInfo from '../../components/Raid/RaidInfo'
 
 import './styles.scss'
+import RaidInscriptions from '../../components/Raid/RaidInscriptions'
 
 class Raid extends React.Component {
   constructor (props) {
@@ -32,27 +33,21 @@ class Raid extends React.Component {
   }
 
   render () {
+    const { dispatch, raidTab } = this.props
     return (
       <Layout>
         <div className='raid'>
           <div className="tabs">
             <ul>
-              <li className="is-active"><a>Informations</a></li>
-              <li><a>Inscriptions</a></li>
+              <li className={raidTab==='infos'?'is-active':''} onClick={() => dispatch({ type: 'CHANGE_RAID_TAB', raidTab: 'infos' })}><a>Informations</a></li>
+              <li className={raidTab==='inscriptions'?'is-active':''} onClick={() => dispatch({ type: 'CHANGE_RAID_TAB', raidTab: 'inscriptions' })}><a>Inscriptions</a></li>
             </ul>
           </div>
 
-          <RaidInfo/>
-          {/*<div className=' columns'>*/}
 
-          {/*  <div className='column is-8'>*/}
-          {/*    <CharactersRegistrationList raidId={this.props.match.params.id} />*/}
-          {/*  </div>*/}
-          {/*  <div className='column is-4'>*/}
-          {/*    <CharactersSubscribeForm raidId={this.props.match.params.id} />*/}
-          {/*    <CharactersRegistrationLogs raidId={this.props.match.params.id} />*/}
-          {/*  </div>*/}
-          {/*</div>*/}
+          {raidTab === 'infos' && <RaidInfo/>}
+          {raidTab === 'inscriptions' && <RaidInscriptions/>}
+
         </div>
       </Layout>
     )
@@ -61,7 +56,12 @@ class Raid extends React.Component {
 
 Raid.propTypes = {
   dispatch: PropTypes.func,
-  match: PropTypes.object
+  match: PropTypes.object,
+  raidTab: PropTypes.string
 }
-
-export default connect()(Raid)
+function mapStateToProps (state) {
+  return {
+    raidTab: state.raidTab
+  }
+}
+export default connect(mapStateToProps)(Raid)

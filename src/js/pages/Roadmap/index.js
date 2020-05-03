@@ -13,11 +13,11 @@ const Roadmap = () => {
           <li>Page characters basique</li>
           <li>Page admin pour donner des roles aux utilisateurs</li>
           <li>Page raid simple avec inscriptions</li>
-
+          <li>Possibilité de modifier les informations de raid (Logs / Heure de début / Lien vers la feuille gdoc ...)</li>
+          <li>Progress bar sur la page d'accueil pour le remplissage de chaque raid</li>
         </ul>
         <h2>A faire</h2>
         <ul>
-          <li>Ajouter des informations au raid (Logs / Heure de début / Lien vers la feuille gdoc)</li>
           <li>Ajouter une page roster pour voir les personnages taggé "main" des utilisateurs</li>
           <li>Différencier les raids principaux vs les raids secondaires (ZG puis plus tard MC etc)</li>
           <li>Utilisation d'un Webhook discord à la création d'un événement pour prévenir de la création</li>

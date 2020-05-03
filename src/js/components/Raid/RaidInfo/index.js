@@ -9,15 +9,15 @@ import './styles.scss'
 class RaidInfo extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { edit: false, date: '', logs: '', gdoc: '', infos: '' }
+    this.state = { edit: false, title: '', main: false, date: '', logs: '', gdoc: '', infos: '' }
     this.activateEdit = this.activateEdit.bind(this)
     this.onInputChange = this.onInputChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
 
   activateEdit () {
-    const { date, logs, gdoc, infos } = this.props.raid
-    this.setState({ edit: true, date: moment(date).format('YYYY-MM-DDTHH:mm'), logs: logs || '', gdoc: gdoc || '', infos: infos || '' })
+    const { date, title, main, logs, gdoc, infos } = this.props.raid
+    this.setState({ edit: true, title: title, main: main, date: moment(date).format('YYYY-MM-DDTHH:mm'), logs: logs || '', gdoc: gdoc || '', infos: infos || '' })
   }
 
   onInputChange (key, e) {
@@ -28,18 +28,17 @@ class RaidInfo extends React.Component {
 
   onSubmit (e) {
     e.preventDefault()
-    const { date, logs, gdoc, infos } = this.state
+    const { date, title, main, logs, gdoc, infos } = this.state
     const { raid } = this.props
-    this.props.dispatch({ type: 'UPDATE_RAID', id: raid._id, raid: { date: moment(date).toISOString(), logs: logs, gdoc: gdoc, infos: infos } })
+    this.props.dispatch({ type: 'UPDATE_RAID', id: raid._id, raid: { date: moment(date).toISOString(), title: title, main: main, logs: logs, gdoc: gdoc, infos: infos } })
     this.setState({ edit: false })
   }
 
   render () {
     const { user, raid } = this.props
-    const { edit, date, logs, gdoc, infos } = this.state
-    console.log(date)
+    const { edit, title, main, date, logs, gdoc, infos } = this.state
     if (raid === null) {
-      return <div>Chargement en cours...</div>
+      return <div className='box'>Chargement en cours...</div>
     }
     return (
       <div className='raid-info'>
@@ -50,10 +49,12 @@ class RaidInfo extends React.Component {
                 <span className='edit-button is-pulled-right'><a onClick={this.activateEdit} ><i
                   className='fas fa-pen'/>&nbsp;Edit</a></span>}
               {!edit && <div>
+
                 <p className='info-item'>
                   <span className='has-text-weight-bold'>Date:</span><br/><span
                     className='is-capitalized'>{moment(raid.date).format('dddd DD MMMM')}</span>
                 </p>
+
                 <p className='info-item'>
                   <span
                     className='has-text-weight-bold'>Heure de pull:</span><br/>{moment(raid.date).format('HH')}h{moment(raid.date).format('mm')} (Le
@@ -74,6 +75,18 @@ class RaidInfo extends React.Component {
               </div>}
               {edit && <div>
                 <form onSubmit={this.onSubmit}>
+                  <div className='field '>
+                    <label className="label">Titre</label>
+                    <div className='control'>
+                      <input className='input' type='title' value={title} onChange={e => this.onInputChange('title', e)} />
+                    </div>
+                  </div>
+                  <div className='field '>
+                    <label className="checkbox">
+                      <input type="checkbox" checked={main} onChange={() => this.setState({ main: !main })}/>
+                      Raid Principal
+                    </label>
+                  </div>
                   <div className='field '>
                     <label className="label">Date</label>
                     <div className='control'>
@@ -113,36 +126,22 @@ class RaidInfo extends React.Component {
           <div className='column is-4'>
             <div className='logo box has-text-centered'>
               <WowRaidImage instance={raid.instance}/>
+              {raid.title && raid.title !== '' &&
+              <div className='subtitle'>{raid.title} {raid.main && <span className='tag is-light is-primary'>Raid principal</span>}</div>
+              }
             </div>
             <CharactersSubscribeForm raidId={raid._id}/>
           </div>
         </div>
       </div>
     )
-
-    //
-    //   return (
-    //     <form onSubmit={(e) => this.onSubmit(e)}>
-    //       <div className='field is-horizontal'>
-    //         <div className="field-body">
-    //           <div className='field is-narrow'>
-    //             <div className='control'>
-    //               <input className='input is-small' type='datetime-local' value={raidEdit.date} onChange={e => this.onChange('date', e)} />
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </form>
-    //   )
-    // }
   }
 }
 
 RaidInfo.propTypes = {
   dispatch: PropTypes.func,
   user: PropTypes.object,
-  raid: PropTypes.object,
-  'raid.logs': PropTypes.string
+  raid: PropTypes.object
 }
 
 function mapStateToProps (state) {

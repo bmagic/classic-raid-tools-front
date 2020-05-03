@@ -42,7 +42,6 @@ function * createRaid (action) {
 }
 
 function * getRaid (action) {
-  console.log(action)
   yield * request('GET', `/v1/raids/${action.id}`, [{ type: 'GET_RAID_SUCCESS' }])
 }
 
@@ -91,11 +90,10 @@ function * request (type, url, actions, body) {
       }
     }
   } catch (e) {
-    console.log(e)
-    if (e.response.status === 401) {
+    if (e.response && e.response.status === 401) {
       yield put({ type: 'DISCONNECT' })
     } else {
-      yield put({ type: 'ADD_ERROR', error: e.response.data })
+      yield put({ type: 'ADD_ERROR', error: e.response ? e.response.data : e.message })
     }
   }
 }

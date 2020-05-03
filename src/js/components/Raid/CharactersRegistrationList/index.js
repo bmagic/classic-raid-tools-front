@@ -27,6 +27,7 @@ class CharactersRegistrationList extends React.Component {
     const { registrations } = this.props
     const charactersRegistration = { tank: [], heal: [], cac: [], dd: [], bench: [], late: [], ko: [] }
     const uniqueUser = {}
+    const charactersuniqueUserRegistration = []
     let count = 0
     for (const index in registrations) {
       const registration = registrations[index]
@@ -36,7 +37,7 @@ class CharactersRegistrationList extends React.Component {
 
       if (registration.status === 'ok') {
         charactersRegistration[registration.spec].push(registration)
-
+        if (!charactersuniqueUserRegistration.includes(registration.userId)) charactersuniqueUserRegistration.push(registration.userId)
         count++
       } else if (charactersRegistration[registration.status]) {
         charactersRegistration[registration.status].push(registration)
@@ -45,7 +46,7 @@ class CharactersRegistrationList extends React.Component {
 
     return (
       <div className='characters-registration-list box'>
-        <h2 className='subtitle'>{Object.keys(uniqueUser).length > 1 ? 'Joueurs inscrits' : 'Joueur inscrit'}: {Object.keys(uniqueUser).length} / {count > 1 ? 'Personnages inscrits' : 'Personnage inscrit'}: {count}</h2>
+        <h2 className='subtitle'>{charactersuniqueUserRegistration.length > 1 ? 'Joueurs' : 'Joueur'}: {charactersuniqueUserRegistration.length} / {count > 1 ? 'Personnages' : 'Personnage'}: {count}</h2>
         <div className='columns'>
           <div className='column is-3'>
             <h3>Tank ({charactersRegistration.tank.length})</h3>

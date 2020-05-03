@@ -5,6 +5,7 @@ import WowRaidImage from '../../Common/WowRaidImage'
 import moment from 'moment'
 import './styles.scss'
 import { Link } from 'react-router-dom'
+import PlayersCountProgressBar from '../PlayersCountProgressBar'
 
 class RaidBox extends React.Component {
   render () {
@@ -16,16 +17,18 @@ class RaidBox extends React.Component {
             <figure className="image">
               <WowRaidImage instance={raid.instance}/>
             </figure>
+            <PlayersCountProgressBar instance={raid.instance} playersCount={raid.playersCount}/>
+
           </div>
           <div className="media-content">
-            <div className="content">
-              <p>
-                <strong><span className='day is-capitalized'>{moment(raid.date).format('dddd')}</span>&nbsp;{moment(raid.date).format('DD MMMM à HH:mm')}</strong>
-                <br/>
-                {!raid.registered && <span className="tag is-danger is-light">Aucun personnage inscrit</span>}
-                {raid.description}
-              </p>
-            </div>
+            <div>{raid.title}</div>
+            <p className="content">
+              <strong><span className='day is-capitalized'>{moment(raid.date).format('dddd')}</span>&nbsp;{moment(raid.date).format('DD MMMM à HH:mm')}</strong>
+              <br/>
+              {raid.main && <span className="tag is-primary is-light">Raid principal</span>}
+              {!raid.registered && <span className="tag is-danger is-light">Aucun de tes personnages n'est inscrit pour ce raid</span>}
+            </p>
+
             <nav className="level is-mobile">
               <div className="level-left">
                 {user.roles.includes('member') &&
@@ -43,7 +46,9 @@ class RaidBox extends React.Component {
               </div>
             </nav>
           </div>
+
         </article>
+
       </div>
     )
   }

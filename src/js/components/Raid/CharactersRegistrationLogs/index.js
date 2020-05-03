@@ -13,11 +13,11 @@ class CharactersRegistrationLogs extends React.Component {
   render () {
     const { registrationLogs } = this.props
     return (
-      <div className='characters-registration-logs box'>
+      <div className='characters-registration-logs'>
         {registrationLogs.map((registrationLog) => {
           return (
             <div key={registrationLog._id}>
-              <span className='has-text-weight-bold'>{moment(registrationLog.date).format('DD/MM LT')}:</span> {registrationLog.characterName} {registrationLog.status}  {registrationLog.favorite ? '(Favori)' : ''}
+              <span className='has-text-weight-bold'>{moment(registrationLog.date).format('DD/MM/YYYY LTS')}:</span> {registrationLog.characterName} {registrationLog.status}  {registrationLog.favorite ? '(Favori)' : ''}
             </div>
           )
         })}

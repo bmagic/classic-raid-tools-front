@@ -7,7 +7,8 @@ const initialState = {
   nextRaids: [],
   raid: null,
   registrations: [],
-  registrationLogs: []
+  registrationLogs: [],
+  raidTab: 'infos'
 }
 
 const reducer = (state = initialState, action) => {
@@ -69,6 +70,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         registrationLogs: action.result
+      }
+    case 'CHANGE_RAID_TAB':
+      return {
+        ...state,
+        raidTab: action.raidTab
       }
     default:
       return state
