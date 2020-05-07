@@ -73,8 +73,21 @@ function * setUserMainCharacter (action) {
   yield * request('PUT', `/v1/user/characters/main/${action.id}`, [{ type: 'GET_USER_CHARACTERS' }])
 }
 
-function * getRoster (action) {
+function * getRoster () {
   yield * request('GET', '/v1/roster', [{ type: 'GET_ROSTER_SUCCESS' }])
+}
+function * importBankData (action) {
+  yield * request('POST', '/v1/bank/import', [{ type: 'DISPLAY_BANK_DATA_MODAL', display: false }, { type: 'GET_BANK_LOGS' }], { data: action.data })
+}
+
+function * getBankLogs (action) {
+  yield * request('GET', '/v1/bank/logs', [{ type: 'GET_BANK_LOGS_SUCCESS' }])
+}
+function * getBankItems (action) {
+  yield * request('GET', '/v1/bank/', [{ type: 'GET_BANK_ITEMS_SUCCESS' }])
+}
+function * setItemFree (action) {
+  yield * request('PUT', `/v1/bank/item/free/${action.wid}`, [{ type: 'GET_BANK_ITEMS' }], { free: action.freeForMembers })
 }
 
 function * request (type, url, actions, body) {
@@ -133,4 +146,8 @@ export default function * rootSaga () {
   yield takeLeading('UPDATE_RAID', updateRaid)
   yield takeLeading('DELETE_RAID', deleteRaid)
   yield takeLeading('GET_ROSTER', getRoster)
+  yield takeLeading('IMPORT_BANK_DATA', importBankData)
+  yield takeLeading('GET_BANK_LOGS', getBankLogs)
+  yield takeLeading('GET_BANK_ITEMS', getBankItems)
+  yield takeLeading('SET_ITEM_FREE', setItemFree)
 }

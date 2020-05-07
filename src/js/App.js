@@ -11,6 +11,7 @@ import AdminUsers from './pages/AdminUsers'
 import Raid from './pages/Raid'
 import Roadmap from './pages/Roadmap'
 import Roster from './pages/Roster'
+import Bank from './pages/Bank'
 
 const App = () => {
   moment.locale('fr')
@@ -22,11 +23,10 @@ const App = () => {
         <PrivateRoute exact path="/roadmap" component={Roadmap}/>
         <PrivateRoute exact path='/user' component={User} />
         <PrivateRoute exact path='/characters' component={Characters}/>
-        <PrivateRoute exact roles={['admin']} path='/admin/users' component={AdminUsers}/>
-        <PrivateRoute exact roles={['member']} path='/raid/:id' component={Raid}/>
-        <PrivateRoute exact roles={['member']} path='/roster' component={Roster}/>
-
-
+        <PrivateRoute exact path='/roster' component={Roster}/>
+        <PrivateRoute exact path="/bank" roles={['member']} component={Bank}/>
+        <PrivateRoute exact path='/raid/:id' roles={['member']} component={Raid}/>
+        <PrivateRoute exact path='/admin/users' roles={['admin']} component={AdminUsers}/>
       </Switch>
     </Router>
   )

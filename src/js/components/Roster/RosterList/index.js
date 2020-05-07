@@ -52,20 +52,21 @@ class RosterList extends React.Component {
         </div>
         <hr/>
         <div className='columns is-multiline'>
-
-          {Object.keys(roleCount).map((role) => {
-            return (
-              <div className='column is-3 has-text-centered'>
-                <div>
-
-                  <h2 className='subtitle'>{role}: {roleCount[role]}</h2>
-                  <span>{(roleCount[role] / count * 100).toFixed(0)}%</span>
-                  <progress className="progress is-primary" value={roleCount[role]} max={count}>15%</progress>
-                </div>
-
-              </div>
-            )
-          })}
+          <div className='column is-4 has-text-centered'>
+            <h2 className='subtitle'>Tank: {roleCount.tank}/4</h2>
+            <span>{(roleCount.tank / 4 * 100).toFixed(0)}%</span>
+            <progress className={`progress ${roleCount.tank / 4 < 0.5 ? 'is-danger' : roleCount.tank / 4 < 0.7 ? 'is-warning' : 'is-primary'}`} value={roleCount.tank} max={4}/>
+          </div>
+          <div className='column is-4 has-text-centered'>
+            <h2 className='subtitle'>Heal: {roleCount.heal}/10</h2>
+            <span>{(roleCount.heal / 10 * 100).toFixed(0)}%</span>
+            <progress className={`progress ${roleCount.heal / 10 < 0.5 ? 'is-danger' : roleCount.heal / 10 < 0.7 ? 'is-warning' : 'is-primary'}`} value={roleCount.heal} max={10}/>
+          </div>
+          <div className='column is-4 has-text-centered'>
+            <h2 className='subtitle'>Dps: {roleCount.dd + roleCount.cac}/26</h2>
+            <span>{((roleCount.dd + roleCount.cac) / 26 * 100).toFixed(0)}%</span>
+            <progress className={`progress ${(roleCount.dd + roleCount.cac) / 26 < 0.5 ? 'is-danger' : (roleCount.dd + roleCount.cac) / 26 < 0.7 ? 'is-warning' : 'is-primary'}`} value={roleCount.dd + roleCount.cac} max={26}/>
+          </div>
         </div>
       </div>
     )

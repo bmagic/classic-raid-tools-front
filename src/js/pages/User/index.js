@@ -34,7 +34,7 @@ class User extends React.Component {
   }
 
   render () {
-    const { user } = this.props
+    const { user, lang, dispatch } = this.props
     const { username, email } = this.state
     if (user === null) return <div>Loading</div>
     return (
@@ -65,6 +65,17 @@ class User extends React.Component {
             <button className="button is-link" disabled={(username === user.username && email === user.email) || username === '' || email === ''}>Sauvegarder</button>
           </div>
         </form>
+        <div className='section'>
+          <div className="field">
+            <label className="label">{'Langue d\'affichage des objets'}</label>
+            <div className="select">
+              <select value={lang} onChange={(e) => dispatch({ type: 'CHANGE_LANGUAGE', lang: e.target.value })}>
+                <option>fr</option>
+                <option>en</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
         <p className='section'>
               Roles: {user.roles.length > 0 ? user.roles.join(', ') : 'Aucun role'}
@@ -76,12 +87,14 @@ class User extends React.Component {
 
 User.propTypes = {
   dispatch: PropTypes.func,
-  user: PropTypes.object
+  user: PropTypes.object,
+  lang: PropTypes.string
 }
 
 function mapStateToProps (state) {
   return {
-    user: state.user
+    user: state.user,
+    lang: state.lang
   }
 }
 export default connect(mapStateToProps)(User)

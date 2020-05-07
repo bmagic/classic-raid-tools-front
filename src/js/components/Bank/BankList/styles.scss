@@ -1,0 +1,28 @@
+.bank-list{
+  .gold{
+    padding:15px;
+  }
+
+  .free{
+    .addFree{
+      display:none;
+      cursor:pointer;
+    }
+    &.is-banker:hover{
+      .display{
+        display:none;
+      }
+
+      .addFree{
+        display:inline
+      }
+
+    }
+  }
+  .add-action {
+    cursor:pointer;
+    a:hover{
+      color:#FFF;
+    }
+  }
+}

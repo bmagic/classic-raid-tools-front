@@ -9,7 +9,12 @@ const initialState = {
   registrations: [],
   registrationLogs: [],
   raidTab: 'infos',
-  roster: []
+  roster: [],
+  displayBankModal: false,
+  bankItems: [],
+  bankLogs: [],
+  basket: [],
+  lang: 'fr'
 }
 
 const reducer = (state = initialState, action) => {
@@ -76,6 +81,26 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         roster: action.result
+      }
+    case 'DISPLAY_BANK_DATA_MODAL':
+      return {
+        ...state,
+        displayBankModal: action.display
+      }
+    case 'GET_BANK_LOGS_SUCCESS':
+      return {
+        ...state,
+        bankLogs: action.result
+      }
+    case 'CHANGE_LANGUAGE':
+      return {
+        ...state,
+        lang: action.lang
+      }
+    case 'GET_BANK_ITEMS_SUCCESS':
+      return {
+        ...state,
+        bankItems: action.result
       }
     default:
       return state

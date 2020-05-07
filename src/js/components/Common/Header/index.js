@@ -33,7 +33,7 @@ class Header extends React.Component {
               <div className="navbar-start">
                 <Link to="/roster" className='navbar-item'>Roster</Link>
 
-                <a className='navbar-item'target='_blank' rel='noopener noreferrer' href='https://classicguildbank.com/#/request'><i className="fas fa-external-link-alt"/>&nbsp;Banque de guilde</a>
+                <Link to="/bank" className="navbar-item">Banque de guilde</Link>
                 <div className='navbar-item has-dropdown is-hoverable'>
                   <a className="navbar-link">
                     Outils externes
