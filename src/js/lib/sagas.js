@@ -77,19 +77,25 @@ function * getRoster () {
   yield * request('GET', '/v1/roster', [{ type: 'GET_ROSTER_SUCCESS' }])
 }
 function * importBankData (action) {
-  yield * request('POST', '/v1/bank/import', [{ type: 'DISPLAY_BANK_DATA_MODAL', display: false }, { type: 'GET_BANK_LOGS' }], { data: action.data })
+  yield * request('POST', '/v1/bank/import', [{ type: 'DISPLAY_BANK_DATA_MODAL', display: false }, { type: 'GET_BANK_ITEMS' }], { data: action.data })
 }
 
-function * getBankLogs (action) {
+function * getBankLogs () {
   yield * request('GET', '/v1/bank/logs', [{ type: 'GET_BANK_LOGS_SUCCESS' }])
 }
-function * getBankItems (action) {
+function * getBankItems () {
   yield * request('GET', '/v1/bank/', [{ type: 'GET_BANK_ITEMS_SUCCESS' }])
 }
 function * setItemFree (action) {
   yield * request('PUT', `/v1/bank/item/free/${action.wid}`, [{ type: 'GET_BANK_ITEMS' }], { free: action.freeForMembers })
 }
+function * createItemsRequest (action) {
+  yield * request('POST', '/v1/bank/request', [{ type: 'CLEAR_BASKET' }], { items: action.items, message: action.message })
+}
 
+function * getItemsRequest (action) {
+  yield * request('GET', '/v1/bank/requests', [{ type: 'GET_BANK_ITEMS_REQUEST_SUCCESS' }])
+}
 function * request (type, url, actions, body) {
   try {
     let result
@@ -150,4 +156,6 @@ export default function * rootSaga () {
   yield takeLeading('GET_BANK_LOGS', getBankLogs)
   yield takeLeading('GET_BANK_ITEMS', getBankItems)
   yield takeLeading('SET_ITEM_FREE', setItemFree)
+  yield takeLeading('CREATE_ITEMS_REQUEST', createItemsRequest)
+  yield takeLeading('GET_BANK_ITEMS_REQUEST', getItemsRequest)
 }

@@ -6,15 +6,23 @@ import Item from '../Item'
 class BankLogs extends React.Component {
   componentDidMount () {
     this.props.dispatch({ type: 'GET_BANK_LOGS' })
-    $WowheadPower.refreshLinks()
+    /* eslint-disable */
+    if (WH && typeof WH.getDataEnv !== "undefined") {
+      $WowheadPower.refreshLinks()
+    }
+    /* eslint-enable */
   }
 
   componentDidUpdate (prevProps, prevState, snapshot) {
-    $WowheadPower.refreshLinks()
+    /* eslint-disable */
+    if (WH && typeof WH.getDataEnv !== "undefined") {
+      $WowheadPower.refreshLinks()
+    }
+    /* eslint-enable */
   }
 
   render () {
-    const { bankLogs, lang } = this.props
+    const { bankLogs } = this.props
     return (
       <div className='box has-background-grey-darker has-text-white'>
         <table className='table is-fullwidth has-background-grey-darker has-text-white'>
@@ -51,14 +59,12 @@ class BankLogs extends React.Component {
 }
 BankLogs.propTypes = {
   dispatch: PropTypes.func,
-  bankLogs: PropTypes.array,
-  lang: PropTypes.string
+  bankLogs: PropTypes.array
 }
 
 function mapStateToProps (state) {
   return {
-    bankLogs: state.bankLogs,
-    lang: state.lang
+    bankLogs: state.bankLogs
   }
 }
 export default connect(mapStateToProps)(BankLogs)

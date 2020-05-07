@@ -1,3 +1,5 @@
+import interopRequireDefault from '@babel/runtime/helpers/esm/interopRequireDefault'
+
 const initialState = {
   loading: false,
   errors: [],
@@ -12,8 +14,9 @@ const initialState = {
   roster: [],
   displayBankModal: false,
   bankItems: [],
+  bankItemsRequests: [],
   bankLogs: [],
-  basket: [],
+  basketItems: {},
   lang: 'fr'
 }
 
@@ -102,6 +105,30 @@ const reducer = (state = initialState, action) => {
         ...state,
         bankItems: action.result
       }
+    case 'CHANGE_BASKET_ITEM_QUANTITY': {
+      const basketItems = Object.assign({}, state.basketItems)
+      if (action.quantity === 0) {
+        delete basketItems[action.item._id]
+      } else {
+        basketItems[action.item._id] = { quantity: action.quantity, marketValue: action.item.marketValue, freeForMembers: action.item.freeForMembers }
+      }
+      return {
+        ...state,
+        basketItems: basketItems
+      }
+    }
+    case 'CLEAR_BASKET': {
+      return {
+        ...state,
+        basketItems: initialState.basketItems
+      }
+    }
+    case 'GET_BANK_ITEMS_REQUEST_SUCCESS': {
+      return {
+        ...state,
+        bankItemsRequests: action.result
+      }
+    }
     default:
       return state
   }

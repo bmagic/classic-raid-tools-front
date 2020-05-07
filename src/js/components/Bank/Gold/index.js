@@ -5,7 +5,7 @@ import silver from '../../../../../static/Money/money-silver.gif'
 import copper from '../../../../../static/Money/money-copper.gif'
 
 const Gold = ({ count }) => {
-  const c = count % 100
+  const c = Math.round(count % 100)
   const a = Math.trunc((count % 10000) / 100)
   const g = Math.trunc(count / 10000)
   return (
