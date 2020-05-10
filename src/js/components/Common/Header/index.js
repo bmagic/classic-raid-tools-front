@@ -17,9 +17,10 @@ class Header extends React.Component {
 
   render () {
     return (
-      <header className='header has-background-grey-light'>
-        <div className='container'>
-          <nav className='navbar has-background-grey-light'>
+      <header className='header '>
+
+        <nav className='navbar '>
+          <div className='container'>
             <div className="navbar-brand">
               <Link className="navbar-item" to="/"><h1 className='title is-5'>Classic Raid Tools</h1></Link>
               <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false"
@@ -52,8 +53,8 @@ class Header extends React.Component {
                 <div className='navbar-item'> <LogoutButton/></div>
               </div>
             </div>
-          </nav>
-        </div>
+          </div>
+        </nav>
       </header>
     )
   }

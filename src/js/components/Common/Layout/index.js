@@ -6,7 +6,7 @@ import Error from '../Error'
 import { Link } from 'react-router-dom'
 
 const Layout = ({ children }) => (
-  <div className='crh-app site'>
+  <div className='crh-app site dark-mode'>
     <Header />
 
     <main className='site-content'>

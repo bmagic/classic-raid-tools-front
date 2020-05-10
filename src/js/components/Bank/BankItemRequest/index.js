@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import Item from '../Item'
+import Gold from '../Gold'
 class BankItemsRequest extends React.Component {
   componentDidMount () {
     this.props.dispatch({ type: 'GET_BANK_ITEMS_REQUEST' })
@@ -22,13 +23,15 @@ class BankItemsRequest extends React.Component {
   }
 
   render () {
-    const { bankItemsRequests } = this.props
+    const { bankItemsRequests, user, dispatch } = this.props
     return (
       <div >
 
         {bankItemsRequests.map((bankItemsRequest) => {
+          let basketPrice = 0
+
           return (
-            <div className='box has-background-grey-darker has-text-white' key={bankItemsRequest._id}>
+            <div className='box ' key={bankItemsRequest._id}>
               <div className='level'>
                 <div className='item-level'>
                   <div>{moment(bankItemsRequest.date).format('DD/MM/YYYY HH:mm')}</div>
@@ -40,12 +43,30 @@ class BankItemsRequest extends React.Component {
                 <div className='item-level'>
                   {Object.keys(bankItemsRequest.items).map((wid) => {
                     const item = bankItemsRequest.items[wid]
+                    if (!item.freeForMembers) { basketPrice += item.marketValue * item.quantity }
                     return (
                       <div key={wid}>{item.quantity} x <Item wid={parseInt(wid)}/></div>
                     )
                   })}
                 </div>
-                <div className='item-level'>{bankItemsRequest.status}</div>
+                <div className='item-level'>
+                  <Gold count={basketPrice / 2}/>
+                </div>
+                {user && user.roles && !user.roles.includes('banker') && <div className='item-level'>
+                  {bankItemsRequest.status === 'asked' && <div>En cours</div>}
+                  {bankItemsRequest.status === 'ok' && <div className='has-text-success'>Effectuée</div>}
+                  {bankItemsRequest.status === 'ko' && <div className='has-text-danger'>Refusée</div>}
+                </div>}
+                {user && user.roles && user.roles.includes('banker') && <div className='item-level'>
+                  <div className="select has-text-black">
+                    <select value={bankItemsRequest.status} onChange={(e) => dispatch({ type: 'UPDATE_BANK_ITEMS_REQUEST', id: bankItemsRequest._id, status: e.target.value })}>
+                      <option value='asked'>En cours</option>
+                      <option value='ok'>Effectuée</option>
+                      <option value='ko'>Refusée</option>
+                    </select>
+                  </div>
+                </div>}
+
               </div>
             </div>
           )
@@ -57,12 +78,14 @@ class BankItemsRequest extends React.Component {
 }
 BankItemsRequest.propTypes = {
   dispatch: PropTypes.func,
-  bankItemsRequests: PropTypes.array
+  bankItemsRequests: PropTypes.array,
+  user: PropTypes.object
 }
 
 function mapStateToProps (state) {
   return {
-    bankItemsRequests: state.bankItemsRequests
+    bankItemsRequests: state.bankItemsRequests,
+    user: state.user
   }
 }
 export default connect(mapStateToProps)(BankItemsRequest)

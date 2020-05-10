@@ -19,10 +19,11 @@ const Roadmap = () => {
           <li>Différencier les raids principaux vs les raids secondaires (ZG puis plus tard MC etc)</li>
           <li>Utilisation d'un webhook discord pour prévenir les utilisateurs non inscrits 72h / 48h /24h avant le raid.</li>
           <li>Utilisation d'un Webhook discord à la création d'un événement pour prévenir de la création</li>
+          <li>Implémentation de la BDG avec webhook et historique plus poussé que l'outil actuel</li>
         </ul>
         <h2>A faire</h2>
         <ul>
-          <li>Implémentation de la BDG avec webhook et historique plus poussé que l'outil actuel</li>
+          <li>Implémentation d'un darkmode</li>
           <li>Gestion de la présence des joueurs</li>
           <li>Gestion de l'historique des loots</li>
         </ul>

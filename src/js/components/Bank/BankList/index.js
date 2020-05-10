@@ -69,8 +69,8 @@ class BankList extends React.Component {
 
           <h2 className='subtitle'>Panier</h2>
 
-          <div className='basket has-background-grey-darker  has-text-white field'>
-            <table className='table is-fullwidth has-background-grey-darker has-text-white'>
+          <div className='basket  field'>
+            <table className='table is-fullwidth is-striped'>
 
               {Object.keys(basketItems).map((key) => {
                 const item = basketItems[key]
@@ -106,7 +106,7 @@ class BankList extends React.Component {
 
           </div>
 
-          <form onSubmit={(e) => {e.preventDefault();dispatch({ type: 'CREATE_ITEMS_REQUEST', items: basketItems, message: message })}}>
+          <form onSubmit={(e) => { e.preventDefault(); dispatch({ type: 'CREATE_ITEMS_REQUEST', items: basketItems, message: message }) }}>
             <div className='field is-grouped is-grouped-right'>
               <div className='control is-expanded'>
                 <input className='input' placeholder='Raison de votre demande: enchant / craft etc' value={message} onChange={(e) => this.setState({ message: e.target.value })}/>
@@ -125,11 +125,11 @@ class BankList extends React.Component {
             <input placeholder='Rechercher' className='input' onChange={(e) => this.onFilterChange(e)}/>
           </div>
 
-          <div className='has-background-grey-darker gold has-text-white'>
+          <div className='gold'>
               Bank gold : <Gold count={gold}/>
           </div>
 
-          <table className='table has-background-grey-darker is-fullwidth has-text-white'>
+          <table className='table is-fullwidth is-striped'>
             <thead >
               <tr>
                 <th className='has-text-white'>Objet</th>

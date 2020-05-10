@@ -17,10 +17,16 @@ $warrior:#C79C6E;
   background-color:$mage
 }
 .bg-class-priest{
-  background-color:$priest
+  background-color:$priest;
+  strong{
+    color:#000;
+  }
 }
 .bg-class-rogue{
   background-color:$rogue;
+  strong{
+    color:#000;
+  }
 }
 .bg-class-shaman{
   background-color:$shaman;

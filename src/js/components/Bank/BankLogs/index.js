@@ -24,8 +24,8 @@ class BankLogs extends React.Component {
   render () {
     const { bankLogs } = this.props
     return (
-      <div className='box has-background-grey-darker has-text-white'>
-        <table className='table is-fullwidth has-background-grey-darker has-text-white'>
+      <div className='box  '>
+        <table className='table is-fullwidth is-striped'>
 
           <tbody>
 

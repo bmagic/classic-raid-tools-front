@@ -92,10 +92,13 @@ function * setItemFree (action) {
 function * createItemsRequest (action) {
   yield * request('POST', '/v1/bank/request', [{ type: 'CLEAR_BASKET' }], { items: action.items, message: action.message })
 }
-
-function * getItemsRequest (action) {
+function * getItemsRequest () {
   yield * request('GET', '/v1/bank/requests', [{ type: 'GET_BANK_ITEMS_REQUEST_SUCCESS' }])
 }
+function * updateItemsRequest (action) {
+  yield * request('PUT', `/v1/bank/request/status/${action.id}`, [{ type: 'GET_BANK_ITEMS_REQUEST' }], { status: action.status })
+}
+
 function * request (type, url, actions, body) {
   try {
     let result
@@ -158,4 +161,5 @@ export default function * rootSaga () {
   yield takeLeading('SET_ITEM_FREE', setItemFree)
   yield takeLeading('CREATE_ITEMS_REQUEST', createItemsRequest)
   yield takeLeading('GET_BANK_ITEMS_REQUEST', getItemsRequest)
+  yield takeLeading('UPDATE_BANK_ITEMS_REQUEST', updateItemsRequest)
 }
