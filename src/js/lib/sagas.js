@@ -49,6 +49,10 @@ function * createRegistration (action) {
   yield * request('POST', '/v1/raids/registration', [], { characterId: action.characterId, raidId: action.raidId, status: action.status, favorite: action.favorite })
 }
 
+function * updateRegistration (action) {
+  yield * request('PUT', `/v1/raids/registration/${action.id}`, [{ type: 'GET_REGISTRATIONS', raidId: action.raidId }], action.registration)
+}
+
 function * getRegistrations (action) {
   yield * request('GET', `/v1/raids/${action.raidId}/registrations`, [{ type: 'GET_REGISTRATIONS_SUCCESS' }])
 }
@@ -149,6 +153,7 @@ export default function * rootSaga () {
   yield takeLeading('CREATE_RAID', createRaid)
   yield takeLeading('GET_RAID', getRaid)
   yield takeLeading('CREATE_REGISTRATION', createRegistration)
+  yield takeLeading('UPDATE_REGISTRATION', updateRegistration)
   yield takeLeading('GET_REGISTRATIONS', getRegistrations)
   yield takeLeading('GET_REGISTRATION_LOGS', getRegistrationLogs)
   yield takeLeading('UPDATE_USER', updateUser)

@@ -7,6 +7,7 @@ import CharactersSubscribeForm from '../CharactersRegistrationForm'
 
 import './styles.scss'
 import { withRouter } from 'react-router-dom'
+import CharactersRegistrationList from '../CharactersRegistrationList'
 class RaidInfo extends React.Component {
   constructor (props) {
     super(props)
@@ -30,13 +31,13 @@ class RaidInfo extends React.Component {
   onSubmit (e) {
     e.preventDefault()
     const { date, title, main, logs, gdoc, infos } = this.state
-    const { raid } = this.props
-    this.props.dispatch({ type: 'UPDATE_RAID', id: raid._id, raid: { date: moment(date).toISOString(), title: title, main: main, logs: logs, gdoc: gdoc, infos: infos } })
+    const { raidId } = this.props
+    this.props.dispatch({ type: 'UPDATE_RAID', id: raidId, raid: { date: moment(date).toISOString(), title: title, main: main, logs: logs, gdoc: gdoc, infos: infos } })
     this.setState({ edit: false })
   }
 
   render () {
-    const { user, raid, dispatch, history } = this.props
+    const { user, raid, dispatch, history, raidId } = this.props
     const { edit, title, main, date, logs, gdoc, infos } = this.state
     if (raid === null) {
       return <div className='box'>Chargement en cours...</div>
@@ -117,7 +118,7 @@ class RaidInfo extends React.Component {
                     <a onClick={() => {
                       if (confirm('Confirmer la suppression du raid')) {
                         history.push('/')
-                        dispatch({ type: 'DELETE_RAID', id: raid._id })
+                        dispatch({ type: 'DELETE_RAID', id: raidId })
                       }
                     }} className="button is-danger">
                       <span className="icon is-small">
@@ -137,6 +138,8 @@ class RaidInfo extends React.Component {
                 </form>
               </div>}
             </div>
+            <CharactersRegistrationList raidId={raidId}/>
+
           </div>
           <div className='column is-4'>
             <div className='logo box has-text-centered'>
@@ -145,7 +148,7 @@ class RaidInfo extends React.Component {
               <div className='subtitle'>{raid.title} {raid.main && <span className='tag is-light is-primary'>Raid principal</span>}</div>
               }
             </div>
-            <CharactersSubscribeForm raidId={raid._id}/>
+            <CharactersSubscribeForm raidId={raidId}/>
           </div>
         </div>
       </div>
@@ -157,7 +160,8 @@ RaidInfo.propTypes = {
   dispatch: PropTypes.func,
   user: PropTypes.object,
   raid: PropTypes.object,
-  history: PropTypes.object
+  history: PropTypes.object,
+  raidId: PropTypes.string
 }
 
 function mapStateToProps (state) {

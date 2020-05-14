@@ -17,7 +17,7 @@ class CharactersRegistrationLogs extends React.Component {
         {registrationLogs.map((registrationLog) => {
           return (
             <div key={registrationLog._id}>
-              <span className='has-text-weight-bold'>{moment(registrationLog.date).format('DD/MM/YYYY LTS')}:</span> {registrationLog.characterName} {registrationLog.status}  {registrationLog.favorite ? '(Favori)' : ''}
+              <span className='has-text-weight-bold'>{moment(registrationLog.date).format('DD/MM/YYYY LTS')}:</span> {registrationLog.characterName} {registrationLog.status}  {registrationLog.favorite ? '(Favori)' : ''} {registrationLog.validated ? '(Validé)' : ''}
             </div>
           )
         })}

@@ -6,7 +6,7 @@ import io from 'socket.io-client'
 import RaidInfo from '../../components/Raid/RaidInfo'
 
 import './styles.scss'
-import RaidInscriptions from '../../components/Raid/RaidInscriptions'
+import RaidLogs from '../../components/Raid/RaidLogs'
 
 class Raid extends React.Component {
   constructor (props) {
@@ -23,7 +23,6 @@ class Raid extends React.Component {
     })
 
     this.props.dispatch({ type: 'GET_RAID', id: this.props.match.params.id })
-    this.props.dispatch({ type: 'CHANGE_RAID_TAB', raidTab: 'infos' })
   }
 
   componentWillUnmount () {
@@ -38,12 +37,12 @@ class Raid extends React.Component {
           <div className="tabs">
             <ul>
               <li className={raidTab === 'infos' ? 'is-active' : ''} onClick={() => dispatch({ type: 'CHANGE_RAID_TAB', raidTab: 'infos' })}><a>Informations</a></li>
-              <li className={raidTab === 'inscriptions' ? 'is-active' : ''} onClick={() => dispatch({ type: 'CHANGE_RAID_TAB', raidTab: 'inscriptions' })}><a>Inscriptions</a></li>
+              <li className={raidTab === 'logs' ? 'is-active' : ''} onClick={() => dispatch({ type: 'CHANGE_RAID_TAB', raidTab: 'logs' })}><a>Logs</a></li>
             </ul>
           </div>
 
-          {raidTab === 'infos' && <RaidInfo/>}
-          {raidTab === 'inscriptions' && <RaidInscriptions/>}
+          {raidTab === 'infos' && <RaidInfo raidId={this.props.match.params.id}/>}
+          {raidTab === 'logs' && <RaidLogs/>}
 
         </div>
       </Layout>

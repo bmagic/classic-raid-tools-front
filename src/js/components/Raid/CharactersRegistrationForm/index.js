@@ -52,7 +52,7 @@ class CharactersRegistrationForm extends React.Component {
               <div className='level-right'>
 
                 <div className='level-item'>
-                  <button onClick={() => this.onClick(character._id, 'ok', favorite)} className={`button is-small ${status === 'ok' ? 'is-primary' : ''}`} title='Disponible'><i className="fas fa-check"/></button>
+                  <button onClick={() => this.onClick(character._id, 'ok', favorite)} className={`button is-small ${status === 'ok' ? 'is-success' : ''}`} title='Disponible'><i className="fas fa-check"/></button>
                   <button onClick={() => this.onClick(character._id, 'late', favorite)} className={`button is-small ${status === 'late' ? 'is-warning' : ''}`} title='Disponible mais en retard'><i className="fas fa-clock"/></button>
                   <button onClick={() => this.onClick(character._id, 'ko', favorite)} className={`button is-small ${status === 'ko' ? 'is-danger' : ''}`} title='Absent'><i className="fas fa-times"/></button>
                   <button onClick={() => this.onClick(character._id, 'bench', favorite)} className={`button is-small ${status === 'bench' ? 'is-warning' : ''}`} title='Dispo mais si possible en repos'><i className="fas fa-umbrella-beach"/></button>

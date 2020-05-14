@@ -1,7 +1,9 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-
+  output: {
+    filename: 'main.[contenthash].js'
+  },
   module: {
     rules: [
       {

@@ -25,7 +25,7 @@ const App = () => {
         <PrivateRoute exact path='/characters' component={Characters}/>
         <PrivateRoute exact path='/roster' component={Roster}/>
         <PrivateRoute exact path="/bank" roles={['member']} component={Bank}/>
-        <PrivateRoute exact path='/raid/:id' roles={['member']} component={Raid}/>
+        <PrivateRoute exact path='/raid/:id' roles={['member', 'guest']} component={Raid}/>
         <PrivateRoute exact path='/admin/users' roles={['admin']} component={AdminUsers}/>
       </Switch>
     </Router>

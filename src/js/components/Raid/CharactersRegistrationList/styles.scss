@@ -8,4 +8,18 @@
   .level{
     margin-bottom:0.2rem!important;
   }
+  .registration{
+    .image{
+      display:inline-block;
+    }
+    .links{display:none}
+    &:hover .links{display: inline-block}
+  }
+
+  .bench{
+    .registration{
+      display:inline-block;
+      margin-left:10px;
+    }
+  }
 }

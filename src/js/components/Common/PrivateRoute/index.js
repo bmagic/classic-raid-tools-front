@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
 import Login from '../../../pages/Login'
+import Layout from '../Layout'
 
 class PrivateRoute extends React.Component {
   componentDidMount () {
@@ -25,7 +26,7 @@ class PrivateRoute extends React.Component {
         }
 
         if (!access) {
-          return <div>Access denied</div>
+          return <Layout>Access denied</Layout>
         }
       }
 
