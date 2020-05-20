@@ -4,6 +4,8 @@ import BankLogs from '../../components/Bank/BankLogs'
 import BankList from '../../components/Bank/BankList'
 import BankImport from '../../components/Bank/BankImport'
 import BankItemsRequest from '../../components/Bank/BankItemRequest'
+import BankBasket from '../../components/Bank/BankBasket'
+import { connect } from 'react-redux'
 
 class Bank extends React.Component {
   constructor (props) {
@@ -13,6 +15,7 @@ class Bank extends React.Component {
 
   render () {
     const { tab } = this.state
+    const { basketItems } = this.props
     return (
       <Layout>
         <div className='is-pulled-right'>
@@ -21,18 +24,25 @@ class Bank extends React.Component {
         <div className="tabs">
           <ul>
             <li className={tab === 'bank' ? 'is-active' : ''} onClick={() => this.setState({ tab: 'bank' })}><a>Banque</a></li>
+            <li className={tab === 'basket' ? 'is-active' : ''} onClick={() => this.setState({ tab: 'basket' })}><a>Panier ({Object.keys(basketItems).length})</a></li>
             <li className={tab === 'request' ? 'is-active' : ''} onClick={() => this.setState({ tab: 'request' })}><a>Requêtes</a></li>
             <li className={tab === 'logs' ? 'is-active' : ''} onClick={() => this.setState({ tab: 'logs' })}><a>Logs import</a></li>
           </ul>
         </div>
 
-        {tab === 'bank' && <BankList main={true} />}
-        {tab === 'request' && <BankItemsRequest main={false}/> }
-        {tab === 'logs' && <BankLogs main={false}/> }
+        {tab === 'bank' && <BankList />}
+        {tab === 'basket' && <BankBasket /> }
+        {tab === 'request' && <BankItemsRequest /> }
+        {tab === 'logs' && <BankLogs /> }
 
       </Layout>
     )
   }
 }
 
-export default Bank
+function mapStateToProps (state) {
+  return {
+    basketItems: state.basketItems
+  }
+}
+export default connect(mapStateToProps)(Bank)

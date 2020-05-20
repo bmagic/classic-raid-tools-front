@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import LogoutButton from '../../Menu/LogoutButton'
 import AdminMenu from '../../Menu/AdminMenu'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 class Header extends React.Component {
   constructor (props) {
@@ -16,6 +18,7 @@ class Header extends React.Component {
   }
 
   render () {
+    const { user } = this.props
     return (
       <header className='header '>
 
@@ -34,20 +37,22 @@ class Header extends React.Component {
               <div className="navbar-start">
                 <Link to="/roster" className='navbar-item'>Roster</Link>
 
-                <Link to="/bank" className="navbar-item">Banque de guilde</Link>
+                {user && user.roles.includes('member') && <Link to="/bank" className="navbar-item">Banque de guilde</Link>}
+                {user && user.roles.includes('member') && <Link to="/presences" className="navbar-item">Présences</Link>}
+
                 <div className='navbar-item has-dropdown is-hoverable'>
                   <a className="navbar-link">
                     Outils externes
                   </a>
                   <div className="navbar-dropdown">
                     <a className='navbar-item' target='_blank' rel='noopener noreferrer' href='https://www.raidcalendar.com/'><i className="fas fa-external-link-alt"/>&nbsp;Raid Calendar</a>
-                    <a className='navbar-item' target='_blank' rel='noopener noreferrer' href='https://classic.warcraftlogs.com/guild/id/521113'><i className="fas fa-external-link-alt"/>&nbsp;Warcraft logs</a>
+                    <a className='navbar-item' target='_blank' rel='noopener noreferrer' href='https://classic.warcraftlogs.com/guild/eu/sulfuron/bloodthirst'><i className="fas fa-external-link-alt"/>&nbsp;Warcraft logs</a>
                     <a className='navbar-item' target='_blank' rel='noopener noreferrer' href='https://nexushub.co/wow-classic/sulfuron-horde'><i className="fas fa-external-link-alt"/>&nbsp;Prix HV</a>
                   </div>
                 </div>
               </div>
               <div className="navbar-end">
-                <Link to="/characters" className='navbar-item'>Characters</Link>
+                <Link to="/characters" className='navbar-item'>Personnages</Link>
                 <Link to="/user" className="navbar-item">Profile</Link>
                 <AdminMenu/>
                 <div className='navbar-item'> <LogoutButton/></div>
@@ -60,4 +65,13 @@ class Header extends React.Component {
   }
 }
 
-export default Header
+Header.propTypes = {
+  user: PropTypes.object
+}
+
+function mapStateToProps (state) {
+  return {
+    user: state.user
+  }
+}
+export default connect(mapStateToProps)(Header)

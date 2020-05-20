@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import WowRaidImage from '../../Common/WowRaidImage'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import CharactersSubscribeForm from '../CharactersRegistrationForm'
+import CharactersRegistrationForm from '../CharactersRegistrationForm'
 
 import './styles.scss'
 import { withRouter } from 'react-router-dom'
@@ -145,10 +145,11 @@ class RaidInfo extends React.Component {
             <div className='logo box has-text-centered'>
               <WowRaidImage instance={raid.instance}/>
               {raid.title && raid.title !== '' &&
-              <div className='subtitle'>{raid.title} {raid.main && <span className='tag is-light is-primary'>Raid principal</span>}</div>
+              <div className='subtitle'>{raid.title}</div>
               }
+              {raid.main && <div className='tag is-light is-primary'>Raid principal</div>}
             </div>
-            <CharactersSubscribeForm raidId={raidId}/>
+            <CharactersRegistrationForm raidId={raidId}/>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { takeLeading, put } from 'redux-saga/effects'
+import { takeLeading, takeEvery, put } from 'redux-saga/effects'
 import { deleteUrl, getUrl, postUrl, putUrl } from './request'
 
 function * login (action) {
@@ -46,7 +46,7 @@ function * getRaid (action) {
 }
 
 function * createRegistration (action) {
-  yield * request('POST', '/v1/raids/registration', [], { characterId: action.characterId, raidId: action.raidId, status: action.status, favorite: action.favorite })
+  yield * request('POST', '/v1/raids/registration', [{ type: 'GET_REGISTRATIONS', raidId: action.raidId }, { type: 'GET_NEXT_RAIDS' }], { characterId: action.characterId, raidId: action.raidId, status: action.status, favorite: action.favorite })
 }
 
 function * updateRegistration (action) {
@@ -54,7 +54,7 @@ function * updateRegistration (action) {
 }
 
 function * getRegistrations (action) {
-  yield * request('GET', `/v1/raids/${action.raidId}/registrations`, [{ type: 'GET_REGISTRATIONS_SUCCESS' }])
+  yield * request('GET', `/v1/raids/${action.raidId}/registrations`, [{ type: 'GET_REGISTRATIONS_SUCCESS', raidId: action.raidId }])
 }
 
 function * getRegistrationLogs (action) {
@@ -102,6 +102,9 @@ function * getItemsRequest () {
 function * updateItemsRequest (action) {
   yield * request('PUT', `/v1/bank/request/status/${action.id}`, [{ type: 'GET_BANK_ITEMS_REQUEST' }], { status: action.status })
 }
+function * getPresences (action) {
+  yield * request('GET', `/v1/presences?instance=${action.instance}`, [{ type: 'GET_PRESENCES_SUCCESS' }])
+}
 
 function * request (type, url, actions, body) {
   try {
@@ -124,11 +127,8 @@ function * request (type, url, actions, body) {
     for (const index in actions) {
       const action = actions[index]
 
-      if (Object.keys(action).length === 1) {
-        yield put({ type: action.type, result: result.data })
-      } else {
-        yield put(action)
-      }
+      action.result = result.data
+      yield put(action)
     }
   } catch (e) {
     if (e.response && e.response.status === 401) {
@@ -154,7 +154,7 @@ export default function * rootSaga () {
   yield takeLeading('GET_RAID', getRaid)
   yield takeLeading('CREATE_REGISTRATION', createRegistration)
   yield takeLeading('UPDATE_REGISTRATION', updateRegistration)
-  yield takeLeading('GET_REGISTRATIONS', getRegistrations)
+  yield takeEvery('GET_REGISTRATIONS', getRegistrations)
   yield takeLeading('GET_REGISTRATION_LOGS', getRegistrationLogs)
   yield takeLeading('UPDATE_USER', updateUser)
   yield takeLeading('UPDATE_RAID', updateRaid)
@@ -167,4 +167,5 @@ export default function * rootSaga () {
   yield takeLeading('CREATE_ITEMS_REQUEST', createItemsRequest)
   yield takeLeading('GET_BANK_ITEMS_REQUEST', getItemsRequest)
   yield takeLeading('UPDATE_BANK_ITEMS_REQUEST', updateItemsRequest)
+  yield takeLeading('GET_PRESENCES', getPresences)
 }

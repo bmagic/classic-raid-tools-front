@@ -23,11 +23,12 @@ class CharactersRegistrationForm extends React.Component {
   }
 
   render () {
-    const { userCharacters, registrations } = this.props
+    const { userCharacters, registrations, raidId } = this.props
+
+    if (registrations[raidId] === undefined) return <div>Chargement en cours</div>
 
     const characters = {}
-    for (const index in registrations) {
-      const registration = registrations[index]
+    for (const registration of registrations[raidId]) {
       characters[registration.characterId] = { status: registration.status, favorite: registration.favorite }
     }
 
@@ -38,7 +39,7 @@ class CharactersRegistrationForm extends React.Component {
           const status = characters[character._id] ? characters[character._id].status : undefined
           const favorite = characters[character._id] ? characters[character._id].favorite : false
           return (
-            <div key={character._id} className='level'>
+            <div key={character._id} className='level is-mobile'>
               <div className='level-left'>
                 <div className='level-item'>
                   <figure className='image is-24x24'><WowClassImage keyClass={character.class} keySpec={character.spec}/></figure>

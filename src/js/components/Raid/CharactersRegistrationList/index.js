@@ -24,7 +24,7 @@ class CharactersRegistrationList extends React.Component {
   }
 
   render () {
-    const { registrations } = this.props
+    const { registrations, raidId } = this.props
     const charactersRegistration = { tank: [], heal: [], cac: [], dd: [], bench: [], late: [], ko: [] }
     const charactersRegistrationValidated = { tank: [], heal: [], cac: [], dd: [], error: [] }
 
@@ -32,8 +32,11 @@ class CharactersRegistrationList extends React.Component {
     const uniqueUserValidated = {}
     const charactersuniqueUserRegistration = []
     const rosterError = []
-    for (const index in registrations) {
-      const registration = registrations[index]
+
+    if (registrations[raidId] === undefined) return <div>Chargement en cours</div>
+
+    for (const registration of registrations[raidId]) {
+      console.log(registration)
 
       if (uniqueUser[registration.userId] === undefined) uniqueUser[registration.userId] = []
       uniqueUser[registration.userId].push(registration.name)

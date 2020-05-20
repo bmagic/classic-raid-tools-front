@@ -18,12 +18,12 @@ const CharacterBox = ({ dispatch, name, wclass, spec, id, main }) => {
             <strong>{name}</strong>
           </div>
           <div className={`level-item main-tag ${main ? 'is-main' : ''}`}>
-            <div onClick={() => dispatch({ type: 'SET_USER_MAIN_CHARACTER', id: id })} className={`tag ${main ? 'is-primary' : 'is-light'}`}>Personnage principal</div>
+            <div onClick={() => dispatch({ type: 'SET_USER_MAIN_CHARACTER', id: id })} className={`tag ${main ? 'is-success' : 'is-light'}`}>Personnage principal</div>
           </div>
         </div>
         <div className="level-right">
-          <div className='level-item delete-button'>
-            <a onClick={() => {
+          <div className='level-item delete-button '>
+            <a className='has-text-danger' onClick={() => {
               if (confirm('Confirmer la suppression du personnage')) {
                 dispatch({ type: 'DELETE_USER_CHARACTER', id: id })
               }

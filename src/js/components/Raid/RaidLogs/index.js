@@ -5,8 +5,6 @@ import PropTypes from 'prop-types'
 import CharactersRegistrationLogs from '../CharactersRegistrationLogs'
 
 class RaidLogs extends React.Component {
-
-
   render () {
     const { raid } = this.props
     if (raid === null) {

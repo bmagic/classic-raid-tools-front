@@ -58,68 +58,11 @@ class BankList extends React.Component {
   }
 
   render () {
-    const { user, basketItems, dispatch } = this.props
-    const { bankItems, gold, message } = this.state
+    const { user, basketItems } = this.props
+    const { bankItems, gold } = this.state
 
-    let basketPrice = 0
     return (
       <div className=' bank-list'>
-        {Object.keys(basketItems).length > 0 && <div className='box'>
-          <a className='is-pulled-right' onClick={() => { dispatch({ type: 'CLEAR_BASKET' }) }}>Vider le panier</a>
-
-          <h2 className='subtitle'>Panier</h2>
-
-          <div className='basket  field'>
-            <table className='table is-fullwidth is-striped'>
-
-              {Object.keys(basketItems).map((key) => {
-                const item = basketItems[key]
-                if (!item.freeForMembers) { basketPrice += item.marketValue * item.quantity }
-                return (
-                  <tr key={key}>
-                    <td>
-                      <Item wid={key}/>
-                    </td>
-                    <td>
-                      {item.quantity}
-                    </td>
-                    <td className='has-text-right'>
-                      <Gold count={item.freeForMembers ? 0 : item.marketValue} />
-                    </td>
-                  </tr>
-                )
-              })}
-              <tfoot>
-                <tr>
-                  <th className='has-text-white'>Total</th>
-                  <th className='has-text-white'/>
-                  <th className='has-text-white has-text-right'><Gold count={basketPrice} /></th>
-                </tr>
-                <tr>
-                  <th className='has-text-white'>Total avec réduction de guilde</th>
-                  <th className='has-text-white'/>
-                  <th className='has-text-white has-text-right'><Gold count={basketPrice / 2}/> </th>
-                </tr>
-              </tfoot>
-
-            </table>
-
-          </div>
-
-          <form onSubmit={(e) => { e.preventDefault(); dispatch({ type: 'CREATE_ITEMS_REQUEST', items: basketItems, message: message }) }}>
-            <div className='field is-grouped is-grouped-right'>
-              <div className='control is-expanded'>
-                <input className='input' placeholder='Raison de votre demande: enchant / craft etc' value={message} onChange={(e) => this.setState({ message: e.target.value })}/>
-              </div>
-              <div className='control'>
-                <button disabled={message === ''} className='button is-primary is-pulled-right has-text-white' type='submit'>Envoyer la demande</button>
-
-              </div>
-            </div>
-          </form>
-        </div>}
-
-        {/* Recherche */}
         <div className='box'>
           <div className='field'>
             <input placeholder='Rechercher' className='input' onChange={(e) => this.onFilterChange(e)}/>
@@ -173,7 +116,6 @@ class BankList extends React.Component {
 }
 BankList.propTypes = {
   dispatch: PropTypes.func,
-  lang: PropTypes.string,
   bankItems: PropTypes.array,
   user: PropTypes.object,
   basketItems: PropTypes.object
@@ -182,7 +124,6 @@ BankList.propTypes = {
 function mapStateToProps (state) {
   return {
     bankItems: state.bankItems,
-    lang: state.lang,
     user: state.user,
     basketItems: state.basketItems
   }

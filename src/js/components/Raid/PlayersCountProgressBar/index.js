@@ -7,9 +7,9 @@ class PlayersCountProgressBar extends React.Component {
     const { instance, playersCount } = this.props
 
     const max = (instance === 'aq20' || instance === 'zg') ? 20 : 40
-    let color = 'is-primary'
+    let color = 'is-danger'
     if (playersCount / max >= 0.75) {
-      color = 'is-danger'
+      color = 'is-success'
     } else if (playersCount / max >= 0.5) {
       color = 'is-warning'
     }

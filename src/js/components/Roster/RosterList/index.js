@@ -2,9 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import './styles.scss'
 import { wowClass } from '../../../lib/wow'
 import WowClassImage from '../../Common/WowClassImage'
+
+import './styles.scss'
 
 class RosterList extends React.Component {
   componentDidMount () {
@@ -34,7 +35,7 @@ class RosterList extends React.Component {
               <div key={index} className='column is-3'>
                 <div className='box'>
                   <span className='is-capitalized has-text-weight-bold'>{wClass} ({classCount[wClass]})</span>
-                  {roster.map((character) => {
+                  {roster.sort().map((character) => {
                     if (character.main === main && character.class === wClass) {
                       return <div className='level' title={character.username} key={character._id}>
                         <div className='level-left'>

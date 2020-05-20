@@ -1,5 +1,3 @@
-import interopRequireDefault from '@babel/runtime/helpers/esm/interopRequireDefault'
-
 const initialState = {
   loading: false,
   errors: [],
@@ -8,7 +6,7 @@ const initialState = {
   users: [],
   nextRaids: [],
   raid: null,
-  registrations: [],
+  registrations: {},
   registrationLogs: [],
   raidTab: 'infos',
   roster: [],
@@ -17,7 +15,8 @@ const initialState = {
   bankItemsRequests: [],
   bankLogs: [],
   basketItems: {},
-  lang: 'fr'
+  lang: 'fr',
+  presences: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -50,11 +49,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         users: action.result
       }
-    case 'GET_NEXT_RAIDS':
-      return {
-        ...state,
-        nextRaids: []
-      }
     case 'GET_NEXT_RAIDS_SUCCESS':
       return {
         ...state,
@@ -65,11 +59,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         raid: action.result
       }
-    case 'GET_REGISTRATIONS_SUCCESS':
+    case 'GET_REGISTRATIONS_SUCCESS': {
+      const registrations = Object.assign({}, state.registrations)
+      registrations[action.raidId] = action.result
       return {
         ...state,
-        registrations: action.result
+        registrations: registrations
       }
+    }
     case 'GET_REGISTRATION_LOGS_SUCCESS':
       return {
         ...state,
@@ -110,7 +107,7 @@ const reducer = (state = initialState, action) => {
       if (action.quantity === 0) {
         delete basketItems[action.item._id]
       } else {
-        basketItems[action.item._id] = { quantity: action.quantity, marketValue: action.item.marketValue, freeForMembers: action.item.freeForMembers }
+        basketItems[action.item._id] = { quantity: action.quantity, marketValue: action.item.marketValue, item: action.item }
       }
       return {
         ...state,
@@ -127,6 +124,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         bankItemsRequests: action.result
+      }
+    }
+    case 'GET_PRESENCES_SUCCESS': {
+      return {
+        ...state,
+        presences: action.result
       }
     }
     default:
