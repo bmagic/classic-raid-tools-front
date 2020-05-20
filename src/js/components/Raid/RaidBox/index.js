@@ -60,7 +60,7 @@ class RaidBox extends React.Component {
               </div>
               <div className='level-right'>
                 <div className='level-item'>
-                  <CharactersRegistrationForm raidId={raid._id}/>
+                  {user && user.roles.includes('member') && <CharactersRegistrationForm raidId={raid._id}/>}
                 </div>
               </div>
             </div>
