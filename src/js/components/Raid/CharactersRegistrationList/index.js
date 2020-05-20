@@ -112,7 +112,7 @@ class CharactersRegistrationList extends React.Component {
           </div>
         </div>
         <div className='box'>
-          <h2 className='subtitle'>Bench</h2>
+          <h2 className='subtitle'>En attente de validation / Bench</h2>
 
           <div className='columns'>
             <div className='column is-3'>
