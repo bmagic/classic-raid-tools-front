@@ -2,8 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+
 import Item from '../Item'
 import Gold from '../Gold'
+
 class BankItemsRequest extends React.Component {
   componentDidMount () {
     this.props.dispatch({ type: 'GET_BANK_ITEMS_REQUEST' })
@@ -26,16 +28,14 @@ class BankItemsRequest extends React.Component {
     const { bankItemsRequests, user, dispatch } = this.props
     return (
       <div >
-
         {bankItemsRequests.map((bankItemsRequest) => {
           let basketPrice = 0
-
           return (
             <div className='box ' key={bankItemsRequest._id}>
               <div className='level'>
                 <div className='item-level'>
                   <div>{moment(bankItemsRequest.date).format('DD/MM/YYYY HH:mm')}</div>
-                  <div>{bankItemsRequest.userId.username}</div>
+                  <div>{bankItemsRequest && bankItemsRequest.userId ? bankItemsRequest.userId.username : 'Joueur inconnu'}</div>
                 </div>
                 <div className='item-level'>
                   <div>{bankItemsRequest.message}</div>

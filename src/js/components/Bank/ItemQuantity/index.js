@@ -28,7 +28,7 @@ const ItemQuantity = ({ wid, item, quantity, dispatch }) => {
 ItemQuantity.propTypes = {
   dispatch: PropTypes.func,
   quantity: PropTypes.number,
-  wid: PropTypes.wid,
+  wid: PropTypes.number,
   item: PropTypes.object
 }
 
