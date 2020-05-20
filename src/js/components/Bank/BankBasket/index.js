@@ -29,7 +29,7 @@ class BankBasket extends React.Component {
     for (const key in this.props.basketItems) {
       let stock = null
       for (const bankItem of this.props.bankItems) {
-        if (bankItem._id === parseInt(key)) {
+        if (bankItem?._id === parseInt(key)) {
           stock = bankItem
         }
       }
@@ -41,10 +41,10 @@ class BankBasket extends React.Component {
           item: { _id: key }
         })
       } else {
-        if (stock.quantity < this.props.basketItems[key].quantity) {
+        if (stock?.quantity < this.props.basketItems[key]?.quantity) {
           this.props.dispatch({
             type: 'CHANGE_BASKET_ITEM_QUANTITY',
-            quantity: stock.quantity,
+            quantity: stock?.quantity,
             wid: key,
             item: stock
           })
@@ -74,7 +74,7 @@ class BankBasket extends React.Component {
               {Object.keys(basketItems).map((key) => {
                 const basketItem = basketItems[key]
                 if (basketItem.item === undefined) return null
-                if (!basketItem.item.freeForMembers) { basketPrice += basketItem.marketValue * basketItem.quantity }
+                if (!basketItem.item?.freeForMembers) { basketPrice += basketItem.marketValue * basketItem.quantity }
                 return (
                   <tr key={key}>
                     <td>
@@ -84,7 +84,7 @@ class BankBasket extends React.Component {
                       <ItemQuantity quantity={basketItem.quantity} wid={key} item={basketItem.item}/>
                     </td>
                     <td className='has-text-right'>
-                      <Gold count={basketItem.item.freeForMembers ? 0 : basketItem.marketValue} />
+                      <Gold count={basketItem?.item.freeForMembers ? 0 : basketItem.marketValue} />
                     </td>
                   </tr>
                 )
