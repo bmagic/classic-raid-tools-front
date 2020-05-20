@@ -4,15 +4,15 @@ import PropTypes from 'prop-types'
 
 import Item from '../Item'
 import Gold from '../Gold'
+import ItemQuantity from '../ItemQuantity'
 
 import './styles.scss'
-import ItemQuantity from '../ItemQuantity'
 
 class BankBasket extends React.Component {
   constructor (props) {
     super(props)
     this.tbody = React.createRef()
-    this.state = { gold: 0, message: '' }
+    this.state = { message: '' }
   }
 
   componentDidMount () {
@@ -68,27 +68,23 @@ class BankBasket extends React.Component {
       <div className=' bank-basket'>
         <div className='box'>
           <a className='is-pulled-right' onClick={() => { dispatch({ type: 'CLEAR_BASKET' }) }}>Vider le panier</a>
-
           <h2 className='subtitle'>Panier</h2>
-
           <div className='basket  field'>
             <table className='table is-fullwidth is-striped'>
-
               {Object.keys(basketItems).map((key) => {
-                const item = basketItems[key]
-                console.log(item)
-
-                if (!item.item.freeForMembers) { basketPrice += item.marketValue * item.quantity }
+                const basketItem = basketItems[key]
+                if (basketItem.item === undefined) return null
+                if (!basketItem.item.freeForMembers) { basketPrice += basketItem.marketValue * basketItem.quantity }
                 return (
                   <tr key={key}>
                     <td>
                       <Item wid={key}/>
                     </td>
                     <td>.
-                      <ItemQuantity quantity={item.quantity} wid={key} item={item.item}/>
+                      <ItemQuantity quantity={basketItem.quantity} wid={key} item={basketItem.item}/>
                     </td>
                     <td className='has-text-right'>
-                      <Gold count={item.item.freeForMembers ? 0 : item.marketValue} />
+                      <Gold count={basketItem.item.freeForMembers ? 0 : basketItem.marketValue} />
                     </td>
                   </tr>
                 )
@@ -105,11 +101,8 @@ class BankBasket extends React.Component {
                   <th className='has-text-white has-text-right'><Gold count={basketPrice / 2}/> </th>
                 </tr>
               </tfoot>
-
             </table>
-
           </div>
-
           <form onSubmit={(e) => { e.preventDefault(); dispatch({ type: 'CREATE_ITEMS_REQUEST', items: basketItems, message: message }) }}>
             <div className='field is-grouped is-grouped-right'>
               <div className='control is-expanded'>
@@ -117,7 +110,6 @@ class BankBasket extends React.Component {
               </div>
               <div className='control'>
                 <button disabled={message === '' || Object.keys(basketItems).length === 0 } className='button is-primary is-pulled-right has-text-white' type='submit'>Envoyer la demande</button>
-
               </div>
             </div>
           </form>
