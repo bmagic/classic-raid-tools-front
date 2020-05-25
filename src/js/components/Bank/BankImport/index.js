@@ -6,7 +6,6 @@ import EscapeOutside from 'react-escape-outside'
 class BankImport extends React.Component {
   constructor (props) {
     super(props)
-
     this.state = { data: '' }
   }
 
@@ -23,7 +22,7 @@ class BankImport extends React.Component {
   render () {
     const { user, displayBankModal } = this.props
     const { data } = this.state
-    if (user && user.roles.includes('banker')) {
+    if (user?.roles.includes('banker')) {
       if (!displayBankModal) return <div className='button' onClick={(e) => this.displayModal(true)}>Importer les données</div>
 
       return (

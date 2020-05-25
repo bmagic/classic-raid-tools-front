@@ -68,3 +68,16 @@ export const wowRaids = {
   naxxramas: Naxxramas,
   other: Other
 }
+
+export const bossList = {
+  bwl: [
+    { name: 'Razorgore the Untamed', id: 12435 },
+    { name: 'Vaelastrasz the Corrupt', id: 13020 },
+    { name: 'Broodlord Lashlayer', id: 12017 },
+    { name: 'Firemaw', id: 11983 },
+    { name: 'Ebonroc', id: 14601 },
+    { name: 'Flamegor', id: 11981 },
+    { name: 'Chromaggus', id: 14020 },
+    { name: 'Nefarian', id: 11583 }
+  ]
+}

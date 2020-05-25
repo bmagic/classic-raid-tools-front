@@ -37,7 +37,7 @@ class BankBasket extends React.Component {
         this.props.dispatch({
           type: 'CHANGE_BASKET_ITEM_QUANTITY',
           quantity: 0,
-          wid: key,
+          wid: parseInt(key),
           item: { _id: key }
         })
       } else {
@@ -45,7 +45,15 @@ class BankBasket extends React.Component {
           this.props.dispatch({
             type: 'CHANGE_BASKET_ITEM_QUANTITY',
             quantity: stock?.quantity,
-            wid: key,
+            wid: parseInt(key),
+            item: stock
+          })
+        }
+        if (stock?.freeForMembers !== this.props.basketItems[key]?.item?.freeForMembers) {
+          this.props.dispatch({
+            type: 'CHANGE_BASKET_ITEM_QUANTITY',
+            quantity: this.props.basketItems[key]?.quantity,
+            wid: parseInt(key),
             item: stock
           })
         }
@@ -60,7 +68,7 @@ class BankBasket extends React.Component {
   }
 
   render () {
-    const { basketItems, dispatch } = this.props
+    const { basketItems, basketForReroll, dispatch } = this.props
     const { message } = this.state
 
     let basketPrice = 0
@@ -71,24 +79,26 @@ class BankBasket extends React.Component {
           <h2 className='subtitle'>Panier</h2>
           <div className='basket  field'>
             <table className='table is-fullwidth is-striped'>
-              {Object.keys(basketItems).map((key) => {
-                const basketItem = basketItems[key]
-                if (basketItem.item === undefined) return null
-                if (!basketItem.item?.freeForMembers) { basketPrice += basketItem.marketValue * basketItem.quantity }
-                return (
-                  <tr key={key}>
-                    <td>
-                      <Item wid={key}/>
-                    </td>
-                    <td>.
-                      <ItemQuantity quantity={basketItem.quantity} wid={key} item={basketItem.item}/>
-                    </td>
-                    <td className='has-text-right'>
-                      <Gold count={basketItem?.item.freeForMembers ? 0 : basketItem.marketValue} />
-                    </td>
-                  </tr>
-                )
-              })}
+              <tbody>
+                {Object.keys(basketItems).map((key) => {
+                  const basketItem = basketItems[key]
+                  if (basketItem.item === undefined) return null
+                  if (!basketItem.item?.freeForMembers || basketForReroll === true) { basketPrice += basketItem.marketValue * basketItem.quantity }
+                  return (
+                    <tr key={key}>
+                      <td>
+                        <Item wid={parseInt(key)}/>
+                      </td>
+                      <td>.
+                        <ItemQuantity quantity={basketItem.quantity} wid={parseInt(key)} item={basketItem.item}/>
+                      </td>
+                      <td className='has-text-right'>
+                        <Gold count={basketItem?.item?.freeForMembers && basketForReroll === false ? 0 : basketItem.marketValue} />
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
               <tfoot>
                 <tr>
                   <th className='has-text-white'>Total</th>
@@ -96,20 +106,29 @@ class BankBasket extends React.Component {
                   <th className='has-text-white has-text-right'><Gold count={basketPrice} /></th>
                 </tr>
                 <tr>
-                  <th className='has-text-white'>Total avec réduction de guilde</th>
+                  <th className='has-text-white'>Total avec réduction de guilde (-50%)</th>
                   <th className='has-text-white'/>
                   <th className='has-text-white has-text-right'><Gold count={basketPrice / 2}/> </th>
                 </tr>
               </tfoot>
             </table>
           </div>
-          <form onSubmit={(e) => { e.preventDefault(); dispatch({ type: 'CREATE_ITEMS_REQUEST', items: basketItems, message: message }) }}>
-            <div className='field is-grouped is-grouped-right'>
+          <form onSubmit={(e) => { e.preventDefault(); dispatch({ type: 'CREATE_ITEMS_REQUEST', items: basketItems, message: message, reroll: basketForReroll }) }}>
+            <div className='field  '>
               <div className='control is-expanded'>
                 <input className='input' placeholder='Raison de votre demande: enchant / craft etc' value={message} onChange={(e) => this.setState({ message: e.target.value })}/>
               </div>
+            </div>
+            <div className='field  '>
               <div className='control'>
-                <button disabled={message === '' || Object.keys(basketItems).length === 0 } className='button is-primary is-pulled-right has-text-white' type='submit'>Envoyer la demande</button>
+                <label className="checkbox">
+                  <input className='checkbox' type='checkbox' checked={basketForReroll} onChange={() => dispatch({ type: 'CHANGE_BASKET_REROLL' })}/> Demande pour un reroll
+                </label>
+              </div>
+            </div>
+            <div className='field  '>
+              <div className='control'>
+                <button disabled={message === '' || Object.keys(basketItems).length === 0 } className='button is-primary has-text-white' type='submit'>Envoyer la demande</button>
               </div>
             </div>
           </form>
@@ -122,13 +141,15 @@ class BankBasket extends React.Component {
 BankBasket.propTypes = {
   dispatch: PropTypes.func,
   bankItems: PropTypes.array,
-  basketItems: PropTypes.object
+  basketItems: PropTypes.object,
+  basketForReroll: PropTypes.bool
 }
 
 function mapStateToProps (state) {
   return {
     bankItems: state.bankItems,
-    basketItems: state.basketItems
+    basketItems: state.basketItems,
+    basketForReroll: state.basketForReroll
   }
 }
 export default connect(mapStateToProps)(BankBasket)

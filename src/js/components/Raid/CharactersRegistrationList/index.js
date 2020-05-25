@@ -39,28 +39,28 @@ class CharactersRegistrationList extends React.Component {
       console.log(registration)
 
       if (uniqueUser[registration.userId] === undefined) uniqueUser[registration.userId] = []
-      uniqueUser[registration.userId].push(registration.name)
+      uniqueUser[registration.userId]?.push(registration.name)
 
       if (registration.status === 'ok') {
         if (registration.validated === true) {
-          charactersRegistrationValidated[registration.spec].push(registration)
+          charactersRegistrationValidated[registration.spec]?.push(registration)
 
           if (uniqueUserValidated[registration.userId] === undefined) uniqueUserValidated[registration.userId] = []
-          uniqueUserValidated[registration.userId].push(registration.name)
+          uniqueUserValidated[registration.userId]?.push(registration.name)
         } else {
-          charactersRegistration[registration.spec].push(registration)
+          charactersRegistration[registration.spec]?.push(registration)
         }
-        if (!charactersuniqueUserRegistration.includes(registration.userId)) charactersuniqueUserRegistration.push(registration.userId)
+        if (!charactersuniqueUserRegistration.includes(registration.userId)) charactersuniqueUserRegistration?.push(registration.userId)
       } else {
         if (registration.validated !== true) {
-          charactersRegistration[registration.status].push(registration)
+          charactersRegistration[registration.status]?.push(registration)
         } else {
           if (registration.status === 'bench') {
             charactersRegistrationValidated[registration.spec].push(registration)
             if (uniqueUserValidated[registration.userId] === undefined) uniqueUserValidated[registration.userId] = []
-            uniqueUserValidated[registration.userId].push(registration.name)
+            uniqueUserValidated[registration.userId]?.push(registration.name)
           } else {
-            charactersRegistrationValidated.error.push(registration)
+            charactersRegistrationValidated?.error?.push(registration)
           }
         }
       }

@@ -35,7 +35,8 @@ class BankItemsRequest extends React.Component {
               <div className='level'>
                 <div className='item-level'>
                   <div>{moment(bankItemsRequest.date).format('DD/MM/YYYY HH:mm')}</div>
-                  <div>{bankItemsRequest && bankItemsRequest.userId ? bankItemsRequest.userId.username : 'Joueur inconnu'}</div>
+                  <div>{bankItemsRequest?.userId?.username || 'Joueur inconnu'}</div>
+                  {bankItemsRequest.reroll && <div><span className='tag is-light is-warning'>Demande pour un reroll</span> </div>}
                 </div>
                 <div className='item-level'>
                   <div>{bankItemsRequest.message}</div>
@@ -43,7 +44,8 @@ class BankItemsRequest extends React.Component {
                 <div className='item-level'>
                   {Object.keys(bankItemsRequest.items).map((wid) => {
                     const item = bankItemsRequest.items[wid]
-                    if (!item.freeForMembers) { basketPrice += item.marketValue * item.quantity }
+
+                    if (!item?.item?.freeForMembers || bankItemsRequest.reroll === true) { basketPrice += item.marketValue * item.quantity }
                     return (
                       <div key={wid}>{item.quantity} x <Item wid={parseInt(wid)}/></div>
                     )

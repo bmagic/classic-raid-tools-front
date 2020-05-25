@@ -15,6 +15,7 @@ const initialState = {
   bankItemsRequests: [],
   bankLogs: [],
   basketItems: {},
+  basketForReroll: false,
   lang: 'fr',
   presences: []
 }
@@ -117,7 +118,14 @@ const reducer = (state = initialState, action) => {
     case 'CLEAR_BASKET': {
       return {
         ...state,
-        basketItems: initialState.basketItems
+        basketItems: initialState.basketItems,
+        basketForReroll: initialState.basketForReroll
+      }
+    }
+    case 'CHANGE_BASKET_REROLL':{
+      return {
+        ...state,
+        basketForReroll: !state.basketForReroll
       }
     }
     case 'GET_BANK_ITEMS_REQUEST_SUCCESS': {

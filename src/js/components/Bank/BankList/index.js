@@ -84,7 +84,7 @@ class BankList extends React.Component {
             </thead>
             <tbody ref={this.tbody}>
               {bankItems.map((item, index) => {
-                if (item._id === 0) return null
+                if (item._id === 0 || item.quantity === 0) return null
                 return (
                   <tr data={item._id} free-for-members={item.freeForMembers ? 'true' : 'false'} market-value={item.marketValue ? item.marketValue : 0} characters={item.characters} quantity={item.quantity} className={item.hidden ? 'is-hidden' : '' } key={index}>
                     <td>
