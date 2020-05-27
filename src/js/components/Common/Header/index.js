@@ -38,7 +38,7 @@ class Header extends React.Component {
                 <Link to="/roster" className='navbar-item'>Roster</Link>
 
                 {user && user.roles.includes('member') && <Link to="/bank" className="navbar-item">Banque de guilde</Link>}
-                {user && user.roles.includes('member') && <Link to="/presences" className="navbar-item">Présences</Link>}
+                {user && (user.roles.includes('member') || user.roles.includes('guest')) && <Link to="/presences" className="navbar-item">Présences</Link>}
 
                 <div className='navbar-item has-dropdown is-hoverable'>
                   <a className="navbar-link">

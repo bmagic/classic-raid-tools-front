@@ -122,7 +122,7 @@ const reducer = (state = initialState, action) => {
         basketForReroll: initialState.basketForReroll
       }
     }
-    case 'CHANGE_BASKET_REROLL':{
+    case 'CHANGE_BASKET_REROLL': {
       return {
         ...state,
         basketForReroll: !state.basketForReroll
@@ -139,6 +139,10 @@ const reducer = (state = initialState, action) => {
         ...state,
         presences: action.result
       }
+    }
+    case 'REDIRECT_404': {
+      window.location.replace('/404')
+      return state
     }
     default:
       return state

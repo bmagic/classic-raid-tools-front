@@ -21,11 +21,12 @@ const Roadmap = () => {
           <li>Utilisation d'un Webhook discord à la création d'un événement pour prévenir de la création</li>
           <li>Implémentation de la BDG avec webhook et historique plus poussé que l'outil actuel</li>
           <li>Changement du thème pour un dark</li>
+          <li>Gestion de la présence des joueurs</li>
         </ul>
         <h2>A faire</h2>
         <ul>
-          <li>Gestion de la présence des joueurs</li>
           <li>Gestion de l'historique des loots</li>
+          <li>Gestion du stuff des joueurs</li>
         </ul>
       </p>
     </Layout>

@@ -89,13 +89,15 @@ class PresencesList extends React.Component {
             <tbody>
               {userPercentArray.map((array) => {
                 const key = array[0]
+                if(!(usersList[key]?.roles?.includes('guest') || usersList[key]?.roles?.includes('member'))) return null
+
                 return (
                   <tr key={key}>
                     <td className='is-size-7'>{usersList[key].username}</td>
                     <td>{(userPercent[key] * 100).toFixed(0)}%</td>
                     {raids.map((raid) => {
                       if (presencesList[key][raid] !== undefined) {
-                        return <td className='has-background-success' key={raid} title={presencesList[key][raid].characterId ? presencesList[key][raid].characterId.name : 'Personnage inconnu'}/>
+                        return <td className='has-background-success has-text-centered' key={raid} title={presencesList[key][raid].characterId ? presencesList[key][raid].characterId.name : 'Personnage inconnu'}>{presencesList[key][raid].characterId && !presencesList[key][raid].characterId.main && <span className='has-text-black'>R</span>}</td>
                       } else {
                         return <td className='has-background-danger' key={raid} />
                       }

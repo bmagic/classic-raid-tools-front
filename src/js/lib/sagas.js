@@ -94,7 +94,7 @@ function * setItemFree (action) {
   yield * request('PUT', `/v1/bank/item/free/${action.wid}`, [{ type: 'GET_BANK_ITEMS' }], { free: action.freeForMembers })
 }
 function * createItemsRequest (action) {
-  yield * request('POST', '/v1/bank/request', [{ type: 'CLEAR_BASKET' }], { items: action.items, message: action.message, reroll:action.reroll })
+  yield * request('POST', '/v1/bank/request', [{ type: 'CLEAR_BASKET' }], { items: action.items, message: action.message, reroll: action.reroll })
 }
 function * getItemsRequest () {
   yield * request('GET', '/v1/bank/requests', [{ type: 'GET_BANK_ITEMS_REQUEST_SUCCESS' }])
@@ -133,6 +133,8 @@ function * request (type, url, actions, body) {
   } catch (e) {
     if (e.response && e.response.status === 401) {
       yield put({ type: 'DISCONNECT' })
+    } else if (e.response && e.response.status === 404) {
+      yield put({ type: 'REDIRECT_404' })
     } else {
       yield put({ type: 'ADD_ERROR', error: e.response ? e.response.data : e.message })
     }
