@@ -18,7 +18,6 @@ class LootAdmin extends React.Component {
     let found = false
     for (const classSpec of this.state.classes) {
       if (classSpec.class === wClass && classSpec.spec === spec) {
-        console.log(wClass, spec)
 
         found = true
       }
@@ -41,7 +40,6 @@ class LootAdmin extends React.Component {
     } else {
       tmpArray.splice(found, 1)
     }
-    console.log(tmpArray)
     this.setState({ classes: tmpArray })
   }
 
@@ -53,7 +51,6 @@ class LootAdmin extends React.Component {
 
   render () {
     const { instance } = this.props
-    console.log(this.state)
     return (
       <div className='loot-admin'>
         <div className='box'>
