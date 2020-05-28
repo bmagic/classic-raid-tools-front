@@ -18,9 +18,11 @@ class CharactersRegistrationLogs extends React.Component {
         return <i className="fas has-text-warning fa-clock"/>
       case 'ko':
         return <i className="fas has-text-danger fa-times"/>
-      case 'bench': {
+      case 'bench':
         return <i className="fas has-text-warning fa-umbrella-beach"/>
-      }
+      default:
+        return <span>vide</span>
+
     }
   }
 
@@ -31,7 +33,7 @@ class CharactersRegistrationLogs extends React.Component {
         {registrationLogs.map((registrationLog) => {
           return (
             <div key={registrationLog._id}>
-              <span className='has-text-weight-bold'>{moment(registrationLog.date).format('DD/MM/YYYY LTS')}: </span>Personnage {registrationLog.characterName} {this.generateStatus(registrationLog.status)} {registrationLog.favorite ? <i className='fas fa-star'/> : ''} {registrationLog.validated ? '(Validé)' : ''}
+              <span className='has-text-weight-bold'>{moment(registrationLog.date).format('DD/MM/YYYY LTS')}: </span>Personnage: {registrationLog.characterName} - Status: {this.generateStatus(registrationLog.status)} {registrationLog.favorite ? <i className='fas fa-star'/> : ''} {registrationLog.validated ? '(Validé)' : ''}
               &nbsp;{registrationLog.userId && <span>par {registrationLog.userId.username}</span>}
             </div>
           )

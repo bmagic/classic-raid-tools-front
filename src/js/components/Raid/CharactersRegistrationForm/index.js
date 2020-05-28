@@ -9,7 +9,7 @@ import './styles.scss'
 class CharactersRegistrationForm extends React.Component {
   constructor (props) {
     super(props)
-
+    this.characters = {}
     this.onClick = this.onClick.bind(this)
   }
 
@@ -19,7 +19,10 @@ class CharactersRegistrationForm extends React.Component {
   }
 
   onClick (characterId, status, favorite) {
-    this.props.dispatch({ type: 'CREATE_REGISTRATION', characterId: characterId, raidId: this.props.raidId, status: status, favorite: favorite })
+    if(this.characters[characterId] && this.characters[characterId].status === status && this.characters[characterId].favorite === favorite ) {
+      status= null
+    }
+      this.props.dispatch({ type: 'CREATE_REGISTRATION', characterId: characterId, raidId: this.props.raidId, status: status, favorite: favorite })
   }
 
   render () {
@@ -27,17 +30,17 @@ class CharactersRegistrationForm extends React.Component {
 
     if (registrations[raidId] === undefined) return <div>Chargement en cours</div>
 
-    const characters = {}
+    this.characters={}
     for (const registration of registrations[raidId]) {
-      characters[registration.characterId] = { status: registration.status, favorite: registration.favorite }
+      this.characters[registration.characterId] = { status: registration.status, favorite: registration.favorite }
     }
 
     return (
       <div className='characters-registration-form box'>
         {userCharacters.length === 0 && <span>Vous {'n\'avez'} pas encore de personnages, ajoutez en <Link to='/characters'>ici</Link></span>}
         {userCharacters.map((character) => {
-          const status = characters[character._id] ? characters[character._id].status : undefined
-          const favorite = characters[character._id] ? characters[character._id].favorite : false
+          const status = this.characters[character._id] ? this.characters[character._id].status : undefined
+          const favorite = this.characters[character._id] ? this.characters[character._id].favorite : false
           return (
             <div key={character._id} className='level is-mobile'>
               <div className='level-left'>
