@@ -36,7 +36,6 @@ class CharactersRegistrationList extends React.Component {
     if (registrations[raidId] === undefined) return <div>Chargement en cours</div>
 
     for (const registration of registrations[raidId]) {
-      console.log(registration)
 
       if (uniqueUser[registration.userId] === undefined) uniqueUser[registration.userId] = []
       uniqueUser[registration.userId]?.push(registration.name)
