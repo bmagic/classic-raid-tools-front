@@ -59,8 +59,7 @@ class RaidInfo extends React.Component {
 
                 <p className='info-item'>
                   <span
-                    className='has-text-weight-bold'>Heure de pull:</span><br/>{moment(raid.date).format('HH')}h{moment(raid.date).format('mm')} (Le
-                  groupage s'effectue 15 min avant le pull)
+                    className='has-text-weight-bold'>Heure de pull:</span><br/>{moment(raid.date).format('HH')}h{moment(raid.date).format('mm')}
                 </p>
                 {raid.logs && raid.logs !== '' && <p className='info-item'>
                   <span
