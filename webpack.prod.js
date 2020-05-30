@@ -7,8 +7,8 @@ module.exports = merge(common, {
   plugins: [
     new EnvironmentPlugin({
       NODE_ENV: 'production',
-      BACKEND_URL: 'https://api.classicrt.bmagic.fr',
-      DISCORD_REDIRECT_URI: 'https://classicrt.bmagic.fr/auth-discord',
+      BACKEND_URL: 'https://api.owls-classic.fr',
+      DISCORD_REDIRECT_URI: 'https://owls-classic.fr/auth-discord',
       DISCORD_CLIENT_ID: '682243386228473873',
       GITHUB_CLIENT_ID: '5183c8d1fe3cd5ecce7b'
     })
