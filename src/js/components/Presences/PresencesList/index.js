@@ -36,7 +36,7 @@ class PresencesList extends React.Component {
         usersList[presence.userId._id] = presence.userId
 
         if (presencesList[presence.userId._id] === undefined) { presencesList[presence.userId._id] = {} }
-        presencesList[presence.userId._id][presence.reportId] = presence.characterId ? presence : null
+        presencesList[presence.userId._id][presence.reportId] = presence?.characterId ? presence : null
       }
     }
 
@@ -97,7 +97,7 @@ class PresencesList extends React.Component {
                     <td>{(userPercent[key] * 100).toFixed(0)}%</td>
                     {raids.map((raid) => {
                       if (presencesList[key][raid] !== undefined) {
-                        return <td className='has-background-success has-text-centered' key={raid} title={presencesList[key][raid].characterId ? presencesList[key][raid].characterId.name : 'Personnage inconnu'}>{presencesList[key][raid].characterId && !presencesList[key][raid].characterId.main && <span className='has-text-black'>R</span>}</td>
+                        return <td className='has-background-success has-text-centered' key={raid} title={presencesList[key][raid]?.characterId ? presencesList[key][raid]?.characterId?.name : 'Personnage inconnu'}>{presencesList[key][raid]?.characterId && !presencesList[key][raid]?.characterId?.main && <span className='has-text-black'>R</span>}</td>
                       } else {
                         return <td className='has-background-danger' key={raid} />
                       }

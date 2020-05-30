@@ -25,7 +25,7 @@ class RaidForm extends React.Component {
   }
 
   render () {
-    if (!this.props.user.roles.includes('modify_raid')) return null
+    if (!this.props?.user?.roles?.includes('modify_raid')) return null
     return (
       <div className='box'>
         <form onSubmit={(e) => this.onSubmit(e)}>

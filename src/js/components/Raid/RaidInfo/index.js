@@ -47,7 +47,7 @@ class RaidInfo extends React.Component {
         <div className='columns'>
           <div className='column is-8'>
             <div className='box'>
-              {user && user.roles.includes('modify_raid') && !edit &&
+              {user && user.roles && user.roles.includes('modify_raid') && !edit &&
                 <span className='edit-button is-pulled-right'><a onClick={this.activateEdit} ><i
                   className='fas fa-pen'/>&nbsp;Edit</a></span>}
               {!edit && <div>
