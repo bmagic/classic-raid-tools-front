@@ -3,14 +3,15 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import createSaga from 'redux-saga'
 import { createLogger } from 'redux-logger'
 import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import storage from 'redux-persist/lib/storage'
 
 import reducer from './reducer'
 import rootSaga from './sagas'
 
 const persistConfig = {
   key: 'crt',
-  storage
+  storage,
+  whitelist: ['basketItems', 'lang']
 }
 
 const saga = createSaga()
