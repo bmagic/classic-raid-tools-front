@@ -16,25 +16,25 @@ class CharactersRegistrationList extends React.Component {
         {this.props.user && this.props.user.roles.includes('modify_raid') && registration.validated === true && <a className='is-pulled-right links' onClick={() => this.props.dispatch({ type: 'UPDATE_REGISTRATION', raidId: this.props.raidId, id: registration._id, registration: { validated: false } })}><i className='fas fa-user-clock'/></a>}
         {this.props.user && this.props.user.roles.includes('modify_raid') && registration.validated === false && <a className='is-pulled-right links' onClick={() => this.props.dispatch({ type: 'UPDATE_REGISTRATION', raidId: this.props.raidId, id: registration._id, registration: { validated: true } })}><i className='fas fa-user-check'/></a>}
         <div>
-          <i className='image is-16x16'><WowClassImage keyClass={registration.class} keySpec={registration.spec}/></i>&nbsp;{registration.name}&nbsp;
+          <i className='image is-16x16'><WowClassImage keyClass={registration.class} keySpec={registration.spec}/></i>&nbsp;{registration.main ? registration.name : `${registration.name} (${registration.username})`}&nbsp;
           {registration.favorite && <i title='Je souhaiterai jouer ce personnage en priorité' className='fas fa-star'/>}
         </div>
       </div>
     )
   }
 
-  fillCharacterClassCount(characterClassCount,registration){
-    if(characterClassCount[registration.spec] === undefined) {
+  fillCharacterClassCount (characterClassCount, registration) {
+    if (characterClassCount[registration.spec] === undefined) {
       const tmpSpecCount = {}
       tmpSpecCount[registration.class] = 1
       characterClassCount[registration.spec] = tmpSpecCount
-    }else{
-      if(characterClassCount[registration.spec][registration.class] === undefined){
+    } else {
+      if (characterClassCount[registration.spec][registration.class] === undefined) {
         const tmpSpecCount = characterClassCount[registration.spec]
         tmpSpecCount[registration.class] = 1
         characterClassCount[registration.spec] = tmpSpecCount
-      }else{
-        characterClassCount[registration.spec][registration.class] = characterClassCount[registration.spec][registration.class]+1
+      } else {
+        characterClassCount[registration.spec][registration.class] = characterClassCount[registration.spec][registration.class] + 1
       }
     }
   }
@@ -52,37 +52,36 @@ class CharactersRegistrationList extends React.Component {
     const characterClassCount = {}
     if (registrations[raidId] === undefined) return <div>Chargement en cours</div>
 
-
-
     for (const registration of registrations[raidId]) {
-
       if (uniqueUser[registration.userId] === undefined) uniqueUser[registration.userId] = []
-      uniqueUser[registration.userId]?.push(registration.name)
+      uniqueUser[registration.userId].push(registration.name)
 
       if (registration.status === 'ok') {
         if (registration.validated === true) {
-          this.fillCharacterClassCount(characterClassCount,registration)
-
-          charactersRegistrationValidated[registration.spec]?.push(registration)
+          this.fillCharacterClassCount(characterClassCount, registration)
+          if (charactersRegistrationValidated[registration.spec] === undefined) charactersRegistrationValidated[registration.spec] = []
+          charactersRegistrationValidated[registration.spec].push(registration)
 
           if (uniqueUserValidated[registration.userId] === undefined) uniqueUserValidated[registration.userId] = []
-          uniqueUserValidated[registration.userId]?.push(registration.name)
+          uniqueUserValidated[registration.userId].push(registration.name)
         } else {
-          charactersRegistration[registration.spec]?.push(registration)
+          if (charactersRegistration[registration.spec] === undefined) charactersRegistration[registration.spec] = []
+          charactersRegistration[registration.spec].push(registration)
         }
-        if (!charactersuniqueUserRegistration.includes(registration.userId)) charactersuniqueUserRegistration?.push(registration.userId)
+        if (!charactersuniqueUserRegistration.includes(registration.userId)) charactersuniqueUserRegistration.push(registration.userId)
       } else {
         if (registration.validated !== true) {
-          charactersRegistration[registration.status]?.push(registration)
+          if (charactersRegistration[registration.status] === undefined) charactersRegistration[registration.status] = []
+          charactersRegistration[registration.status].push(registration)
         } else {
           if (registration.status === 'bench') {
-            this.fillCharacterClassCount(characterClassCount,registration)
-
+            this.fillCharacterClassCount(characterClassCount, registration)
+            if (charactersRegistrationValidated[registration.spec] === undefined) charactersRegistrationValidated[registration.spec] = []
             charactersRegistrationValidated[registration.spec].push(registration)
             if (uniqueUserValidated[registration.userId] === undefined) uniqueUserValidated[registration.userId] = []
-            uniqueUserValidated[registration.userId]?.push(registration.name)
+            uniqueUserValidated[registration.userId].push(registration.name)
           } else {
-            charactersRegistrationValidated?.error?.push(registration)
+            charactersRegistrationValidated.error.push(registration)
           }
         }
       }
@@ -98,7 +97,6 @@ class CharactersRegistrationList extends React.Component {
     return (
       <div className='characters-registration-list '>
         <h2 className='subtitle'>{charactersuniqueUserRegistration.length > 1 ? 'Joueurs inscrits' : 'Joueur inscrit'}: {charactersuniqueUserRegistration.length}</h2>
-
 
         <div className='box'>
           <h2 className='subtitle'>Roster</h2>
@@ -137,27 +135,27 @@ class CharactersRegistrationList extends React.Component {
           </div>
           <div className='columns'>
             <div className='column is-3'>
-              {characterClassCount['tank'] && Object.keys(characterClassCount['tank']).map((wClass) => {
-                  return <span className='class-count'>{characterClassCount['tank'][wClass]}&nbsp;<WowClassImage keySpec={'tank'} keyClass={wClass}/> </span>
-                }
+              {characterClassCount.tank && Object.keys(characterClassCount.tank).map((wClass, index) => {
+                return <span key={index} className='class-count'>{characterClassCount.tank[wClass]}&nbsp;<WowClassImage keySpec={'tank'} keyClass={wClass}/> </span>
+              }
               )}
             </div>
             <div className='column is-3'>
-              {characterClassCount['heal'] && Object.keys(characterClassCount['heal']).map((wClass) => {
-                  return <span className='class-count'>{characterClassCount['heal'][wClass]}&nbsp;<WowClassImage keySpec={'heal'} keyClass={wClass}/> </span>
-                }
+              {characterClassCount.heal && Object.keys(characterClassCount.heal).map((wClass, index) => {
+                return <span key={index} className='class-count'>{characterClassCount.heal[wClass]}&nbsp;<WowClassImage keySpec={'heal'} keyClass={wClass}/> </span>
+              }
               )}
             </div>
             <div className='column is-3'>
-              {characterClassCount['cac'] && Object.keys(characterClassCount['cac']).map((wClass) => {
-                  return <span className='class-count'>{characterClassCount['cac'][wClass]}&nbsp;<WowClassImage keySpec={'cac'} keyClass={wClass}/> </span>
-                }
+              {characterClassCount.cac && Object.keys(characterClassCount.cac).map((wClass, index) => {
+                return <span key={index} className='class-count'>{characterClassCount.cac[wClass]}&nbsp;<WowClassImage keySpec={'cac'} keyClass={wClass}/> </span>
+              }
               )}
             </div>
             <div className='column is-3'>
-              {characterClassCount['dd'] && Object.keys(characterClassCount['dd']).map((wClass) => {
-                  return <span className='class-count'>{characterClassCount['dd'][wClass]}&nbsp;<WowClassImage keySpec={'dd'} keyClass={wClass}/> </span>
-                }
+              {characterClassCount.dd && Object.keys(characterClassCount.dd).map((wClass, index) => {
+                return <span key={index} className='class-count'>{characterClassCount.dd[wClass]}&nbsp;<WowClassImage keySpec={'dd'} keyClass={wClass}/> </span>
+              }
               )}
             </div>
           </div>
