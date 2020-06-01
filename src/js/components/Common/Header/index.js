@@ -46,7 +46,7 @@ class Header extends React.Component {
                   </a>
                   <div className="navbar-dropdown">
                     <a className='navbar-item' target='_blank' rel='noopener noreferrer' href='https://www.raidcalendar.com/'><i className="fas fa-external-link-alt"/>&nbsp;Raid Calendar</a>
-                    <a className='navbar-item' target='_blank' rel='noopener noreferrer' href='https://classic.warcraftlogs.com/guild/eu/sulfuron/bloodthirst'><i className="fas fa-external-link-alt"/>&nbsp;Warcraft logs</a>
+                    <a className='navbar-item' target='_blank' rel='noopener noreferrer' href='https://classic.warcraftlogs.com/guild/eu/sulfuron/owls'><i className="fas fa-external-link-alt"/>&nbsp;Warcraft logs</a>
                     <a className='navbar-item' target='_blank' rel='noopener noreferrer' href='https://nexushub.co/wow-classic/sulfuron-horde'><i className="fas fa-external-link-alt"/>&nbsp;Prix HV</a>
                   </div>
                 </div>
