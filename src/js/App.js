@@ -15,6 +15,7 @@ import Bank from './pages/Bank'
 import Presences from './pages/Presences'
 import AdminLoots from './pages/AdminLoots'
 import E404 from './pages/404'
+import Logout from './pages/Logout'
 
 const App = () => {
   moment.locale('fr')
@@ -32,6 +33,7 @@ const App = () => {
         <PrivateRoute exact path='/raid/:id' roles={['member', 'guest']} component={Raid}/>
         <PrivateRoute exact path='/admin/loots' roles={['admin']} component={AdminLoots}/>
         <PrivateRoute exact path='/admin/users' roles={['admin']} component={AdminUsers}/>
+        <Route exact path='/reset' component={Logout} />
         <Route component={E404} />
       </Switch>
     </Router>
