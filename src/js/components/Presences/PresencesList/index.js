@@ -21,7 +21,7 @@ class PresencesList extends React.Component {
 
   render () {
     const { instance } = this.state
-    const { presences } = this.props
+    const { presences,user } = this.props
     const usersList = {}
     const raidsList = {}
     const presencesList = {}
@@ -36,7 +36,7 @@ class PresencesList extends React.Component {
         usersList[presence.userId._id] = presence.userId
 
         if (presencesList[presence.userId._id] === undefined) { presencesList[presence.userId._id] = {} }
-        presencesList[presence.userId._id][presence.reportId] = presence?.characterId ? presence : null
+        presencesList[presence.userId._id][presence.reportId] = presence
       }
     }
 
@@ -79,7 +79,7 @@ class PresencesList extends React.Component {
                 <th className='is-size-7'>Raider</th>
                 <th className='is-size-7'>Présence</th>
                 {raids.map((raid) => {
-                  return <th className='is-size-7 has-text-centered' key={raid}>
+                  return <th className='is-size-7 has-text-centered' key={`head-${raid}`}>
                     {instance === '' && <div>{raidsList[raid].instance}</div>}
                     <div>{moment(raidsList[raid].date).format('DD/MM')}</div>
                   </th>
@@ -96,10 +96,22 @@ class PresencesList extends React.Component {
                     <td className='is-size-7'>{usersList[key].username}</td>
                     <td>{(userPercent[key] * 100).toFixed(0)}%</td>
                     {raids.map((raid) => {
-                      if (presencesList[key][raid] !== undefined) {
+
+                      if (presencesList[key][raid]  && presencesList[key][raid].status==='ok') {
                         return <td className='has-background-success has-text-centered' key={raid} title={presencesList[key][raid]?.characterId ? presencesList[key][raid]?.characterId?.name : 'Personnage inconnu'}>{presencesList[key][raid]?.characterId && !presencesList[key][raid]?.characterId?.main && <span className='has-text-black'>R</span>}</td>
-                      } else {
-                        return <td className='has-background-danger' key={raid} />
+                      } else if(presencesList[key][raid] && presencesList[key][raid].status==='bench' ){
+                        if(user && user.roles && user.roles.includes('modify_raid')){
+                          return <td className='has-background-warning' key={raid} onClick={()=>this.props.dispatch({type:'DELETE_PRESENCE_BENCH', id: presencesList[key][raid]._id, instance:raidsList[raid].instance})}/>
+                        }else {
+                          return <td className='has-background-warning' key={raid}/>
+                        }
+                      }else{
+                        if(user && user.roles && user.roles.includes('modify_raid')){
+                          return <td className='has-background-danger' key={raid} onClick={()=>this.props.dispatch({type:'CREATE_PRESENCE_BENCH', presence: {userId:usersList[key]._id, status:'bench', reportId:raid, date:raidsList[raid].date,instance:raidsList[raid].instance}})}/>
+                        }else {
+                          return <td className='has-background-danger' key={raid}/>
+                        }
+
                       }
                     })}
 
@@ -116,12 +128,14 @@ class PresencesList extends React.Component {
 }
 PresencesList.propTypes = {
   dispatch: PropTypes.func,
-  presences: PropTypes.array
+  presences: PropTypes.array,
+  user:PropTypes.object
 }
 
 function mapStateToProps (state) {
   return {
-    presences: state.presences
+    presences: state.presences,
+    user:state.user
   }
 }
 export default connect(mapStateToProps)(PresencesList)

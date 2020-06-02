@@ -105,6 +105,12 @@ function * updateItemsRequest (action) {
 function * getPresences (action) {
   yield * request('GET', `/v1/presences?instance=${action.instance}`, [{ type: 'GET_PRESENCES_SUCCESS' }])
 }
+function * createPresenceBench (action) {
+  yield * request('POST', '/v1/presences', [{ type: 'GET_PRESENCES', instance: action.presence.instance }], action.presence)
+}
+function * deletePresenceBench (action) {
+  yield * request('DELETE', `/v1/presences/${action.id}`, [{ type: 'GET_PRESENCES', instance: action.instance }])
+}
 
 function * request (type, url, actions, body) {
   try {
@@ -170,4 +176,6 @@ export default function * rootSaga () {
   yield takeLeading('GET_BANK_ITEMS_REQUEST', getItemsRequest)
   yield takeLeading('UPDATE_BANK_ITEMS_REQUEST', updateItemsRequest)
   yield takeLeading('GET_PRESENCES', getPresences)
+  yield takeLeading('CREATE_PRESENCE_BENCH', createPresenceBench)
+  yield takeLeading('DELETE_PRESENCE_BENCH', deletePresenceBench)
 }

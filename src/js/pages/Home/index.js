@@ -8,35 +8,39 @@ const Home = () => {
     <Layout>
       <div className='columns'>
         <div className='column is-8'>
-          <p className='content box'>
-            <h2>Qui sommes nous ?</h2>
+          <div className='box'>
+            <h2 className='title'>Qui sommes nous ?</h2>
+            <p className='content '>
             OWLS est une guilde WoW Classic sur le serveur Sulfuron, nous avons pour objectif de nettoyer le contenu raid PvE de WoW Classic dans son intégralité, de manière sereine et efficace.
             Pour cela, nous demandons à nos membres du roster un investissement conséquent dans les raids du palier actuel afin d'assurer des performances correctes.
-          </p>
-          <p className='content box'>
-            <h2>Jours de raids</h2>
+            </p>
+          </div>
+          <div className='box'>
+            <h2 className='title'>Jours de raids</h2>
+            <p className='content '>
             Nous raidons actuellement le Mardi Soir (BWL + MC + Onyxia) et des raids ZG optionnels sont également proposés dans la semaine.<br/>
-            <i className='fas fa-exclamation-triangle'/> Un jour de raid sera rajouté avec l'arrivée de la phase 5.
-          </p>
-          <p className='content box'>
-            <h2>Charte de Guilde</h2>
+              <i className='fas fa-exclamation-triangle'/> Un jour de raid sera rajouté avec l'arrivée de la phase 5.
+            </p>
+          </div>
+          <div className='box'>
+            <h2 className='title'>Charte de Guilde</h2>
+            <p className='content'>
             Notre charte de guilde est consultable <a href='https://docs.google.com/document/d/1VaocdCUl4AgTeOyVsMSSGKcARqAONrbSp2yCAMvUHdg/edit'>ici</a>.
-          </p>
+            </p>
+          </div>
         </div>
         <div className='column is-4'>
           <div className='box has-background-success'>
             <a href='https://discord.gg/j6pCmfC'>
-              <p className='level'>
-                <p className='level-item'>
+              <div className='level'>
+                <div className='level-item'>
                   <i className='fab fa-discord'/>&nbsp;Rejoignez notre serveur discord
-                </p>
-              </p>
+                </div>
+              </div>
             </a>
           </div>
           <div className='box'>
-            <p className='content'>
-              <h3>Recrutement</h3>
-            </p>
+            <h3 className='title'>Recrutement</h3>
             <div className='level'>
               <div className='level-left'>
                 <div className='level-item'>
