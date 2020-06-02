@@ -25,7 +25,7 @@ class Header extends React.Component {
         <nav className='navbar '>
           <div className='container'>
             <div className="navbar-brand">
-              <Link className="navbar-item" to="/"><h1 className='title is-5'>Classic Raid Tools</h1></Link>
+              <Link className="navbar-item" to="/"><h1 className='title is-5'>OWLS Guild</h1></Link>
               <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false"
                 data-target="navbar" onClick={() => this.toggleMenu()}>
                 <span aria-hidden="true"/>
@@ -36,9 +36,9 @@ class Header extends React.Component {
             <div id="navbar" className={`navbar-menu ${this.state.isOpen ? 'is-active' : ''}`}>
               <div className="navbar-start">
                 <Link to="/roster" className='navbar-item'>Roster</Link>
-
-                {user?.roles?.includes('member') && <Link to="/bank" className="navbar-item">Banque de guilde</Link>}
-                {(user?.roles?.includes('member') || user?.roles?.includes('guest')) && <Link to="/presences" className="navbar-item">Présences</Link>}
+                {user && user.roles.includes('member') && <Link to="/raids" className="navbar-item">Raids</Link>}
+                {user && user.roles.includes('member') && <Link to="/bank" className="navbar-item">Banque de guilde</Link>}
+                {user && user.roles && (user.roles.includes('member') || user.roles.includes('guest')) && <Link to="/presences" className="navbar-item">Présences</Link>}
 
                 <div className='navbar-item has-dropdown is-hoverable'>
                   <a className="navbar-link">
@@ -52,10 +52,11 @@ class Header extends React.Component {
                 </div>
               </div>
               <div className="navbar-end">
-                <Link to="/characters" className='navbar-item'>Personnages</Link>
-                <Link to="/user" className="navbar-item">Profile</Link>
+                {user && <Link to="/characters" className='navbar-item'>Personnages</Link>}
+                {user && <Link to="/user" className="navbar-item">Profile</Link>}
                 <AdminMenu/>
-                <div className='navbar-item'> <LogoutButton/></div>
+                {user && <div className='navbar-item'> <LogoutButton/></div>}
+                {!user && <div className='navbar-item'><a className='button' href={`https://discordapp.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&redirect_uri=${process.env.DISCORD_REDIRECT_URI}&response_type=code&scope=email%20identify`}><span className="icon is-small"><i className='fab fa-discord'/></span>&nbsp;<span>Connexion</span></a></div>}
               </div>
             </div>
           </div>

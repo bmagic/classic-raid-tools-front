@@ -10,6 +10,7 @@ class AdminMenu extends React.Component {
 
   render () {
     const { user } = this.props
+    if (user === null) return null
     if (user && user.roles && !user.roles.includes('admin')) return null
     return (
       <Link to="/admin/users" className="navbar-item">Admin</Link>

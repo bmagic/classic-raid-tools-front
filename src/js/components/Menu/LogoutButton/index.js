@@ -9,7 +9,7 @@ const LogoutButton = ({ dispatch, history }) => {
       dispatch({ type: 'LOGOUT' })
       history.push('/')
     }}>
-    Logout
+    Déconnexion
     </div>
   )
 }

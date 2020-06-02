@@ -11,11 +11,24 @@ class PrivateRoute extends React.Component {
     this.props.dispatch({ type: 'GET_USER' })
   }
 
+  generate403 () {
+    return (
+      <Layout>
+        <h1 className="title">
+          403, Accès refusé
+        </h1>
+        <h2 className="subtitle">
+          <a href='/'>{'Revenir à la page d\'accueil'}</a>
+        </h2>
+      </Layout>
+    )
+  }
+
   render () {
     const { user, token, dispatch, component: Component, roles, ...rest } = this.props
 
     if (user === null) {
-      return <Login />
+      return this.generate403()
     } else {
       if (roles) {
         let access = false
@@ -26,7 +39,7 @@ class PrivateRoute extends React.Component {
         }
 
         if (!access) {
-          return <Layout>Access denied</Layout>
+          return this.generate403()
         }
       }
 
