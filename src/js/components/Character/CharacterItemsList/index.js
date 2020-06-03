@@ -41,7 +41,7 @@ class CharacterItemsList extends React.Component {
                 if (characterItem.slot !== slot) return null
                 if (this.state.displayAllItems || moment(characterItem.date) > moment().subtract(1, 'month')) {
                   return (
-                    <div key={characterItem._id}><Item wid={characterItem._id} /> - {moment(characterItem.date).format('DD/MM/YYYY')} - {characterItem.encounters.length} boss tués</div>
+                    <div key={characterItem._id}><Item wid={characterItem._id} /> - {moment(characterItem.date).format('DD/MM/YYYY')} - {characterItem.encounters} boss tués</div>
                   )
                 }
               })}
