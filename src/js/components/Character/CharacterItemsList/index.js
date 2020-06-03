@@ -21,6 +21,8 @@ class CharacterItemsList extends React.Component {
   }
 
   componentDidUpdate (prevProps, prevState, snapshot) {
+    if (prevProps.id !== this.props.id) this.props.dispatch({ type: 'GET_CHARACTER_ITEMS', id: this.props.id })
+
     /* eslint-disable */
     if (WH && typeof WH.getDataEnv !== "undefined") {
       $WowheadPower.refreshLinks()

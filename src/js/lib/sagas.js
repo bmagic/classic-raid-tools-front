@@ -1,4 +1,4 @@
-import { takeLeading, takeEvery, put } from 'redux-saga/effects'
+import { takeLeading, takeEvery, takeLatest, put } from 'redux-saga/effects'
 import { deleteUrl, getUrl, postUrl, putUrl } from './request'
 
 function * login (action) {
@@ -185,5 +185,5 @@ export default function * rootSaga () {
   yield takeLeading('CREATE_PRESENCE_BENCH', createPresenceBench)
   yield takeLeading('DELETE_PRESENCE_BENCH', deletePresenceBench)
   yield takeLeading('GET_CHARACTER', getCharacter)
-  yield takeLeading('GET_CHARACTER_ITEMS', getCharacterItems)
+  yield takeLatest('GET_CHARACTER_ITEMS', getCharacterItems)
 }
