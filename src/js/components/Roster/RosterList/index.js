@@ -6,6 +6,7 @@ import { wowClass } from '../../../lib/wow'
 import WowClassImage from '../../Common/WowClassImage'
 
 import './styles.scss'
+import { Link } from 'react-router-dom'
 
 class RosterList extends React.Component {
   componentDidMount () {
@@ -39,7 +40,7 @@ class RosterList extends React.Component {
                     if (character.main === main && character.class === wClass) {
                       return <div className='level' title={character.username} key={character._id}>
                         <div className='level-left'>
-                          <div className='level-item'><figure className='image is-24x24'><WowClassImage keyClass={character.class} keySpec={character.spec}/></figure>&nbsp;{character.name}</div>
+                          <Link to={`/character/${character.name}`}><div className='level-item'><figure className='image is-24x24'><WowClassImage keyClass={character.class} keySpec={character.spec}/></figure>&nbsp;{character.name}</div></Link>
                         </div>
                       </div>
                     } else {

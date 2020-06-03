@@ -44,14 +44,14 @@ const Home = () => {
             <div className='level'>
               <div className='level-left'>
                 <div className='level-item'>
-                  <figure className='image is-24x24'><WowClassImage keyClass='warrior' keySpec='cac'/></figure>&nbsp;&nbsp;1 ou 2 Guerriers DPS
+                  <figure className='image is-24x24'><WowClassImage keyClass='warrior' keySpec='cac'/></figure>&nbsp;&nbsp;1 Guerrier DPS
                 </div>
               </div>
             </div>
             <div className='level'>
               <div className='level-left'>
                 <div className='level-item'>
-                  <figure className='image is-24x24'><WowClassImage keyClass='hunt' keySpec='dd'/></figure>&nbsp;&nbsp;1 ou 2 Chasseurs DPS
+                  <figure className='image is-24x24'><WowClassImage keyClass='hunt' keySpec='dd'/></figure>&nbsp;&nbsp;1 Chasseur
                 </div>
               </div>
             </div>
@@ -59,7 +59,7 @@ const Home = () => {
           <div className='box'>
             <div className='has-text-centered'>
               <WowRaidImage instance='bwl' />
-              <span className='is-size-5 has-text-success'>8/8 en 1h02m11s</span>
+              <span className='is-size-5 has-text-success'>8/8 en 59m14s</span>
             </div>
             <div className='has-text-centered'>
               <WowRaidImage instance='mc'/>

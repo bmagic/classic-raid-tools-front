@@ -111,6 +111,12 @@ function * createPresenceBench (action) {
 function * deletePresenceBench (action) {
   yield * request('DELETE', `/v1/presences/${action.id}`, [{ type: 'GET_PRESENCES', instance: action.instance }])
 }
+function * getCharacter (action) {
+  yield * request('GET', `/v1/characters/${action.name}`, [{ type: 'GET_CHARACTER_SUCCESS' }])
+}
+function * getCharacterItems (action) {
+  yield * request('GET', `/v1/items/character/${action.id}`, [{ type: 'GET_CHARACTER_ITEMS_SUCCESS' }])
+}
 
 function * request (type, url, actions, body) {
   try {
@@ -178,4 +184,6 @@ export default function * rootSaga () {
   yield takeLeading('GET_PRESENCES', getPresences)
   yield takeLeading('CREATE_PRESENCE_BENCH', createPresenceBench)
   yield takeLeading('DELETE_PRESENCE_BENCH', deletePresenceBench)
+  yield takeLeading('GET_CHARACTER', getCharacter)
+  yield takeLeading('GET_CHARACTER_ITEMS', getCharacterItems)
 }

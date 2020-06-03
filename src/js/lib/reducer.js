@@ -17,7 +17,9 @@ const initialState = {
   basketItems: {},
   basketForReroll: false,
   lang: 'fr',
-  presences: []
+  presences: [],
+  character: null,
+  characterItems: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -143,6 +145,30 @@ const reducer = (state = initialState, action) => {
     case 'REDIRECT_404': {
       window.location.replace('/404')
       return state
+    }
+    case 'GET_CHARACTER': {
+      return {
+        ...state,
+        character: initialState.character
+      }
+    }
+    case 'GET_CHARACTER_ITEMS': {
+      return {
+        ...state,
+        characterItems: initialState.characterItems
+      }
+    }
+    case 'GET_CHARACTER_SUCCESS': {
+      return {
+        ...state,
+        character: action.result
+      }
+    }
+    case 'GET_CHARACTER_ITEMS_SUCCESS': {
+      return {
+        ...state,
+        characterItems: action.result
+      }
     }
     default:
       return state

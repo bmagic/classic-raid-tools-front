@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 const Item = ({ wid, lang }) => {
   if (wid !== 0) {
     return (
-      <a key={wid} href={`https://${lang === 'en' ? '' : 'fr'}.classic.wowhead.com/item=${wid}`}>{wid}</a>
+      <a key={wid} href={`https://${lang === 'en' ? '' : 'fr.'}classic.wowhead.com/item=${wid}`}>{wid}</a>
     )
   } else {
     return (
