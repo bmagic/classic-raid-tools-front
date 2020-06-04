@@ -57,6 +57,10 @@ function * getRegistrations (action) {
   yield * request('GET', `/v1/raids/${action.raidId}/registrations`, [{ type: 'GET_REGISTRATIONS_SUCCESS', raidId: action.raidId }])
 }
 
+function * getMissingRegistrations (action) {
+  yield * request('GET', `/v1/raids/${action.raidId}/missing-registrations`, [{ type: 'GET_MISSING_REGISTRATIONS_SUCCESS' }])
+}
+
 function * getRegistrationLogs (action) {
   yield * request('GET', `/v1/raids/${action.raidId}/registration-logs`, [{ type: 'GET_REGISTRATION_LOGS_SUCCESS' }])
 }
@@ -117,6 +121,9 @@ function * getCharacter (action) {
 function * getCharacterItems (action) {
   yield * request('GET', `/v1/items/character/${action.id}`, [{ type: 'GET_CHARACTER_ITEMS_SUCCESS' }])
 }
+function * getCharactersComparatorData (action) {
+  yield * request('GET', `/v1/items?spec=${action.spec}${action.class !== '' ? `&class=${action.class}` : ''}`, [{ type: 'GET_CHARACTERS_COMPARATOR_DATA_SUCCESS' }])
+}
 
 function * request (type, url, actions, body) {
   try {
@@ -169,6 +176,7 @@ export default function * rootSaga () {
   yield takeLeading('CREATE_REGISTRATION', createRegistration)
   yield takeLeading('UPDATE_REGISTRATION', updateRegistration)
   yield takeEvery('GET_REGISTRATIONS', getRegistrations)
+  yield takeLeading('GET_MISSING_REGISTRATIONS', getMissingRegistrations)
   yield takeLeading('GET_REGISTRATION_LOGS', getRegistrationLogs)
   yield takeLeading('UPDATE_USER', updateUser)
   yield takeLeading('UPDATE_RAID', updateRaid)
@@ -186,4 +194,5 @@ export default function * rootSaga () {
   yield takeLeading('DELETE_PRESENCE_BENCH', deletePresenceBench)
   yield takeLeading('GET_CHARACTER', getCharacter)
   yield takeLatest('GET_CHARACTER_ITEMS', getCharacterItems)
+  yield takeLeading('GET_CHARACTERS_COMPARATOR_DATA', getCharactersComparatorData)
 }

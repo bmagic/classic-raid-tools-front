@@ -8,6 +8,7 @@ import CharactersRegistrationForm from '../CharactersRegistrationForm'
 import './styles.scss'
 import { withRouter } from 'react-router-dom'
 import CharactersRegistrationList from '../CharactersRegistrationList'
+import MissingRegistrations from '../MissingRegistrations'
 class RaidInfo extends React.Component {
   constructor (props) {
     super(props)
@@ -138,6 +139,7 @@ class RaidInfo extends React.Component {
               </div>}
             </div>
             <CharactersRegistrationList raidId={raidId}/>
+            <MissingRegistrations raidId={raidId}/>
 
           </div>
           <div className='column is-4'>

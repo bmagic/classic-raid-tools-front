@@ -13,8 +13,8 @@ class CharactersRegistrationList extends React.Component {
   generateRegistration (registration, uniqueUser) {
     return (
       <div key={registration._id} className='registration' title={uniqueUser[registration.userId] && uniqueUser[registration.userId].length > 1 ? uniqueUser[registration.userId].join(', ') : ''}>
-        {this.props.user && this.props.user.roles.includes('modify_raid') && registration.validated === true && <a className='is-pulled-right links' onClick={() => this.props.dispatch({ type: 'UPDATE_REGISTRATION', raidId: this.props.raidId, id: registration._id, registration: { validated: false } })}><i className='fas fa-user-clock'/></a>}
-        {this.props.user && this.props.user.roles.includes('modify_raid') && registration.validated === false && <a className='is-pulled-right links' onClick={() => this.props.dispatch({ type: 'UPDATE_REGISTRATION', raidId: this.props.raidId, id: registration._id, registration: { validated: true } })}><i className='fas fa-user-check'/></a>}
+        {this.props.user && this.props.user.roles.includes('modify_raid') && registration.validated === true && <a className='links' onClick={() => this.props.dispatch({ type: 'UPDATE_REGISTRATION', raidId: this.props.raidId, id: registration._id, registration: { validated: false } })}><i className='fas fa-user-clock'/></a>}
+        {this.props.user && this.props.user.roles.includes('modify_raid') && registration.validated === false && <a className='links' onClick={() => this.props.dispatch({ type: 'UPDATE_REGISTRATION', raidId: this.props.raidId, id: registration._id, registration: { validated: true } })}><i className='fas fa-user-check'/></a>}
         <div>
           <i className='image is-16x16'><WowClassImage keyClass={registration.class} keySpec={registration.spec}/></i>&nbsp;{registration.main ? registration.name : `${registration.name} (${registration.username})`}&nbsp;
           {registration.favorite && <i title='Je souhaiterai jouer ce personnage en priorité' className='fas fa-star'/>}

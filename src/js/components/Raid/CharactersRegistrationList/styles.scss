@@ -15,11 +15,16 @@
     }
   }
   .registration{
+    position: relative;
     .image{
       display:inline-block;
     }
     .links{display:none}
-    &:hover .links{display: inline-block}
+    &:hover .links{
+      display: inline-block;
+      position:absolute;
+      right:0;
+    }
   }
 
   .bench{

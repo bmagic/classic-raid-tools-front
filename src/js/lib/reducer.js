@@ -7,6 +7,7 @@ const initialState = {
   nextRaids: [],
   raid: null,
   registrations: {},
+  missingRegistrations: [],
   registrationLogs: [],
   raidTab: 'infos',
   roster: [],
@@ -19,7 +20,8 @@ const initialState = {
   lang: 'fr',
   presences: [],
   character: null,
-  characterItems: []
+  characterItems: [],
+  charactersComparatorData: {}
 }
 
 const reducer = (state = initialState, action) => {
@@ -68,6 +70,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         registrations: registrations
+      }
+    }
+    case 'GET_MISSING_REGISTRATIONS_SUCCESS': {
+      return {
+        ...state,
+        missingRegistrations: action.result
       }
     }
     case 'GET_REGISTRATION_LOGS_SUCCESS':
@@ -168,6 +176,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         characterItems: action.result
+      }
+    }
+    case 'GET_CHARACTERS_COMPARATOR_DATA_SUCCESS': {
+      return {
+        ...state,
+        charactersComparatorData: action.result
       }
     }
     default:

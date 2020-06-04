@@ -18,6 +18,7 @@ import E404 from './pages/404'
 import Logout from './pages/Logout'
 import Home from './pages/Home'
 import Character from './pages/Character'
+import CharactersComparator from './pages/CharactersComparator'
 
 const App = () => {
   moment.locale('fr')
@@ -27,12 +28,12 @@ const App = () => {
         <Route path="/auth-discord"><AuthRedirect/></Route>
         <Route exact path='/' component={Home} />
         <Route exact path='/roster' component={Roster}/>
-
+        <Route exact path="/character/:name" component={Character}/>
+        <PrivateRoute exact path="/characters-comparator" component={CharactersComparator}/>
         <PrivateRoute exact path="/raids" component={NextRaids}/>
         <PrivateRoute exact path="/roadmap" component={Roadmap}/>
         <PrivateRoute exact path='/user' component={User} />
         <PrivateRoute exact path='/characters' component={Characters}/>
-        <PrivateRoute exact path="/character/:name" component={Character}/>
         <PrivateRoute exact path="/bank" roles={['member']} component={Bank}/>
         <PrivateRoute exact path="/presences" roles={['member', 'guest']} component={Presences}/>
         <PrivateRoute exact path='/raid/:id' roles={['member', 'guest']} component={Raid}/>

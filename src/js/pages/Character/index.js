@@ -7,7 +7,6 @@ import CharacterItemsList from '../../components/Character/CharacterItemsList'
 class Character extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { socket: null }
   }
 
   componentDidMount () {
