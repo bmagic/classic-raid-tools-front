@@ -75,6 +75,8 @@ class CharactersRegistrationList extends React.Component {
           charactersRegistration[registration.status].push(registration)
         } else {
           if (registration.status === 'bench') {
+            if (!charactersuniqueUserRegistration.includes(registration.userId)) charactersuniqueUserRegistration.push(registration.userId)
+
             this.fillCharacterClassCount(characterClassCount, registration)
             if (charactersRegistrationValidated[registration.spec] === undefined) charactersRegistrationValidated[registration.spec] = []
             charactersRegistrationValidated[registration.spec].push(registration)
