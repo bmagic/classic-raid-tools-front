@@ -13,7 +13,7 @@ class MissingRegistrations extends React.Component {
     if (missingRegistrations.length === 0) return null
     return (
       <div className='missing-registrations'>
-        Inscriptions manquantes : {missingRegistrations.join(', ')}
+        Inscriptions manquantes : {missingRegistrations.sort().join(', ')}
       </div>
 
     )
