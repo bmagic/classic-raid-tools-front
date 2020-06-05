@@ -37,7 +37,7 @@ class CharactersComparatorTable extends React.Component {
   render () {
     const { spec, wClass } = this.state
     const { data } = this.props
-    const itemSlots = ['head', 'neck', 'shoulder', 'chest', 'waist', 'legs', 'feet', 'wrist', 'hands', 'finger', 'trinket', 'back', 'mainHand', 'offHand', 'ranged']
+    const itemSlots = ['head', 'neck', 'shoulder', 'chest', 'waist', 'legs', 'feet', 'wrist', 'hands', 'finger', 'trinket', 'back', 'weapon', 'ranged']
 
     return (
       <div>

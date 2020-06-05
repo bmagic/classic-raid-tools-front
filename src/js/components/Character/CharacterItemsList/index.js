@@ -56,8 +56,8 @@ class CharacterItemsList extends React.Component {
   render () {
     const { displayAllItems } = this.state
     const { characterItems } = this.props
-    const itemSlotsLeft = ['head', 'neck', 'shoulder', 'chest', 'waist', 'legs', 'feet', 'wrist']
-    const itemSlotsRight = ['hands', 'finger', 'trinket', 'back', 'mainHand', 'offHand', 'ranged']
+    const itemSlotsLeft = ['head', 'neck', 'shoulder', 'chest', 'waist', 'legs', 'feet']
+    const itemSlotsRight = ['wrist', 'hands', 'finger', 'trinket', 'back', 'weapon', 'ranged']
 
     if (characterItems.length === 0) {
       return (
