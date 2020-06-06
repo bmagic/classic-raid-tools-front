@@ -71,13 +71,13 @@ class CharactersRegistrationList extends React.Component {
         }
         if (!charactersuniqueUserRegistration.includes(registration.userId)) charactersuniqueUserRegistration.push(registration.userId)
       } else {
+        if (registration.status === 'bench' && !charactersuniqueUserRegistration.includes(registration.userId)) charactersuniqueUserRegistration.push(registration.userId)
+
         if (registration.validated !== true) {
           if (charactersRegistration[registration.status] === undefined) charactersRegistration[registration.status] = []
           charactersRegistration[registration.status].push(registration)
         } else {
           if (registration.status === 'bench') {
-            if (!charactersuniqueUserRegistration.includes(registration.userId)) charactersuniqueUserRegistration.push(registration.userId)
-
             this.fillCharacterClassCount(characterClassCount, registration)
             if (charactersRegistrationValidated[registration.spec] === undefined) charactersRegistrationValidated[registration.spec] = []
             charactersRegistrationValidated[registration.spec].push(registration)
@@ -102,7 +102,7 @@ class CharactersRegistrationList extends React.Component {
         <h2 className='subtitle'>{charactersuniqueUserRegistration.length > 1 ? 'Joueurs inscrits' : 'Joueur inscrit'}: {charactersuniqueUserRegistration.length}</h2>
 
         <div className='box'>
-          <h2 className='subtitle'>Roster</h2>
+          <h2 className='subtitle'>Roster: {charactersRegistrationValidated.tank.length+charactersRegistrationValidated.heal.length+charactersRegistrationValidated.cac.length+charactersRegistrationValidated.dd.length}</h2>
           { rosterError.length > 0 && <div className='notification is-danger'>
             {rosterError.map((error, index) => {
               return <div key={index}>{error}</div>
