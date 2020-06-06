@@ -44,14 +44,24 @@ const Home = () => {
             <div className='level'>
               <div className='level-left'>
                 <div className='level-item'>
-                  <figure className='image is-24x24'><WowClassImage keyClass='warrior' keySpec='cac'/></figure>&nbsp;&nbsp;1 Guerrier DPS
+                  <figure className='image is-24x24'><WowClassImage keyClass='shaman' keySpec='heal'/></figure>&nbsp;&nbsp;1 Chaman Heal
                 </div>
               </div>
             </div>
             <div className='level'>
               <div className='level-left'>
                 <div className='level-item'>
-                  <figure className='image is-24x24'><WowClassImage keyClass='hunt' keySpec='dd'/></figure>&nbsp;&nbsp;1 Chasseur
+                  <figure className='image is-24x24'><WowClassImage keyClass='hunt' keySpec='dd'/></figure>&nbsp;&nbsp;1 ou 2 Chasseurs
+                </div>
+              </div>
+            </div>
+            <div className='level'>
+              <div className='level-left'>
+                <div className='level-item'>
+                  <figure className='image is-24x24'><WowClassImage keyClass='warrior' keySpec='cac'/></figure>&nbsp;
+                  <figure className='image is-24x24'><WowClassImage keyClass='rogue' keySpec='cac'/></figure>&nbsp;
+                  <figure className='image is-24x24'><WowClassImage keyClass='druid' keySpec='cac'/></figure>&nbsp;
+                  <figure className='image is-24x24'><WowClassImage keyClass='shaman' keySpec='cac'/></figure>&nbsp;&nbsp;1 DPS CaC
                 </div>
               </div>
             </div>
