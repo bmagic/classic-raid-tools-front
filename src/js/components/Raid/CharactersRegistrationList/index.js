@@ -99,7 +99,7 @@ class CharactersRegistrationList extends React.Component {
 
     return (
       <div className='characters-registration-list '>
-        <h2 className='subtitle'>{charactersuniqueUserRegistration.length > 1 ? 'Joueurs inscrits' : 'Joueur inscrit'}: {charactersuniqueUserRegistration.length}</h2>
+        <h2 className='subtitle'>{charactersuniqueUserRegistration.length > 1 ? 'Joueurs disponibles' : 'Joueur disponible'}: {charactersuniqueUserRegistration.length}</h2>
 
         <div className='box'>
           <h2 className='subtitle'>Roster: {charactersRegistrationValidated.tank.length+charactersRegistrationValidated.heal.length+charactersRegistrationValidated.cac.length+charactersRegistrationValidated.dd.length}</h2>
