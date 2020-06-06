@@ -124,6 +124,12 @@ function * getCharacterItems (action) {
 function * getCharactersComparatorData (action) {
   yield * request('GET', `/v1/items?spec=${action.spec}${action.class !== '' ? `&class=${action.class}` : ''}`, [{ type: 'GET_CHARACTERS_COMPARATOR_DATA_SUCCESS' }])
 }
+function * getEnchantsAnalyzerRaids (action) {
+  yield * request('GET', '/v1/enchants/raids', [{ type: 'GET_ENCHANTS_ANALYZER_RAIDS_SUCCESS' }])
+}
+function * getEnchantsAnalyzerData (action) {
+  yield * request('GET', `/v1/enchants/${action.instance}/${action.date}`, [{ type: 'GET_ENCHANTS_ANALYZER_DATA_SUCCESS' }])
+}
 
 function * request (type, url, actions, body) {
   try {
@@ -195,4 +201,6 @@ export default function * rootSaga () {
   yield takeLeading('GET_CHARACTER', getCharacter)
   yield takeLatest('GET_CHARACTER_ITEMS', getCharacterItems)
   yield takeLeading('GET_CHARACTERS_COMPARATOR_DATA', getCharactersComparatorData)
+  yield takeLeading('GET_ENCHANTS_ANALYZER_RAIDS', getEnchantsAnalyzerRaids)
+  yield takeLeading('GET_ENCHANTS_ANALYZER_DATA', getEnchantsAnalyzerData)
 }

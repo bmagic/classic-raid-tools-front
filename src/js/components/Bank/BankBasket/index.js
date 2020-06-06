@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import Item from '../Item'
+import Item from '../../Common/Item'
 import Gold from '../Gold'
 import ItemQuantity from '../ItemQuantity'
 

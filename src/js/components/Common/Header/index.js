@@ -35,7 +35,7 @@ class Header extends React.Component {
             </div>
             <div id="navbar" className={`navbar-menu ${this.state.isOpen ? 'is-active' : ''}`}>
               <div className="navbar-start">
-                {user && user.roles.includes('member') && <Link to="/raids" className="navbar-item">Raids</Link>}
+                {user && (user.roles.includes('member') || user.roles.includes('guest')) && <Link to="/raids" className="navbar-item">Raids</Link>}
                 <Link to="/roster" className='navbar-item'>Roster</Link>
                 {user && user.roles.includes('member') && <Link to="/bank" className="navbar-item">Banque de guilde</Link>}
                 {user && user.roles && (user.roles.includes('member') || user.roles.includes('guest')) && <div className='navbar-item has-dropdown is-hoverable'>

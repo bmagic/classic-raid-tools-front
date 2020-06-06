@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import Item from '../Item'
+import Item from '../../Common/Item'
 import Gold from '../Gold'
 
 class BankItemsRequest extends React.Component {

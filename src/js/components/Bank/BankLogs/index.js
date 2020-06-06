@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import Item from '../Item'
+import Item from '../../Common/Item'
 class BankLogs extends React.Component {
   componentDidMount () {
     this.props.dispatch({ type: 'GET_BANK_LOGS' })

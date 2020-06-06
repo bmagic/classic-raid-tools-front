@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import md5 from 'md5'
 
-import Item from '../Item'
+import Item from '../../Common/Item'
 import Gold from '../Gold'
 
 import './styles.scss'

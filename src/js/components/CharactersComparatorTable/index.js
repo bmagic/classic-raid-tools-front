@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Item from '../Bank/Item'
+import Item from '../Common/Item'
 import moment from 'moment'
 import { wowClass } from '../../lib/wow'
 import { Link } from 'react-router-dom'

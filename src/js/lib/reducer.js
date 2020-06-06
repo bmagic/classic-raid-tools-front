@@ -21,7 +21,9 @@ const initialState = {
   presences: [],
   character: null,
   characterItems: [],
-  charactersComparatorData: {}
+  charactersComparatorData: {},
+  enchantsAnalyzerRaids: [],
+  enchantsAnalyzerData: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -182,6 +184,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         charactersComparatorData: action.result
+      }
+    }
+    case 'GET_ENCHANTS_ANALYZER_RAIDS_SUCCESS': {
+      return {
+        ...state,
+        enchantsAnalyzerRaids: action.result
+      }
+    }
+    case 'GET_ENCHANTS_ANALYZER_DATA_SUCCESS': {
+      return {
+        ...state,
+        enchantsAnalyzerData: action.result
       }
     }
     default:

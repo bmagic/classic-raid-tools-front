@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-const Item = ({ wid, lang }) => {
+const Item = ({ wid, lang, ench }) => {
   if (wid !== 0) {
     return (
-      <a key={wid} href={`https://${lang === 'en' ? '' : 'fr.'}classic.wowhead.com/item=${wid}`}>{wid}</a>
+      <a key={wid} data-wowhead={`${ench ? `ench=${ench}` : ''}`}href={`https://${lang === 'en' ? '' : 'fr.'}classic.wowhead.com/item=${wid}`}>{wid}</a>
     )
   } else {
     return (
@@ -16,7 +16,8 @@ const Item = ({ wid, lang }) => {
 
 Item.propTypes = {
   lang: PropTypes.string,
-  wid: PropTypes.number
+  wid: PropTypes.number,
+  ench: PropTypes.number
 }
 
 function mapStateToProps (state) {
