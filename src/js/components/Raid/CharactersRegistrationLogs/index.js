@@ -20,6 +20,8 @@ class CharactersRegistrationLogs extends React.Component {
         return <i className="fas has-text-danger fa-times"/>
       case 'bench':
         return <i className="fas has-text-warning fa-umbrella-beach"/>
+      case 'delete':
+        return <i className="fas has-text-danger fa-times"/>
       default:
         return <span>vide</span>
 

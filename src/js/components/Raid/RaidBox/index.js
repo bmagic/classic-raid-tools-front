@@ -40,7 +40,7 @@ class RaidBox extends React.Component {
 
                     <nav className="level is-mobile">
                       <div className="level-left">
-                        {(user.roles.includes('member') || user.roles.includes('guest')) &&
+                        {(user.roles.includes('member') || user.roles.includes('casu') || user.roles.includes('guest')) &&
                   <Link to={`/raid/${raid._id}`}>
                     <a className="level-item" aria-label="reply">
                       <span className="icon is-small">
@@ -49,7 +49,7 @@ class RaidBox extends React.Component {
                     </a>
                   </Link>
                         }
-                        {!(user.roles.includes('member') || user.roles.includes('guest')) && <span className='has-text-danger'>
+                        {!(user.roles.includes('member') || user.roles.includes('casu') || user.roles.includes('guest')) && <span className='has-text-danger'>
                   Pour pouvoir accéder au raid, demandez les permissions sur discord
                         </span>}
                       </div>
@@ -60,7 +60,7 @@ class RaidBox extends React.Component {
               </div>
               <div className='level-right'>
                 <div className='level-item'>
-                  {user && (user.roles.includes('member') || user.roles.includes('guest')) && <CharactersRegistrationForm raidId={raid._id}/>}
+                  {user && (user.roles.includes('member') || user.roles.includes('casu') || user.roles.includes('guest')) && <CharactersRegistrationForm raidId={raid._id}/>}
                 </div>
               </div>
             </div>

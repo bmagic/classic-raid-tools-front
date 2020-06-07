@@ -30,15 +30,15 @@ const App = () => {
         <Route exact path='/' component={Home} />
         <Route exact path='/roster' component={Roster}/>
         <Route exact path="/character/:name" component={Character}/>
-        <PrivateRoute exact path="/characters-comparator" roles={['member']} component={CharactersComparator}/>
+        <PrivateRoute exact path="/characters-comparator" roles={['member', 'casu']} component={CharactersComparator}/>
         <PrivateRoute exact path="/raids" component={NextRaids}/>
         <PrivateRoute exact path="/roadmap" component={Roadmap}/>
         <PrivateRoute exact path='/user' component={User} />
         <PrivateRoute exact path='/characters' component={Characters}/>
-        <PrivateRoute exact path="/bank" roles={['member']} component={Bank}/>
-        <PrivateRoute exact path="/enchants-analyzer" roles={['member']} component={EnchantsAnalyzer}/>
-        <PrivateRoute exact path="/presences" roles={['member', 'guest']} component={Presences}/>
-        <PrivateRoute exact path='/raid/:id' roles={['member', 'guest']} component={Raid}/>
+        <PrivateRoute exact path="/bank" roles={['member', 'casu']} component={Bank}/>
+        <PrivateRoute exact path="/enchants-analyzer" roles={['member', 'casu']} component={EnchantsAnalyzer}/>
+        <PrivateRoute exact path="/presences" roles={['member', 'casu']} component={Presences}/>
+        <PrivateRoute exact path='/raid/:id' roles={['member', 'casu', 'guest']} component={Raid}/>
         <PrivateRoute exact path='/admin/loots' roles={['admin']} component={AdminLoots}/>
         <PrivateRoute exact path='/admin/users' roles={['admin']} component={AdminUsers}/>
         <Route exact path='/reset' component={Logout} />

@@ -21,7 +21,7 @@ class AdminUsers extends React.Component {
   }
 
   render () {
-    const roles = ['admin', 'modify_raid', 'banker', 'member', 'guest']
+    const roles = ['admin', 'modify_raid', 'banker', 'member', 'casu', 'guest']
     const { users } = this.props
     if (users === null) return <div>Loading</div>
     return (

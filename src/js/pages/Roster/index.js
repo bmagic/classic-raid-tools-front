@@ -15,12 +15,14 @@ class Roster extends React.Component {
         <div className="tabs">
           <ul>
             <li className={tab === 'main' ? 'is-active' : ''} onClick={() => this.setState({ tab: 'main' })}><a>Main</a></li>
+            <li className={tab === 'casu' ? 'is-active' : ''} onClick={() => this.setState({ tab: 'casu' })}><a>Casu</a></li>
             <li className={tab === 'reroll' ? 'is-active' : ''} onClick={() => this.setState({ tab: 'reroll' })}><a>Reroll</a></li>
           </ul>
         </div>
 
-        {tab === 'main' && <RosterList main={true} />}
-        {tab === 'reroll' && <RosterList main={false}/> }
+        {tab === 'main' && <RosterList main={true} roles={['member']}/>}
+        {tab === 'casu' && <RosterList main={true} roles={['casu']}/> }
+        {tab === 'reroll' && <RosterList main={false} roles={['member', 'casu']}/> }
 
       </Layout>
     )

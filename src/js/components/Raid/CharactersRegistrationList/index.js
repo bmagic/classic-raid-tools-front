@@ -13,8 +13,16 @@ class CharactersRegistrationList extends React.Component {
   generateRegistration (registration, uniqueUser) {
     return (
       <div key={registration._id} className='registration' title={uniqueUser[registration.userId] && uniqueUser[registration.userId].length > 1 ? uniqueUser[registration.userId].join(', ') : ''}>
-        {this.props.user && this.props.user.roles.includes('modify_raid') && registration.validated === true && <a className='links' onClick={() => this.props.dispatch({ type: 'UPDATE_REGISTRATION', raidId: this.props.raidId, id: registration._id, registration: { validated: false } })}><i className='fas fa-user-clock'/></a>}
-        {this.props.user && this.props.user.roles.includes('modify_raid') && registration.validated === false && <a className='links' onClick={() => this.props.dispatch({ type: 'UPDATE_REGISTRATION', raidId: this.props.raidId, id: registration._id, registration: { validated: true } })}><i className='fas fa-user-check'/></a>}
+        {this.props.user && this.props.user.roles.includes('modify_raid') && registration.validated === true && <div className='links'>
+          <a className='has-text-danger' onClick={() => { if (confirm('Confirmer la suppression de l\'inscription')) { this.props.dispatch({ type: 'DELETE_REGISTRATION', raidId: this.props.raidId, id: registration._id }) } }}><i className='fas fa-times'/></a>&nbsp;&nbsp;
+          <a onClick={() => this.props.dispatch({ type: 'UPDATE_REGISTRATION', raidId: this.props.raidId, id: registration._id, registration: { validated: false } })}><i className='fas fa-user-clock'/></a>
+        </div>
+        }
+        {this.props.user && this.props.user.roles.includes('modify_raid') && registration.validated === false && <div className='links'>
+          <a className='has-text-danger' onClick={() => { if (confirm('Confirmer la suppression de l\'inscription')) { this.props.dispatch({ type: 'DELETE_REGISTRATION', raidId: this.props.raidId, id: registration._id }) } }}><i className='fas fa-times'/></a>&nbsp;&nbsp;
+          <a onClick={() => this.props.dispatch({ type: 'UPDATE_REGISTRATION', raidId: this.props.raidId, id: registration._id, registration: { validated: true } })}><i className='fas fa-user-check'/></a>
+        </div>
+        }
         <div className={`${registration.status === 'bench' && registration.validated === true ? 'has-text-warning' : ''}`}>
           <i className='image is-16x16'><WowClassImage keyClass={registration.class} keySpec={registration.spec}/></i>&nbsp;{registration.main ? registration.name : `${registration.name} (${registration.username})`}&nbsp;
           {registration.favorite && <i title='Je souhaiterai jouer ce personnage en priorité' className='fas fa-star'/>}
@@ -102,7 +110,7 @@ class CharactersRegistrationList extends React.Component {
         <h2 className='subtitle'>{charactersuniqueUserRegistration.length > 1 ? 'Joueurs disponibles' : 'Joueur disponible'}: {charactersuniqueUserRegistration.length}</h2>
 
         <div className='box'>
-          <h2 className='subtitle'>Roster: {charactersRegistrationValidated.tank.length+charactersRegistrationValidated.heal.length+charactersRegistrationValidated.cac.length+charactersRegistrationValidated.dd.length}</h2>
+          <h2 className='subtitle'>Roster: {charactersRegistrationValidated.tank.length + charactersRegistrationValidated.heal.length + charactersRegistrationValidated.cac.length + charactersRegistrationValidated.dd.length}</h2>
           { rosterError.length > 0 && <div className='notification is-danger'>
             {rosterError.map((error, index) => {
               return <div key={index}>{error}</div>

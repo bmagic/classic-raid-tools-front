@@ -19,10 +19,10 @@ class CharactersRegistrationForm extends React.Component {
   }
 
   onClick (characterId, status, favorite) {
-    if(this.characters[characterId] && this.characters[characterId].status === status && this.characters[characterId].favorite === favorite ) {
-      status= null
+    if (this.characters[characterId] && this.characters[characterId].status === status && this.characters[characterId].favorite === favorite) {
+      status = null
     }
-      this.props.dispatch({ type: 'CREATE_REGISTRATION', characterId: characterId, raidId: this.props.raidId, status: status, favorite: favorite })
+    this.props.dispatch({ type: 'CREATE_REGISTRATION', characterId: characterId, raidId: this.props.raidId, status: status, favorite: favorite })
   }
 
   render () {
@@ -30,7 +30,7 @@ class CharactersRegistrationForm extends React.Component {
 
     if (registrations[raidId] === undefined) return <div>Chargement en cours</div>
 
-    this.characters={}
+    this.characters = {}
     for (const registration of registrations[raidId]) {
       this.characters[registration.characterId] = { status: registration.status, favorite: registration.favorite }
     }

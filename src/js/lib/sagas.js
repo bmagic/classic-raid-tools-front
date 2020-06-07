@@ -53,6 +53,10 @@ function * updateRegistration (action) {
   yield * request('PUT', `/v1/raids/registration/${action.id}`, [{ type: 'GET_REGISTRATIONS', raidId: action.raidId }], action.registration)
 }
 
+function * deleteRegistration (action) {
+  yield * request('DELETE', `/v1/raids/registration/${action.id}`, [{ type: 'GET_REGISTRATIONS', raidId: action.raidId }])
+}
+
 function * getRegistrations (action) {
   yield * request('GET', `/v1/raids/${action.raidId}/registrations`, [{ type: 'GET_REGISTRATIONS_SUCCESS', raidId: action.raidId }])
 }
@@ -81,8 +85,8 @@ function * setUserMainCharacter (action) {
   yield * request('PUT', `/v1/user/characters/main/${action.id}`, [{ type: 'GET_USER_CHARACTERS' }])
 }
 
-function * getRoster () {
-  yield * request('GET', '/v1/roster', [{ type: 'GET_ROSTER_SUCCESS' }])
+function * getRoster (action) {
+  yield * request('GET', `/v1/roster?main=${action.main}&roles=${action.roles}`, [{ type: 'GET_ROSTER_SUCCESS' }])
 }
 function * importBankData (action) {
   yield * request('POST', '/v1/bank/import', [{ type: 'DISPLAY_BANK_DATA_MODAL', display: false }, { type: 'GET_BANK_ITEMS' }], { data: action.data })
@@ -181,6 +185,7 @@ export default function * rootSaga () {
   yield takeLeading('GET_RAID', getRaid)
   yield takeLeading('CREATE_REGISTRATION', createRegistration)
   yield takeLeading('UPDATE_REGISTRATION', updateRegistration)
+  yield takeLeading('DELETE_REGISTRATION', deleteRegistration)
   yield takeEvery('GET_REGISTRATIONS', getRegistrations)
   yield takeLeading('GET_MISSING_REGISTRATIONS', getMissingRegistrations)
   yield takeLeading('GET_REGISTRATION_LOGS', getRegistrationLogs)
