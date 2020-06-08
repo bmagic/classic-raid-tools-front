@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import Login from '../../../pages/Login'
 import Layout from '../Layout'
 
 class PrivateRoute extends React.Component {
@@ -18,7 +17,12 @@ class PrivateRoute extends React.Component {
           403, Accès refusé
         </h1>
         <h2 className="subtitle">
-          <a href='/'>{'Revenir à la page d\'accueil'}</a>
+
+          {!this.props.user && <div>
+            <a className='button' href={`https://discordapp.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&redirect_uri=${process.env.DISCORD_REDIRECT_URI}&response_type=code&scope=email%20identify`}><span className="icon is-small"><i className='fab fa-discord'/></span><span>Connexion</span></a>
+          </div>}
+          {this.props.user && <a href='/'>{'Revenir à la page d\'accueil'}</a> }
+
         </h2>
       </Layout>
     )

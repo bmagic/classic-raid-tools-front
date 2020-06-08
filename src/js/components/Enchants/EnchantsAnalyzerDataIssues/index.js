@@ -37,7 +37,6 @@ class EnchantsAnalyzerDataIssues extends React.Component {
       return (
         <div>
           {enchantsAnalyzerData.map((data) => {
-            console.log(data)
             return (
               <div key={data._id}>
                 {data._id}

@@ -3,16 +3,26 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Item from '../Common/Item'
 import moment from 'moment'
-import { wowClass } from '../../lib/wow'
+import { enchantToSpell, wowClass } from '../../lib/wow'
 import { Link } from 'react-router-dom'
+import Spell from '../Common/Spell'
+
+import './styles.scss'
+const queryString = require('query-string')
+
 class CharactersComparatorTable extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { spec: 'tank', wClass: '' }
+    this.state = { spec: 'tank', wClass: '', tab: 'items' }
   }
 
   componentDidMount () {
-    const { spec, wClass } = this.state
+    const hash = queryString.parse(location.hash)
+    const wClass = hash.class || this.state.wClass
+    const spec = hash.spec || this.state.spec
+    const tab = hash.tab || this.state.tab
+
+    this.setState({ spec: spec, wClass: wClass, tab: tab })
     this.props.dispatch({ type: 'GET_CHARACTERS_COMPARATOR_DATA', spec: spec, class: wClass })
 
     /* eslint-disable */
@@ -23,6 +33,8 @@ class CharactersComparatorTable extends React.Component {
   }
 
   componentDidUpdate (prevProps, prevState, snapshot) {
+    const hash = queryString.stringify({ spec: this.state.spec, class: this.state.wClass, tab: this.state.tab })
+    location.hash = hash
     if (prevState.wClass !== this.state.wClass || prevState.spec !== this.state.spec) {
       const { spec, wClass } = this.state
       this.props.dispatch({ type: 'GET_CHARACTERS_COMPARATOR_DATA', spec: spec, class: wClass })
@@ -35,16 +47,16 @@ class CharactersComparatorTable extends React.Component {
   }
 
   render () {
-    const { spec, wClass } = this.state
+    const { spec, wClass, tab } = this.state
     const { data } = this.props
-    const itemSlots = ['head', 'neck', 'shoulder', 'chest', 'waist', 'legs', 'feet', 'wrist', 'hands', 'finger', 'trinket', 'back', 'weapon', 'ranged']
+    const itemSlots = [['Head'], ['Neck'], ['Shoulder'], ['Back'], ['Chest'], ['Wrist'], ['Hands'], ['Waist'], ['Legs'], ['Feet'], ['Finger'], ['Trinket'], ['Main Hand', 'One-Hand', 'Held In Off-hand', 'Two-Hand'], ['Ranged']]
 
     return (
-      <div>
+      <div className='characters-comparator-table'>
         <div className='field  is-grouped'>
           <div className='control'>
             <div className="select">
-              <select value={spec} onChange={(e) => { this.setState({ spec: e.target.value }) }}>
+              <select value={spec} onChange={(e) => { this.setState({ spec: e.target.value, wClass: '' }) }}>
                 <option>tank</option>
                 <option>heal</option>
                 <option>dd</option>
@@ -54,7 +66,6 @@ class CharactersComparatorTable extends React.Component {
           </div>
           <div className='control'>
             <div className="select">
-
               <select value={wClass} onChange={(e) => { this.setState({ wClass: e.target.value }) }}>
                 <option></option>
                 {Object.keys(wowClass).map((key, index) => {
@@ -70,10 +81,17 @@ class CharactersComparatorTable extends React.Component {
               </select>
             </div>
           </div>
-        </div>
 
+        </div>
+        <div className="tabs">
+          <ul>
+            <li className={`${tab === 'items' ? 'is-active' : ''}`}><a onClick={() => this.setState({ tab: 'items' })}>Objets</a></li>
+            <li className={`${tab === 'enchants' ? 'is-active' : ''}`}><a onClick={() => this.setState({ tab: 'enchants' })}>Enchantements</a></li>
+
+          </ul>
+        </div>
         <div className="table-container">
-          <table className='table is-fullwidth is-mob'>
+          <table className='table is-fullwidth is-narrow'>
             <thead>
               <tr>
                 <th>Slots</th>
@@ -87,18 +105,19 @@ class CharactersComparatorTable extends React.Component {
 
             <tbody>
 
-              {itemSlots.map((slot, index) => {
+              {itemSlots.map((slots, index) => {
                 return (
-                  <tr key={slot}>
-                    <td>{slot}</td>
+                  <tr key={slots.join('-')}>
+                    <td>{slots.includes('Main Hand') ? 'Weapons' : slots.join(', ')}</td>
                     {Object.keys(data).map((key) => {
                       return (
-                        <td key={`${slot}${key}`}> {data[key].map((characterItem) => {
-                          if (characterItem.slot !== slot) return null
-                          if (this.state.displayAllItems || moment(characterItem.lastDate) > moment().subtract(1, 'month')) {
+                        <td key={`${slots.join('-')}-${key}`}> {data[key].map((characterItem) => {
+                          if (!slots.includes(characterItem.slot)) return null
+                          if (this.state.displayAllItems || moment(characterItem.lastDate) > moment().subtract(15, 'days')) {
                             return (
                               <div key={characterItem._id}>
-                                <Item wid={characterItem.wid}/>
+                                {tab === 'items' && <Item ench={characterItem.enchantId} wid={characterItem.wid}/>}
+                                {characterItem.enchantId && tab === 'enchants' && <span className='enchant'><Item size='small' ench={characterItem.enchantId} wid={characterItem.wid}/><Spell wid={enchantToSpell[characterItem.enchantId] || characterItem.enchantId}/></span>}
                               </div>
                             )
                           }

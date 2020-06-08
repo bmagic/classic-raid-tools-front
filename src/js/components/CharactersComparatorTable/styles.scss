@@ -1,0 +1,16 @@
+.characters-comparator-table{
+ .enchant{
+   position: relative;
+    .item{
+      font-size:0;
+      width:20px;
+      height: 20px;
+      display:inline-block;
+      position:absolute;
+      left:0;
+    }
+   .spell{
+     margin-left:30px;
+   }
+ }
+}

@@ -3,9 +3,17 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 const Spell = ({ wid, lang }) => {
-  return (
-    <a key={wid} data-wowhead="wh-icon-size=small" href={`https://${lang === 'en' ? '' : 'fr.'}classic.wowhead.com/spell=${wid}`}>{wid}</a>
-  )
+  if(wid===0){
+    return (
+      <a className='spell' data-wowhead="" key={wid}
+         href={`https://${lang === 'en' ? '' : 'fr.'}classic.wowhead.com/spell=${wid}`}>{wid}</a>
+    )
+  }else {
+    return (
+      <a className='spell' data-wowhead="" key={wid}
+         href={`https://${lang === 'en' ? '' : 'fr.'}classic.wowhead.com/spell=${wid}`}>{wid}</a>
+    )
+  }
 }
 
 Spell.propTypes = {

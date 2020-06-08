@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Item from '../../Common/Item'
 import moment from 'moment'
-
+import Spell from '../../Common/Spell'
+import { enchantToSpell } from '../../../lib/wow'
+import './styles.scss'
 class CharacterItemsList extends React.Component {
   constructor (props) {
     super(props)
@@ -30,54 +32,66 @@ class CharacterItemsList extends React.Component {
     /* eslint-enable */
   }
 
-  generateSlots (itemSlots, characterItems) {
-    return (
-      <div>
-        {itemSlots.map((slot) => {
-          return (
-            <div key={slot}>
-              <span className='subtitle'>{slot}</span>
-              {characterItems.map((characterItem) => {
-                if (characterItem.slot !== slot) return null
-                if (this.state.displayAllItems || moment(characterItem.lastDate) > moment().subtract(1, 'month')) {
-                  return (
-                    <div key={characterItem._id}><Item wid={characterItem.wid} /> - Du {moment(characterItem.firstDate).format('DD/MM/YYYY')} au {moment(characterItem.lastDate).format('DD/MM/YYYY')}</div>
-                  )
-                }
-              })}
-              <hr/>
-            </div>
-          )
-        })}
-      </div>
-    )
-  }
-
   render () {
     const { displayAllItems } = this.state
     const { characterItems } = this.props
-    const itemSlotsLeft = ['head', 'neck', 'shoulder', 'chest', 'waist', 'legs', 'feet']
-    const itemSlotsRight = ['wrist', 'hands', 'finger', 'trinket', 'back', 'weapon', 'ranged']
+    const itemSlots = [['Head'], ['Neck'], ['Shoulder'], ['Back'], ['Chest'], ['Wrist'], ['Hands'], ['Waist'], ['Legs'], ['Feet'], ['Finger'], ['Trinket'], ['Main Hand', 'One-Hand', 'Held In Off-hand', 'Two-Hand'], ['Ranged']]
+
+    const characterItemsSorted = {}
+    for (const item of characterItems) {
+      if (!characterItemsSorted[item.slot]) characterItemsSorted[item.slot] = []
+      characterItemsSorted[item.slot].push(item)
+    }
 
     if (characterItems.length === 0) {
       return (
         <div>Chargement en cours</div>
       )
     }
+
     return (
-      <div>
+      <div className='character-items-list'>
         <label className="checkbox">
           <input type="checkbox" checked={displayAllItems} onClick={() => this.setState({ displayAllItems: !displayAllItems })}/>
-            Afficher les items utilisés il y a plus d'un mois
+            Afficher les items utilisés il y a plus de 15 jours
         </label>
-        <div className='columns'>
-          <div className='column is-6'>
-            {this.generateSlots(itemSlotsLeft, characterItems)}
-          </div>
-          <div className='column is-6'>
-            {this.generateSlots(itemSlotsRight, characterItems)}
-          </div>
-        </div>
+
+        {itemSlots.map((slots) => {
+
+          return (
+            <div key={slots.join('-')} className="table-container">
+
+              <table className='table is-fullwidth is-narrow'>
+                <thead>
+                  <th className='slot'>{slots.join(', ')}</th>
+                  <th className='enchant'>Enchantement</th>
+                  <th className='first-use'>Première utilisation</th>
+                  <th className='last-use'>Dernière utilisation</th>
+                </thead>
+                <tbody>
+                  {Object.keys(characterItemsSorted).map((characterItemKey) => {
+                    if (!characterItemsSorted[characterItemKey]) return null
+                    if (!slots.includes(characterItemKey)) return null
+                    return (
+                      characterItemsSorted[characterItemKey].map((characterItem) => {
+                        if (this.state.displayAllItems || moment(characterItem.lastDate) > moment().subtract(15, 'days')) {
+                          return (
+                            <tr key={characterItem._id} >
+                              <td><Item ench={characterItem.enchantId} wid={characterItem.wid} /></td>
+                              <td>{characterItem.enchantId ? <Spell wid={enchantToSpell[characterItem.enchantId] || characterItem.enchantId}/> : 'Aucun'}</td>
+                              <td>{moment(characterItem.firstDate).format('DD/MM/YYYY')}</td>
+                              <td>{moment(characterItem.lastDate).format('DD/MM/YYYY')}</td>
+                            </tr>
+                          )
+                        }
+                      })
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )
+        })}
 
       </div>
     )
