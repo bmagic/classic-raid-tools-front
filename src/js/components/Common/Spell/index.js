@@ -2,23 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-const Spell = ({ wid, lang }) => {
-  if(wid===0){
-    return (
-      <a className='spell' data-wowhead="" key={wid}
-         href={`https://${lang === 'en' ? '' : 'fr.'}classic.wowhead.com/spell=${wid}`}>{wid}</a>
-    )
-  }else {
-    return (
-      <a className='spell' data-wowhead="" key={wid}
-         href={`https://${lang === 'en' ? '' : 'fr.'}classic.wowhead.com/spell=${wid}`}>{wid}</a>
-    )
-  }
+const Spell = ({ wid, lang, size }) => {
+  return (
+    <a className='spell' data-wh-icon-size={size || 'tiny'} key={wid}
+      href={`https://${lang === 'en' ? '' : 'fr.'}classic.wowhead.com/spell=${wid}`}>{wid}</a>
+  )
 }
 
 Spell.propTypes = {
   lang: PropTypes.string,
-  wid: PropTypes.number
+  wid: PropTypes.number,
+  size: PropTypes.string
 }
 
 function mapStateToProps (state) {

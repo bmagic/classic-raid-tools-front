@@ -45,6 +45,8 @@ class Header extends React.Component {
                   <div className="navbar-dropdown">
                     <Link to="/presences" className="navbar-item">Présences</Link>
                     <Link to="/characters-comparator" className="navbar-item">Comparateur de personnages</Link>
+                    <Link to="/debriefs" className="navbar-item">Raids debriefings</Link>
+
                   </div>
                 </div>}
                 <div className='navbar-item has-dropdown is-hoverable'>

@@ -82,6 +82,184 @@ export const bossList = {
   ]
 }
 
+export const enchantsList = {
+  priest: {
+    heal: {
+      head: [2590],
+      shoulder: [2604],
+      back: [1888],
+      chest: [1891, 1893],
+      wrist: [2566],
+      hands: [],
+      legs: [2590],
+      feet: [911],
+      'two-hand': [2505],
+      'one-hand': [2505],
+      'main hand': [2505],
+      'held in off-hand': [],
+      ranged: []
+    },
+    dd: {
+      head: [2544],
+      shoulder: [2605],
+      back: [1888],
+      chest: [1891],
+      wrist: [2565, 1883],
+      hands: [],
+      legs: [2544],
+      feet: [911],
+      'two-hand': [2504],
+      'one-hand': [2504],
+      'main hand': [2504],
+      'held in off-hand': [],
+      ranged: []
+    }
+  },
+  druid: {
+    tank: {
+      head: [2543, 2591, 1508, 1506, 1505],
+      shoulder: [2483, 2606],
+      back: [849, 2463],
+      chest: [1891, 1892],
+      wrist: [1886, 1885],
+      hands: [927, 1887, 931],
+      legs: [2543, 2591, 1508, 1506, 1505],
+      feet: [1887, 929],
+      'one-hand': [2564, 34],
+      'main hand': [2564, 34],
+      'two-hand': [2564, 34],
+      ranged: []
+    },
+    heal: {
+      head: [2591],
+      shoulder: [2604],
+      back: [1888],
+      chest: [1891, 1893],
+      wrist: [2566],
+      hands: [],
+      legs: [2591],
+      feet: [911],
+      'two-hand': [2505],
+      'one-hand': [2505],
+      'main hand': [2505],
+      'held in off-hand': [],
+      ranged: []
+    }
+  },
+  warrior: {
+    tank: {
+      head: [2543, 2583, 1508, 1506, 1505],
+      shoulder: [2483, 2606],
+      back: [849, 2463],
+      chest: [1891, 1892],
+      wrist: [1886, 1885],
+      hands: [927, 1887, 931],
+      legs: [2543, 2583, 1508, 1506, 1505],
+      feet: [911, 1887, 929],
+      'one-hand': [1900, 2564, 2563],
+      'main hand': [1900],
+      shield: [929, 1704],
+      ranged: []
+    },
+    cac: {
+      head: [1506, 2543],
+      shoulder: [2606],
+      back: [849],
+      chest: [1891],
+      wrist: [1885],
+      hands: [927, 931],
+      legs: [1506, 2543],
+      feet: [911, 1887],
+      'one-hand': [1900],
+      'main hand': [1900],
+      'two-hand': [1900],
+      ranged: []
+    }
+  },
+  shaman: {
+    heal: {
+      head: [2587],
+      shoulder: [2604],
+      back: [1888],
+      chest: [1893],
+      wrist: [2566],
+      hands: [],
+      legs: [2587],
+      feet: [911],
+      'one-hand': [2505],
+      'main hand': [2505],
+      shield: [929, 1890],
+      'held in off-hand': [],
+      ranged: []
+    }
+  },
+  hunt: {
+    dd: {
+      head: [2586],
+      shoulder: [2606],
+      back: [849],
+      chest: [1891],
+      wrist: [1883, 586],
+      hands: [1887],
+      legs: [2586],
+      feet: [1887],
+      'one-hand': [2564],
+      'main hand': [2564],
+      'two-hand': [2564],
+      ranged: [2523, 664]
+    }
+  },
+  rogue: {
+    cac: {
+      head: [2585],
+      shoulder: [2606],
+      back: [849],
+      chest: [1891],
+      wrist: [1885],
+      hands: [1887],
+      legs: [2585],
+      feet: [1887],
+      'one-hand': [1897, 1900],
+      'main hand': [1897, 1900],
+      ranged: []
+    }
+  },
+  mage: {
+    dd: {
+      head: [2588],
+      shoulder: [2605],
+      back: [1888],
+      chest: [1891],
+      wrist: [1883],
+      hands: [],
+      legs: [2588],
+      feet: [911],
+      'one-hand': [2504],
+      'main hand': [2504],
+      'two-hand': [2504],
+      'held in off-hand': [],
+      ranged: []
+    }
+  },
+  warlock: {
+    dd: {
+      head: [2589],
+      shoulder: [2605],
+      back: [1888],
+      chest: [1891],
+      wrist: [1883],
+      hands: [],
+      legs: [2589],
+      feet: [911, 929],
+      'one-hand': [2504],
+      'main hand': [2504],
+      'two-hand': [2504],
+      'held in off-hand': [],
+      ranged: []
+    }
+  }
+}
+
 export const enchantToSpell = {
   1: 15568,
   2: 8034,

@@ -6,9 +6,9 @@ import moment from 'moment'
 import { enchantToSpell, wowClass } from '../../lib/wow'
 import { Link } from 'react-router-dom'
 import Spell from '../Common/Spell'
+const queryString = require('query-string')
 
 import './styles.scss'
-const queryString = require('query-string')
 
 class CharactersComparatorTable extends React.Component {
   constructor (props) {
@@ -49,7 +49,7 @@ class CharactersComparatorTable extends React.Component {
   render () {
     const { spec, wClass, tab } = this.state
     const { data } = this.props
-    const itemSlots = [['Head'], ['Neck'], ['Shoulder'], ['Back'], ['Chest'], ['Wrist'], ['Hands'], ['Waist'], ['Legs'], ['Feet'], ['Finger'], ['Trinket'], ['Main Hand', 'One-Hand', 'Held In Off-hand', 'Two-Hand'], ['Ranged']]
+    const itemSlots = [['Head'], ['Neck'], ['Shoulder'], ['Back'], ['Chest'], ['Wrist'], ['Hands'], ['Waist'], ['Legs'], ['Feet'], ['Finger'], ['Trinket'], ['Main Hand', 'One-Hand', 'Held In Off-hand', 'Two-Hand','Shield'], ['Ranged']]
 
     return (
       <div className='characters-comparator-table'>
@@ -117,7 +117,7 @@ class CharactersComparatorTable extends React.Component {
                             return (
                               <div key={characterItem._id}>
                                 {tab === 'items' && <Item ench={characterItem.enchantId} wid={characterItem.wid}/>}
-                                {characterItem.enchantId && tab === 'enchants' && <span className='enchant'><Item size='small' ench={characterItem.enchantId} wid={characterItem.wid}/><Spell wid={enchantToSpell[characterItem.enchantId] || characterItem.enchantId}/></span>}
+                                {characterItem.enchantId && tab === 'enchants' && <span title={characterItem.enchantId} className='enchant'><Item size='small' ench={characterItem.enchantId} wid={characterItem.wid}/><Spell wid={enchantToSpell[characterItem.enchantId] || characterItem.enchantId}/></span>}
                               </div>
                             )
                           }

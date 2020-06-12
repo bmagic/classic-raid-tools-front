@@ -44,14 +44,7 @@ const Home = () => {
             <div className='level'>
               <div className='level-left'>
                 <div className='level-item'>
-                  <figure className='image is-24x24'><WowClassImage keyClass='shaman' keySpec='heal'/></figure>&nbsp;&nbsp;1 Chaman Heal
-                </div>
-              </div>
-            </div>
-            <div className='level'>
-              <div className='level-left'>
-                <div className='level-item'>
-                  <figure className='image is-24x24'><WowClassImage keyClass='hunt' keySpec='dd'/></figure>&nbsp;&nbsp;1 ou 2 Chasseurs
+                  <figure className='image is-24x24'><WowClassImage keyClass='hunt' keySpec='dd'/></figure>&nbsp;&nbsp;1 Chasseur
                 </div>
               </div>
             </div>
@@ -69,11 +62,11 @@ const Home = () => {
           <div className='box'>
             <div className='has-text-centered'>
               <WowRaidImage instance='bwl' />
-              <span className='is-size-5 has-text-success'>8/8 en 59m14s</span>
+              <span className='is-size-5 has-text-success'>8/8 en 52m59s</span>
             </div>
             <div className='has-text-centered'>
               <WowRaidImage instance='mc'/>
-              <span className='is-size-5 has-text-success'>10/10 en 1h04m34s</span>
+              <span className='is-size-5 has-text-success'>10/10 en 59m32s</span>
             </div>
           </div>
         </div>

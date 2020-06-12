@@ -22,8 +22,8 @@ const initialState = {
   character: null,
   characterItems: [],
   charactersComparatorData: {},
-  enchantsAnalyzerRaids: [],
-  enchantsAnalyzerData: []
+  debriefRaids: [],
+  debrief: {}
 }
 
 const reducer = (state = initialState, action) => {
@@ -186,16 +186,16 @@ const reducer = (state = initialState, action) => {
         charactersComparatorData: action.result
       }
     }
-    case 'GET_ENCHANTS_ANALYZER_RAIDS_SUCCESS': {
+    case 'GET_DEBRIEF_RAIDS_SUCCESS': {
       return {
         ...state,
-        enchantsAnalyzerRaids: action.result
+        debriefRaids: action.result
       }
     }
-    case 'GET_ENCHANTS_ANALYZER_DATA_SUCCESS': {
+    case 'GET_DEBRIEF_SUCCESS': {
       return {
         ...state,
-        enchantsAnalyzerData: action.result
+        debrief: action.result
       }
     }
     default:

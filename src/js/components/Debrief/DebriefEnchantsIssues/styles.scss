@@ -1,0 +1,15 @@
+.debrief-enchants-issues{
+  td {
+    padding:0!important;
+    .item-container {
+      position: relative;
+      height:35px;
+      display: inline-block;
+      width:40px;
+      text-align: center;
+      .item {
+        font-size: 0;
+      }
+    }
+  }
+}

@@ -35,7 +35,7 @@ class CharacterItemsList extends React.Component {
   render () {
     const { displayAllItems } = this.state
     const { characterItems } = this.props
-    const itemSlots = [['Head'], ['Neck'], ['Shoulder'], ['Back'], ['Chest'], ['Wrist'], ['Hands'], ['Waist'], ['Legs'], ['Feet'], ['Finger'], ['Trinket'], ['Main Hand', 'One-Hand', 'Held In Off-hand', 'Two-Hand'], ['Ranged']]
+    const itemSlots = [['Head'], ['Neck'], ['Shoulder'], ['Back'], ['Chest'], ['Wrist'], ['Hands'], ['Waist'], ['Legs'], ['Feet'], ['Finger'], ['Trinket'], ['Main Hand', 'One-Hand', 'Held In Off-hand', 'Two-Hand', 'Shield'], ['Ranged']]
 
     const characterItemsSorted = {}
     for (const item of characterItems) {
@@ -57,7 +57,6 @@ class CharacterItemsList extends React.Component {
         </label>
 
         {itemSlots.map((slots) => {
-
           return (
             <div key={slots.join('-')} className="table-container">
 

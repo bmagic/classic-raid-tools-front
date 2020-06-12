@@ -19,7 +19,7 @@ import Logout from './pages/Logout'
 import Home from './pages/Home'
 import Character from './pages/Character'
 import CharactersComparator from './pages/CharactersComparator'
-import EnchantsAnalyzer from './pages/EnchantsAnalyzer'
+import EnchantsAnalyzer from './pages/Debrief'
 
 const App = () => {
   moment.locale('fr')
@@ -36,7 +36,7 @@ const App = () => {
         <PrivateRoute exact path='/user' component={User} />
         <PrivateRoute exact path='/characters' component={Characters}/>
         <PrivateRoute exact path="/bank" roles={['member', 'casu']} component={Bank}/>
-        <PrivateRoute exact path="/enchants-analyzer" roles={['member', 'casu']} component={EnchantsAnalyzer}/>
+        <PrivateRoute exact path="/debriefs" roles={['member', 'casu']} component={EnchantsAnalyzer}/>
         <PrivateRoute exact path="/presences" roles={['member', 'casu']} component={Presences}/>
         <PrivateRoute exact path='/raid/:id' roles={['member', 'casu', 'guest']} component={Raid}/>
         <PrivateRoute exact path='/admin/loots' roles={['admin']} component={AdminLoots}/>
