@@ -51,10 +51,27 @@ const Home = () => {
             <div className='level'>
               <div className='level-left'>
                 <div className='level-item'>
+                  <figure className='image is-24x24'><WowClassImage keyClass='priest' keySpec='heal'/></figure>&nbsp;
+                  <figure className='image is-24x24'><WowClassImage keyClass='shaman' keySpec='heal'/></figure>&nbsp;&nbsp;1 Healer
+                </div>
+              </div>
+            </div>
+            <div className='level'>
+              <div className='level-left'>
+                <div className='level-item'>
+                  <figure className='image is-24x24'><WowClassImage keyClass='warlock' keySpec='dd'/></figure>&nbsp;
+                  <figure className='image is-24x24'><WowClassImage keyClass='shaman' keySpec='dd'/></figure>&nbsp;
+                  <figure className='image is-24x24'><WowClassImage keyClass='druid' keySpec='dd'/></figure>&nbsp;&nbsp;1 Caster
+                </div>
+              </div>
+            </div>
+            <div className='level'>
+              <div className='level-left'>
+                <div className='level-item'>
                   <figure className='image is-24x24'><WowClassImage keyClass='warrior' keySpec='cac'/></figure>&nbsp;
                   <figure className='image is-24x24'><WowClassImage keyClass='rogue' keySpec='cac'/></figure>&nbsp;
                   <figure className='image is-24x24'><WowClassImage keyClass='druid' keySpec='cac'/></figure>&nbsp;
-                  <figure className='image is-24x24'><WowClassImage keyClass='shaman' keySpec='cac'/></figure>&nbsp;&nbsp;1 DPS CaC
+                  <figure className='image is-24x24'><WowClassImage keyClass='shaman' keySpec='cac'/></figure>&nbsp;&nbsp;1 ou 2 DPS CaC
                 </div>
               </div>
             </div>
