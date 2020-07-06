@@ -1,0 +1,18 @@
+.loot-list{
+  .image{
+    display: inline-block;
+  }
+  tr{
+    position:relative;
+    .tools{
+      display: none;
+      position:absolute;
+    }
+    &:hover .tools{
+      display: inline-block;
+
+
+    }
+  }
+
+}

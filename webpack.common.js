@@ -30,7 +30,17 @@ module.exports = {
           }
         ]
       },
-
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: 'html-loader'
+          },
+          {
+            loader: 'markdown-loader'
+          }
+        ]
+      },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [

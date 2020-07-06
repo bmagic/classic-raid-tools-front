@@ -12,7 +12,6 @@ class User extends React.Component {
     this.onInputChange = this.onInputChange.bind(this)
   }
 
-  // <UserBox key={user._id} id={user._id} email={user.email} roles={user.roles} characters={user.characters} username={user.username} />
   componentDidMount () {
     this.props.dispatch({ type: 'GET_USER' })
     const { username, email } = this.props.user

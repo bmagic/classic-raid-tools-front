@@ -18,8 +18,8 @@ const Home = () => {
           <div className='box'>
             <h2 className='title'>Jours de raids</h2>
             <p className='content '>
-            Nous raidons actuellement le Mardi Soir (BWL + MC + Onyxia) et des raids ZG optionnels sont également proposés dans la semaine.<br/>
-              <i className='fas fa-exclamation-triangle'/> Un jour de raid sera rajouté avec l'arrivée de la phase 5.
+            Nous raidons le Mercredi et le Dimanche soir (AQ40 + BWL + MC) à partir de 21h.<br/>
+            Des raids ZG & AQ20 optionnels sont également proposés dans la semaine.<br/>
             </p>
           </div>
           <div className='box'>
@@ -38,43 +38,6 @@ const Home = () => {
                 </div>
               </div>
             </a>
-          </div>
-          <div className='box'>
-            <h3 className='title'>Recrutement</h3>
-            <div className='level'>
-              <div className='level-left'>
-                <div className='level-item'>
-                  <figure className='image is-24x24'><WowClassImage keyClass='hunt' keySpec='dd'/></figure>&nbsp;&nbsp;1 Chasseur
-                </div>
-              </div>
-            </div>
-            <div className='level'>
-              <div className='level-left'>
-                <div className='level-item'>
-                  <figure className='image is-24x24'><WowClassImage keyClass='priest' keySpec='heal'/></figure>&nbsp;
-                  <figure className='image is-24x24'><WowClassImage keyClass='shaman' keySpec='heal'/></figure>&nbsp;&nbsp;1 Healer
-                </div>
-              </div>
-            </div>
-            <div className='level'>
-              <div className='level-left'>
-                <div className='level-item'>
-                  <figure className='image is-24x24'><WowClassImage keyClass='warlock' keySpec='dd'/></figure>&nbsp;
-                  <figure className='image is-24x24'><WowClassImage keyClass='shaman' keySpec='dd'/></figure>&nbsp;
-                  <figure className='image is-24x24'><WowClassImage keyClass='druid' keySpec='dd'/></figure>&nbsp;&nbsp;1 Caster
-                </div>
-              </div>
-            </div>
-            <div className='level'>
-              <div className='level-left'>
-                <div className='level-item'>
-                  <figure className='image is-24x24'><WowClassImage keyClass='warrior' keySpec='cac'/></figure>&nbsp;
-                  <figure className='image is-24x24'><WowClassImage keyClass='rogue' keySpec='cac'/></figure>&nbsp;
-                  <figure className='image is-24x24'><WowClassImage keyClass='druid' keySpec='cac'/></figure>&nbsp;
-                  <figure className='image is-24x24'><WowClassImage keyClass='shaman' keySpec='cac'/></figure>&nbsp;&nbsp;1 ou 2 DPS CaC
-                </div>
-              </div>
-            </div>
           </div>
           <div className='box'>
             <div className='has-text-centered'>

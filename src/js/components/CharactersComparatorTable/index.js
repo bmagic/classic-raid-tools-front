@@ -6,14 +6,14 @@ import moment from 'moment'
 import { enchantToSpell, wowClass } from '../../lib/wow'
 import { Link } from 'react-router-dom'
 import Spell from '../Common/Spell'
-const queryString = require('query-string')
 
 import './styles.scss'
+const queryString = require('query-string')
 
 class CharactersComparatorTable extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { spec: 'tank', wClass: '', tab: 'items' }
+    this.state = { spec: '', wClass: '', tab: 'items' }
   }
 
   componentDidMount () {
@@ -49,7 +49,7 @@ class CharactersComparatorTable extends React.Component {
   render () {
     const { spec, wClass, tab } = this.state
     const { data } = this.props
-    const itemSlots = [['Head'], ['Neck'], ['Shoulder'], ['Back'], ['Chest'], ['Wrist'], ['Hands'], ['Waist'], ['Legs'], ['Feet'], ['Finger'], ['Trinket'], ['Main Hand', 'One-Hand', 'Held In Off-hand', 'Two-Hand','Shield'], ['Ranged']]
+    const itemSlots = [['Head'], ['Neck'], ['Shoulder'], ['Back'], ['Chest'], ['Wrist'], ['Hands'], ['Waist'], ['Legs'], ['Feet'], ['Finger'], ['Trinket'], ['Main Hand', 'One-Hand', 'Held In Off-hand', 'Two-Hand', 'Shield'], ['Ranged']]
 
     return (
       <div className='characters-comparator-table'>
@@ -57,6 +57,7 @@ class CharactersComparatorTable extends React.Component {
           <div className='control'>
             <div className="select">
               <select value={spec} onChange={(e) => { this.setState({ spec: e.target.value, wClass: '' }) }}>
+                <option value=''>All</option>
                 <option>tank</option>
                 <option>heal</option>
                 <option>dd</option>
@@ -69,7 +70,7 @@ class CharactersComparatorTable extends React.Component {
               <select value={wClass} onChange={(e) => { this.setState({ wClass: e.target.value }) }}>
                 <option></option>
                 {Object.keys(wowClass).map((key, index) => {
-                  if (wowClass[key][spec]) {
+                  if (wowClass[key][spec] || spec === '') {
                     return (
                       <option key={index}>{key}</option>
                     )

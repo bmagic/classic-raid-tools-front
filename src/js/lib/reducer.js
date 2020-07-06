@@ -23,7 +23,10 @@ const initialState = {
   characterItems: [],
   charactersComparatorData: {},
   debriefRaids: [],
-  debrief: {}
+  debrief: {},
+  loot: null,
+  loots: [],
+  lootsNeeds: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -196,6 +199,25 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         debrief: action.result
+      }
+    }
+    case 'GET_LOOTS_SUCCESS': {
+      return {
+        ...state,
+        loots: action.result
+      }
+    }
+    case 'SET_LOOT': {
+      return {
+        ...state,
+        loot: action.loot
+      }
+    }
+
+    case 'GET_LOOTS_NEEDS_SUCCESS': {
+      return {
+        ...state,
+        lootsNeeds: action.result
       }
     }
     default:

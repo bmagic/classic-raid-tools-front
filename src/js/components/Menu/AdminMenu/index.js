@@ -13,7 +13,14 @@ class AdminMenu extends React.Component {
     if (user === null) return null
     if (user && user.roles && !user.roles.includes('admin')) return null
     return (
-      <Link to="/admin/users" className="navbar-item">Admin</Link>
+      <div className='navbar-item has-dropdown is-hoverable'>
+        <a className="navbar-link">
+          Admin
+        </a>
+        <div className="navbar-dropdown">
+          <Link to="/admin/users" className="navbar-item">Users</Link>
+        </div>
+      </div>
     )
   }
 }

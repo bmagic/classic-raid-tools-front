@@ -209,7 +209,7 @@ class CharactersRegistrationList extends React.Component {
               })}
             </div>
             <div className='column is-3'>
-              <h3>Retard ({charactersRegistration.late.length})</h3>
+              <h3>Retard / Tentative ({charactersRegistration.late.length})</h3>
               {charactersRegistration.late.map((registration) => {
                 return this.generateRegistration(registration, uniqueUser)
               })}

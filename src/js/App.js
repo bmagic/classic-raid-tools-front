@@ -13,13 +13,15 @@ import Roadmap from './pages/Roadmap'
 import Roster from './pages/Roster'
 import Bank from './pages/Bank'
 import Presences from './pages/Presences'
-import AdminLoots from './pages/AdminLoots'
 import E404 from './pages/404'
 import Logout from './pages/Logout'
 import Home from './pages/Home'
 import Character from './pages/Character'
 import CharactersComparator from './pages/CharactersComparator'
 import EnchantsAnalyzer from './pages/Debrief'
+import Loots from './pages/Loots'
+import LootsSummary from './pages/LootsSummary'
+import AQ40 from './pages/strats/AQ40'
 
 const App = () => {
   moment.locale('fr')
@@ -30,16 +32,18 @@ const App = () => {
         <Route exact path='/' component={Home} />
         <Route exact path='/roster' component={Roster}/>
         <Route exact path="/character/:name" component={Character}/>
-        <PrivateRoute exact path="/characters-comparator" roles={['member', 'casu']} component={CharactersComparator}/>
+        <PrivateRoute exact path="/strat/aq40" roles={['member', 'apply', 'casu']} component={AQ40}/>
+        <PrivateRoute exact path="/characters-comparator" roles={['member', 'apply', 'casu']} component={CharactersComparator}/>
         <PrivateRoute exact path="/raids" component={NextRaids}/>
         <PrivateRoute exact path="/roadmap" component={Roadmap}/>
         <PrivateRoute exact path='/user' component={User} />
         <PrivateRoute exact path='/characters' component={Characters}/>
-        <PrivateRoute exact path="/bank" roles={['member', 'casu']} component={Bank}/>
-        <PrivateRoute exact path="/debriefs" roles={['member', 'casu']} component={EnchantsAnalyzer}/>
-        <PrivateRoute exact path="/presences" roles={['member', 'casu']} component={Presences}/>
-        <PrivateRoute exact path='/raid/:id' roles={['member', 'casu', 'guest']} component={Raid}/>
-        <PrivateRoute exact path='/admin/loots' roles={['admin']} component={AdminLoots}/>
+        <PrivateRoute exact path="/loots" roles={['member']} component={Loots}/>
+        <PrivateRoute exact path="/loots-summary" roles={['member']} component={LootsSummary}/>
+        <PrivateRoute exact path="/bank" roles={['member', 'apply', 'casu']} component={Bank}/>
+        <PrivateRoute exact path="/debriefs" roles={['member', 'apply', 'casu']} component={EnchantsAnalyzer}/>
+        <PrivateRoute exact path="/presences" roles={['member', 'apply', 'casu']} component={Presences}/>
+        <PrivateRoute exact path='/raid/:id' roles={['member', 'apply', 'casu', 'guest']} component={Raid}/>
         <PrivateRoute exact path='/admin/users' roles={['admin']} component={AdminUsers}/>
         <Route exact path='/reset' component={Logout} />
         <Route component={E404} />

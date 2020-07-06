@@ -3,15 +3,14 @@ import PropTypes from 'prop-types'
 
 import Header from '../Header'
 import Error from '../Error'
-import { Link } from 'react-router-dom'
 
-const Layout = ({ children }) => (
+const Layout = ({ children, fullWith }) => (
   <div className='crh-app site dark-mode'>
     <Header />
 
     <main className='site-content'>
       <div className='section'>
-        <div className='container'>
+        <div className={!fullWith ? 'container' : ''}>
           <Error />
           {children}
         </div>
@@ -21,7 +20,8 @@ const Layout = ({ children }) => (
 )
 
 Layout.propTypes = {
-  children: PropTypes.any.isRequired
+  children: PropTypes.any.isRequired,
+  fullWith: PropTypes.bool
 }
 
 export default Layout

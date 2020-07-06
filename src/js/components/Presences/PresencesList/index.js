@@ -89,7 +89,7 @@ class PresencesList extends React.Component {
             <tbody>
               {userPercentArray.map((array) => {
                 const key = array[0]
-                if(!(usersList[key]?.roles?.includes('member'))) return null
+                if(!(usersList[key]?.roles?.includes('member')) && !(usersList[key]?.roles?.includes('apply'))) return null
 
                 return (
                   <tr key={key}>

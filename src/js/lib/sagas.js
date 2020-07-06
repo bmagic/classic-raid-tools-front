@@ -30,7 +30,11 @@ function * getUsers () {
 }
 
 function * updateRoles (action) {
-  yield * request('POST', '/v1/users/roles', [{ type: 'GET_USERS' }], { roles: action.roles, id: action.id })
+  yield * request('PUT', `/v1/users/roles/${action.id}`, [{ type: 'GET_USERS' }], { roles: action.roles })
+}
+
+function * updateMdC (action) {
+  yield * request('PUT', `/v1/users/mdc/${action.id}`, [{ type: 'GET_USERS' }], { mdc: action.mdc })
 }
 
 function * getNextRaids () {
@@ -134,6 +138,41 @@ function * getDebriefRaids (action) {
 function * getDebrief (action) {
   yield * request('GET', `/v1/debriefs/${action.instance}/${action.date}`, [{ type: 'GET_DEBRIEF_SUCCESS' }])
 }
+function * createLoot (action) {
+  yield * request('POST', '/v1/loots', [{ type: 'GET_LOOTS', filter: action.filter }], action.loot)
+}
+function * updateLoot (action) {
+  yield * request('PUT', `/v1/loots/${action.id}`, [{ type: 'GET_LOOTS', filter: action.filter }], action.loot)
+}
+function * updateLootAssign (action) {
+  yield * request('PUT', `/v1/loots/${action.id}/assign-text`, [{ type: 'GET_LOOTS', filter: action.filter }], { value: action.value })
+}
+
+function * setMdcClassSpec (action) {
+  yield * request('PUT', `/v1/loots/${action.id}/mdc`, [{ type: 'GET_LOOTS', filter: action.filter }], { value: action.value })
+}
+
+function * getLoots (action) {
+  yield * request('GET', `/v1/loots/?
+${action.filter && action.filter.instance ? `&instance=${action.filter.instance}` : ''}
+${action.filter && action.filter.slot ? `&slot=${action.filter.slot}` : ''}
+${action.filter && action.filter.classSpec ? `&classSpec=${action.filter.classSpec}` : ''}
+${action.filter && action.filter.whClass ? `&whClass=${action.filter.whClass}` : ''}
+${action.filter && action.filter.whSubClass ? `&whSubClass=${action.filter.whSubClass}` : ''}`
+
+  , [{ type: 'GET_LOOTS_SUCCESS' }])
+}
+
+function * deleteLoot (action) {
+  yield * request('DELETE', `/v1/loots/${action.id}`, [{ type: 'GET_LOOTS', filter: action.filter }])
+}
+
+function * setLootNeed (action) {
+  yield * request('PUT', '/v1/loots/need', [{ type: 'GET_LOOTS', filter: action.filter }], { wid: action.wid, type: action.ltype })
+}
+function * getLootsNeeds () {
+  yield * request('GET', '/v1/loots/needs', [{ type: 'GET_LOOTS_NEEDS_SUCCESS' }])
+}
 
 function * request (type, url, actions, body) {
   try {
@@ -180,6 +219,7 @@ export default function * rootSaga () {
   yield takeLeading('SET_USER_MAIN_CHARACTER', setUserMainCharacter)
   yield takeLeading('GET_USERS', getUsers)
   yield takeLeading('UPDATE_ROLES', updateRoles)
+  yield takeLeading('UPDATE_MDC', updateMdC)
   yield takeLeading('GET_NEXT_RAIDS', getNextRaids)
   yield takeLeading('CREATE_RAID', createRaid)
   yield takeLeading('GET_RAID', getRaid)
@@ -208,4 +248,12 @@ export default function * rootSaga () {
   yield takeLeading('GET_CHARACTERS_COMPARATOR_DATA', getCharactersComparatorData)
   yield takeLeading('GET_DEBRIEF_RAIDS', getDebriefRaids)
   yield takeLeading('GET_DEBRIEF', getDebrief)
+  yield takeLeading('CREATE_LOOT', createLoot)
+  yield takeLeading('UPDATE_LOOT', updateLoot)
+  yield takeLatest('GET_LOOTS', getLoots)
+  yield takeLatest('DELETE_LOOT', deleteLoot)
+  yield takeLeading('SET_MDC_CLASS_SPEC', setMdcClassSpec)
+  yield takeLeading('UPDATE_LOOT_ASSIGN', updateLootAssign)
+  yield takeLeading('SET_LOOT_NEED', setLootNeed)
+  yield takeLeading('GET_LOOTS_NEEDS', getLootsNeeds)
 }
