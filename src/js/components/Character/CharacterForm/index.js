@@ -3,6 +3,7 @@ import WowClassImage from '../../Common/WowClassImage'
 import { wowClass } from '../../../lib/wow'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import './styles.scss'
 
 class CharacterForm extends React.Component {
   constructor (props) {
@@ -36,11 +37,17 @@ class CharacterForm extends React.Component {
     return (
       <div className='character-form'>
         <form onSubmit={(e) => this.onSubmit(e)}>
-          <div className='field'>
-            <div className='control'>
+          <div className="field is-grouped">
+            <p className="control is-expanded">
               <input className='input' type='text' placeholder='Name' value={this.state.name} onChange={e => this.onNameChange('name', e)} />
-            </div>
+            </p>
+            <p className="control">
+              <button type='submit' className='button'  disabled={this.state.name === '' || this.state.class === '' || this.state.spec === ''}>
+                Add character
+              </button>
+            </p>
           </div>
+
           <div className="field is-grouped is-grouped-multiline">
 
             {Object.keys(wowClass).map((keyClass) => {
@@ -56,9 +63,7 @@ class CharacterForm extends React.Component {
             })}
 
           </div>
-          <button type='submit' className='button' disabled={this.state.name === '' || this.state.class === '' || this.state.spec === ''}>
-            Add character
-          </button>
+
         </form>
       </div>
 

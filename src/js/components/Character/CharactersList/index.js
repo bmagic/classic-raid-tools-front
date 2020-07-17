@@ -18,11 +18,11 @@ class CharactersList extends React.Component {
     return (
       <div className='characters-list'>
         {!oneMain && <div className='notification is-light is-warning'>Vous n'avez pas défini de personnage principal</div>}
-        <div className='columns is-multiline'>
+        <div className=''>
 
           {userCharacters.map((character) => {
             return (
-              <div className='column is-6' key={character._id}>
+              <div key={character._id}>
                 <CharacterBox wclass={character.class} spec={character.spec} name={character.name} id={character._id} main={character.main}/>
               </div>
             )

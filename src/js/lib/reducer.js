@@ -3,6 +3,7 @@ const initialState = {
   errors: [],
   user: null,
   userCharacters: [],
+  userLootsNeeds: [],
   users: [],
   nextRaids: [],
   raid: null,
@@ -26,7 +27,9 @@ const initialState = {
   debrief: {},
   loot: null,
   loots: [],
-  lootsNeeds: []
+  lootsNeeds: [],
+  userAvailabilities: null,
+  availabilities: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -44,7 +47,6 @@ const reducer = (state = initialState, action) => {
     case 'LOGOUT_SUCCESS':
       return initialState
     case 'GET_USER_SUCCESS':
-
       return {
         ...state,
         user: action.result === '' ? null : action.result
@@ -218,6 +220,24 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         lootsNeeds: action.result
+      }
+    }
+    case ('GET_USER_LOOTS_NEEDS_SUCCESS'): {
+      return {
+        ...state,
+        userLootsNeeds: action.result
+      }
+    }
+    case ('GET_USER_AVAILABILITIES_SUCCESS'): {
+      return {
+        ...state,
+        userAvailabilities: action.result
+      }
+    }
+    case ('GET_AVAILABILITIES_SUCCESS'): {
+      return {
+        ...state,
+        availabilities: action.result
       }
     }
     default:

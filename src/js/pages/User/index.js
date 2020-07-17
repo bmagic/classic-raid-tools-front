@@ -14,6 +14,8 @@ class User extends React.Component {
 
   componentDidMount () {
     this.props.dispatch({ type: 'GET_USER' })
+    this.props.dispatch({ type: 'GET_USER_AVAILABILITIES' })
+
     const { username, email } = this.props.user
 
     this.setState({ username: username, email: email })
@@ -33,7 +35,7 @@ class User extends React.Component {
   }
 
   render () {
-    const { user, lang, dispatch } = this.props
+    const { user, userAvailabilities, lang, dispatch } = this.props
     const { username, email } = this.state
     if (user === null) return <div>Loading</div>
     return (
@@ -65,6 +67,105 @@ class User extends React.Component {
           </div>
         </form>
         <div className='section'>
+          <h2 className='subtitle'>Disponibilités</h2>
+          <table className='table is-narrow is-fullwidth is-hoverable is-bordered'>
+            <thead>
+              <tr>
+                <th>Jour</th>
+                <th className='has-text-centered'>Disponible ce soir sans problème</th>
+                <th className='has-text-centered'>Disponible ce soir mais ça ne m'arrange pas trop</th>
+                <th className='has-text-centered'>Pas disponible ce soir</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Lundi</td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'monday', status: 'ok' })}>
+                  {userAvailabilities && userAvailabilities.monday === 'ok' && <i className='fas fa-check has-text-success' />}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'monday', status: 'maybe' })}>
+                  {userAvailabilities && userAvailabilities.monday === 'maybe' && <i className='fas fa-check has-text-warning'/>}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'monday', status: 'ko' })}>
+                  {userAvailabilities && userAvailabilities.monday === 'ko' && <i className='fas fa-check has-text-danger'/>}
+                </td>
+              </tr>
+              <tr>
+                <td>Mardi</td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'tuesday', status: 'ok' })}>
+                  {userAvailabilities && userAvailabilities.tuesday === 'ok' && <i className='fas fa-check has-text-success' />}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'tuesday', status: 'maybe' })}>
+                  {userAvailabilities && userAvailabilities.tuesday === 'maybe' && <i className='fas fa-check has-text-warning'/>}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'tuesday', status: 'ko' })}>
+                  {userAvailabilities && userAvailabilities.tuesday === 'ko' && <i className='fas fa-check has-text-danger'/>}
+                </td>
+              </tr>
+              <tr>
+                <td>Mercredi</td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'wednesday', status: 'ok' })}>
+                  {userAvailabilities && userAvailabilities.wednesday === 'ok' && <i className='fas fa-check has-text-success' />}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'wednesday', status: 'maybe' })}>
+                  {userAvailabilities && userAvailabilities.wednesday === 'maybe' && <i className='fas fa-check has-text-warning'/>}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'wednesday', status: 'ko' })}>
+                  {userAvailabilities && userAvailabilities.wednesday === 'ko' && <i className='fas fa-check has-text-danger'/>}
+                </td>
+              </tr>
+              <tr>
+                <td>Jeudi</td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'thursday', status: 'ok' })}>
+                  {userAvailabilities && userAvailabilities.thursday === 'ok' && <i className='fas fa-check has-text-success' />}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'thursday', status: 'maybe' })}>
+                  {userAvailabilities && userAvailabilities.thursday === 'maybe' && <i className='fas fa-check has-text-warning'/>}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'thursday', status: 'ko' })}>
+                  {userAvailabilities && userAvailabilities.thursday === 'ko' && <i className='fas fa-check has-text-danger'/>}
+                </td>
+              </tr>
+              <tr>
+                <td>Vendredi</td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'friday', status: 'ok' })}>
+                  {userAvailabilities && userAvailabilities.friday === 'ok' && <i className='fas fa-check has-text-success' />}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'friday', status: 'maybe' })}>
+                  {userAvailabilities && userAvailabilities.friday === 'maybe' && <i className='fas fa-check has-text-warning'/>}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'friday', status: 'ko' })}>
+                  {userAvailabilities && userAvailabilities.friday === 'ko' && <i className='fas fa-check has-text-danger'/>}
+                </td>
+              </tr>
+              <tr>
+                <td>Samedi</td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'saturday', status: 'ok' })}>
+                  {userAvailabilities && userAvailabilities.saturday === 'ok' && <i className='fas fa-check has-text-success' />}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'saturday', status: 'maybe' })}>
+                  {userAvailabilities && userAvailabilities.saturday === 'maybe' && <i className='fas fa-check has-text-warning'/>}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'saturday', status: 'ko' })}>
+                  {userAvailabilities && userAvailabilities.saturday === 'ko' && <i className='fas fa-check has-text-danger'/>}
+                </td>
+              </tr>
+              <tr>
+                <td>Dimanche</td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'sunday', status: 'ok' })}>
+                  {userAvailabilities && userAvailabilities.sunday === 'ok' && <i className='fas fa-check has-text-success' />}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'sunday', status: 'maybe' })}>
+                  {userAvailabilities && userAvailabilities.sunday === 'maybe' && <i className='fas fa-check has-text-warning'/>}
+                </td>
+                <td className='has-text-centered has-pointer' onClick={() => dispatch({ type: 'SET_AVAILABILITY', day: 'sunday', status: 'ko' })}>
+                  {userAvailabilities && userAvailabilities.sunday === 'ko' && <i className='fas fa-check has-text-danger'/>}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className='section'>
           <div className="field">
             <label className="label">{'Langue d\'affichage des objets'}</label>
             <div className="select">
@@ -79,6 +180,7 @@ class User extends React.Component {
         <p className='section'>
               Roles: {user.roles.length > 0 ? user.roles.join(', ') : 'Aucun role'}
         </p>
+
       </Layout>
     )
   }
@@ -87,13 +189,16 @@ class User extends React.Component {
 User.propTypes = {
   dispatch: PropTypes.func,
   user: PropTypes.object,
-  lang: PropTypes.string
+  lang: PropTypes.string,
+  userAvailabilities: PropTypes.object
+
 }
 
 function mapStateToProps (state) {
   return {
     user: state.user,
-    lang: state.lang
+    lang: state.lang,
+    userAvailabilities: state.userAvailabilities
   }
 }
 export default connect(mapStateToProps)(User)
