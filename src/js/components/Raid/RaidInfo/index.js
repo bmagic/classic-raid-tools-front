@@ -12,15 +12,15 @@ import MissingRegistrations from '../MissingRegistrations'
 class RaidInfo extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { edit: false, title: '', main: false, date: '', logs: '', gdoc: '', infos: '' }
+    this.state = { edit: false, instance: '', title: '', main: false, date: '', logs: '', gdoc: '', infos: '' }
     this.activateEdit = this.activateEdit.bind(this)
     this.onInputChange = this.onInputChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
 
   activateEdit () {
-    const { date, title, main, logs, gdoc, infos } = this.props.raid
-    this.setState({ edit: true, title: title, main: main, date: moment(date).format('YYYY-MM-DDTHH:mm'), logs: logs || '', gdoc: gdoc || '', infos: infos || '' })
+    const { date, title, instance, main, logs, gdoc, infos } = this.props.raid
+    this.setState({ edit: true, instance: instance, title: title, main: main, date: moment(date).format('YYYY-MM-DDTHH:mm'), logs: logs || '', gdoc: gdoc || '', infos: infos || '' })
   }
 
   onInputChange (key, e) {
@@ -31,9 +31,9 @@ class RaidInfo extends React.Component {
 
   onSubmit (e) {
     e.preventDefault()
-    const { date, title, main, logs, gdoc, infos } = this.state
+    const { date, title, main, logs, gdoc, infos, instance } = this.state
     const { raidId } = this.props
-    this.props.dispatch({ type: 'UPDATE_RAID', id: raidId, raid: { date: moment(date).toISOString(), title: title, main: main, logs: logs, gdoc: gdoc, infos: infos } })
+    this.props.dispatch({ type: 'UPDATE_RAID', id: raidId, raid: { date: moment(date).toISOString(), title: title, main: main, logs: logs, gdoc: gdoc, infos: infos, instance: instance } })
     this.setState({ edit: false })
   }
 
@@ -81,6 +81,34 @@ class RaidInfo extends React.Component {
                     <label className="label">Titre</label>
                     <div className='control'>
                       <input className='input' type='title' value={title} onChange={e => this.onInputChange('title', e)} />
+                    </div>
+                  </div>
+                  <div className='field is-narrow'>
+                    <div className="control" onChange={e => this.onInputChange('instance', e)}>
+                      <label className="radio">
+                        <input type="radio" name="instance" value="onyxia" checked={this.state.instance === 'onyxia'}/>Onyxia
+                      </label>
+                      <label className="radio">
+                        <input type="radio" name="instance" value="mc" checked={this.state.instance === 'mc'}/>Molten Core
+                      </label>
+                      <label className="radio">
+                        <input type="radio" name="instance" value="bwl" checked={this.state.instance === 'bwl'}/>Black Wing Lair
+                      </label>
+                      <label className="radio">
+                        <input type="radio" name="instance" value="zg" checked={this.state.instance === 'zg'}/>{'Zul\'Gurub'}
+                      </label>
+                      <label className="radio">
+                        <input type="radio" name="instance" value="aq20" checked={this.state.instance === 'aq20'}/>{'Ahn\'Qiraj 20'}
+                      </label>
+                      <label className="radio">
+                        <input type="radio" name="instance" value="aq40" checked={this.state.instance === 'aq40'}/>{'Ahn\'Qiraj 40'}
+                      </label>
+                      <label className="radio">
+                        <input type="radio" name="instance" value="naxxramas" checked={this.state.instance === 'naxxramas'}/>Naxxramas
+                      </label>
+                      <label className="radio">
+                        <input type="radio" name="instance" value="other" checked={this.state.instance === 'other'}/>Autre
+                      </label>
                     </div>
                   </div>
                   <div className='field '>

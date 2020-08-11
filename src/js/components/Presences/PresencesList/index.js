@@ -7,7 +7,7 @@ import './styles.scss'
 class PresencesList extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { instance: 'bwl' }
+    this.state = { instance: 'aq40' }
   }
 
   componentDidMount () {
@@ -63,6 +63,8 @@ class PresencesList extends React.Component {
         <div className='field'>
           <div className="select is-small" value={instance} onChange={(e) => this.onInstanceChange(e.target.value)}>
             <select>
+              <option value='aq40'>Temple of Ahn'Qiraj</option>
+              <option value='aq20'>Ruins of Ahn'Qiraj</option>
               <option value='bwl'>Black Wing Lair</option>
               <option value='zg'>{'Zul\'Gurub'}</option>
               <option value='mc'>Molten Core</option>

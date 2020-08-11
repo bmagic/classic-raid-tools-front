@@ -19,6 +19,8 @@ class AdminMenu extends React.Component {
         </a>
         <div className="navbar-dropdown">
           <Link to="/admin/users" className="navbar-item">Users</Link>
+          <Link to="/admin/availabilities" className="navbar-item">Dispos</Link>
+
         </div>
       </div>
     )

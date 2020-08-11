@@ -27,6 +27,9 @@ class CharactersRegistrationList extends React.Component {
           <i className='image is-16x16'><WowClassImage keyClass={registration.class} keySpec={registration.spec}/></i>&nbsp;{registration.main ? registration.name : `${registration.name} (${registration.username})`}&nbsp;
           {registration.favorite && <i title='Je souhaiterai jouer ce personnage en priorité' className='fas fa-star'/>}
           {registration.status === 'bench' && registration.validated === true && <i className="fas fa-umbrella-beach"/>}
+          {registration.roles.includes('casu') && <sup title='Casu'>c</sup>}
+          {registration.roles.includes('apply') && <sup title='Apply'>a</sup>}
+          {registration.roles.includes('guest') && <sup title='Guest'>g</sup>}
         </div>
       </div>
     )

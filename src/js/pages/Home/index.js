@@ -42,7 +42,7 @@ const Home = () => {
           <div className='box'>
             <div className='has-text-centered'>
               <WowRaidImage instance='bwl' />
-              <span className='is-size-5 has-text-success'>8/8 en 52m59s</span>
+              <span className='is-size-5 has-text-success'>8/8 en 51m41s</span>
             </div>
             <div className='has-text-centered'>
               <WowRaidImage instance='mc'/>

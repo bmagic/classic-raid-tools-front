@@ -20,6 +20,7 @@ import MoltenCore from '../../../static/Raids/wow_classic_logo_molten_core.png'
 import BlackwingLair from '../../../static/Raids/wow_classic_logo_blackwing_lair.png'
 import ZulGurub from '../../../static/Raids/wow_classic_logo_zul_gurub.png'
 import AhnQiraj from '../../../static/Raids/wow_classic_logo_ahn_qiraj.png'
+import AhnQiraj20 from '../../../static/Raids/wow_classic_logo_ahn_qiraj_20.png'
 import Naxxramas from '../../../static/Raids/wow_classic_logo_naxxramas.png'
 import Other from '../../../static/Raids/wow_classic_logo.png'
 
@@ -63,7 +64,7 @@ export const wowRaids = {
   mc: MoltenCore,
   bwl: BlackwingLair,
   zg: ZulGurub,
-  aq20: AhnQiraj,
+  aq20: AhnQiraj20,
   aq40: AhnQiraj,
   naxxramas: Naxxramas,
   other: Other
@@ -215,9 +216,9 @@ export const enchantsList = {
       wrist: [1885],
       hands: [1887],
       legs: [2585],
-      feet: [1887],
-      'one-hand': [1897, 1900],
-      'main hand': [1897, 1900],
+      feet: [1887, 911],
+      'one-hand': [1897, 1900, 2564],
+      'main hand': [1897, 1900, 2564],
       ranged: []
     }
   },

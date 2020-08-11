@@ -174,6 +174,22 @@ function * getLootsNeeds () {
   yield * request('GET', '/v1/loots/needs', [{ type: 'GET_LOOTS_NEEDS_SUCCESS' }])
 }
 
+function * getUserLootsNeeds () {
+  yield * request('GET', '/v1/loots/user/needs', [{ type: 'GET_USER_LOOTS_NEEDS_SUCCESS' }])
+}
+function * deleteUserLootNeed (action) {
+  yield * request('DELETE', `/v1/loots/needs/${action.id}`, [{ type: 'GET_USER_LOOTS_NEEDS' }])
+}
+
+function * getUserAvailabilities () {
+  yield * request('GET', '/v1/availabilities', [{ type: 'GET_USER_AVAILABILITIES_SUCCESS' }])
+}
+function * setAvailability (action) {
+  yield * request('PUT', '/v1/availabilities', [{ type: 'GET_USER_AVAILABILITIES' }], { day: action.day, status: action.status })
+}
+function * getAvailabilities () {
+  yield * request('GET', '/v1/availabilities/all', [{ type: 'GET_AVAILABILITIES_SUCCESS' }])
+}
 function * request (type, url, actions, body) {
   try {
     let result
@@ -256,4 +272,9 @@ export default function * rootSaga () {
   yield takeLeading('UPDATE_LOOT_ASSIGN', updateLootAssign)
   yield takeLeading('SET_LOOT_NEED', setLootNeed)
   yield takeLeading('GET_LOOTS_NEEDS', getLootsNeeds)
+  yield takeLeading('GET_USER_LOOTS_NEEDS', getUserLootsNeeds)
+  yield takeLeading('DELETE_USER_LOOT_NEED', deleteUserLootNeed)
+  yield takeLeading('GET_USER_AVAILABILITIES', getUserAvailabilities)
+  yield takeLeading('SET_AVAILABILITY', setAvailability)
+  yield takeLeading('GET_AVAILABILITIES', getAvailabilities)
 }

@@ -21,7 +21,7 @@ import CharactersComparator from './pages/CharactersComparator'
 import EnchantsAnalyzer from './pages/Debrief'
 import Loots from './pages/Loots'
 import LootsSummary from './pages/LootsSummary'
-import AQ40 from './pages/strats/AQ40'
+import AdminAvailabilitites from './pages/AdminAvailabilities'
 
 const App = () => {
   moment.locale('fr')
@@ -32,7 +32,6 @@ const App = () => {
         <Route exact path='/' component={Home} />
         <Route exact path='/roster' component={Roster}/>
         <Route exact path="/character/:name" component={Character}/>
-        <PrivateRoute exact path="/strat/aq40" roles={['member', 'apply', 'casu']} component={AQ40}/>
         <PrivateRoute exact path="/characters-comparator" roles={['member', 'apply', 'casu']} component={CharactersComparator}/>
         <PrivateRoute exact path="/raids" component={NextRaids}/>
         <PrivateRoute exact path="/roadmap" component={Roadmap}/>
@@ -45,6 +44,8 @@ const App = () => {
         <PrivateRoute exact path="/presences" roles={['member', 'apply', 'casu']} component={Presences}/>
         <PrivateRoute exact path='/raid/:id' roles={['member', 'apply', 'casu', 'guest']} component={Raid}/>
         <PrivateRoute exact path='/admin/users' roles={['admin']} component={AdminUsers}/>
+        <PrivateRoute exact path='/admin/availabilities' roles={['admin']} component={AdminAvailabilitites}/>
+
         <Route exact path='/reset' component={Logout} />
         <Route component={E404} />
       </Switch>
