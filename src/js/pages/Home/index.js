@@ -41,12 +41,16 @@ const Home = () => {
           </div>
           <div className='box'>
             <div className='has-text-centered'>
+              <WowRaidImage instance='aq40' />
+              <span className='is-size-5 has-text-success'>8/9 en ~3h</span>
+            </div>
+            <div className='has-text-centered'>
               <WowRaidImage instance='bwl' />
-              <span className='is-size-5 has-text-success'>8/8 en 51m41s</span>
+              <span className='is-size-5 has-text-success'>8/8 en 49m01s</span>
             </div>
             <div className='has-text-centered'>
               <WowRaidImage instance='mc'/>
-              <span className='is-size-5 has-text-success'>10/10 en 59m32s</span>
+              <span className='is-size-5 has-text-success'>10/10 en 59m14s</span>
             </div>
           </div>
         </div>
