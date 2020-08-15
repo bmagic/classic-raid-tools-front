@@ -97,8 +97,8 @@ class PresencesList extends React.Component {
                   <tr key={key}>
                     <td className='is-size-7'>
                       {usersList[key].username}
-                      {usersList[key]?.roles?.includes('apply') || <sup>a</sup>}
-                      {usersList[key]?.roles?.includes('casu') || <sup>c</sup>}
+                      {usersList[key]?.roles?.includes('apply') && <sup>a</sup>}
+                      {usersList[key]?.roles?.includes('casu') && <sup>c</sup>}
                     </td>
                     <td>{(userPercent[key] * 100).toFixed(0)}%</td>
                     {raids.map((raid) => {
