@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import WowClassImage from '../../Common/WowClassImage'
+import { wowClass } from '../../../lib/wow'
 import { connect } from 'react-redux'
 
 import './styles.scss'
@@ -20,6 +21,15 @@ const CharacterBox = ({ dispatch, name, wclass, spec, id, main }) => {
           <div className={`level-item main-tag ${main ? 'is-main' : ''}`}>
             <div onClick={() => dispatch({ type: 'SET_USER_MAIN_CHARACTER', id: id })} className={`tag ${main ? 'is-success' : 'is-light'}`}>Personnage principal</div>
           </div>
+          <div className='level-item spec'>
+            {Object.keys(wowClass[wclass]).map((spec2) => {
+              return <button key={spec2} className={`button ${spec === spec2 ? 'is-active' : ''} is-small bg-class-${wclass}`} onClick={() => dispatch({ type: 'SET_USER_CHARACTER_SPEC', id: id, spec: spec2 })}>
+                <span className="icon">
+                  <WowClassImage keyClass={wclass} keySpec={spec2} />
+                </span>
+              </button>
+            })}
+          </div>
         </div>
         <div className="level-right">
           <div className='level-item delete-button '>
@@ -33,6 +43,7 @@ const CharacterBox = ({ dispatch, name, wclass, spec, id, main }) => {
           </div>
         </div>
       </div>
+
     </div>
   )
 }

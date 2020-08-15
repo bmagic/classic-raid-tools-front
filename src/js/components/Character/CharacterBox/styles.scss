@@ -1,5 +1,5 @@
 .character-box{
-  .delete-button{
+  .delete-button, .spec{
     display:none;
   }
   .main-tag{
@@ -9,7 +9,7 @@
       display:block;
     }
   }
-  &:hover .delete-button, &:hover .main-tag{
+  &:hover .delete-button, &:hover .main-tag,&:hover .spec{
     display: block;
   }
 }

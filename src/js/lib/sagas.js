@@ -89,6 +89,10 @@ function * setUserMainCharacter (action) {
   yield * request('PUT', `/v1/user/characters/main/${action.id}`, [{ type: 'GET_USER_CHARACTERS' }])
 }
 
+function * setUserCharacterSpec (action) {
+  yield * request('PUT', `/v1/user/characters/spec/${action.id}`, [{ type: 'GET_USER_CHARACTERS' }], { spec: action.spec })
+}
+
 function * getRoster (action) {
   yield * request('GET', `/v1/roster?main=${action.main}&roles=${action.roles}`, [{ type: 'GET_ROSTER_SUCCESS' }])
 }
@@ -233,6 +237,7 @@ export default function * rootSaga () {
   yield takeLeading('GET_USER_CHARACTERS', getUserCharacters)
   yield takeLeading('DELETE_USER_CHARACTER', deleteUserCharacter)
   yield takeLeading('SET_USER_MAIN_CHARACTER', setUserMainCharacter)
+  yield takeLeading('SET_USER_CHARACTER_SPEC', setUserCharacterSpec)
   yield takeLeading('GET_USERS', getUsers)
   yield takeLeading('UPDATE_ROLES', updateRoles)
   yield takeLeading('UPDATE_MDC', updateMdC)
