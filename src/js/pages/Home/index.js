@@ -1,7 +1,6 @@
 import React from 'react'
 import Layout from '../../components/Common/Layout'
 import WowRaidImage from '../../components/Common/WowRaidImage'
-import WowClassImage from '../../components/Common/WowClassImage'
 
 const Home = () => {
   return (
