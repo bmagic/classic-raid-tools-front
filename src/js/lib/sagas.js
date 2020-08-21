@@ -41,6 +41,10 @@ function * getNextRaids () {
   yield * request('GET', '/v1/raids/next', [{ type: 'GET_NEXT_RAIDS_SUCCESS' }])
 }
 
+function * getRaids () {
+  yield * request('GET', '/v1/raids', [{ type: 'GET_RAIDS_SUCCESS' }])
+}
+
 function * createRaid (action) {
   yield * request('POST', '/v1/raids', [{ type: 'GET_NEXT_RAIDS' }], { date: action.date, instance: action.instance })
 }
@@ -242,6 +246,7 @@ export default function * rootSaga () {
   yield takeLeading('UPDATE_ROLES', updateRoles)
   yield takeLeading('UPDATE_MDC', updateMdC)
   yield takeLeading('GET_NEXT_RAIDS', getNextRaids)
+  yield takeLeading('GET_RAIDS', getRaids)
   yield takeLeading('CREATE_RAID', createRaid)
   yield takeLeading('GET_RAID', getRaid)
   yield takeLeading('CREATE_REGISTRATION', createRegistration)

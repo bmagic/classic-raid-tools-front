@@ -22,6 +22,7 @@ import EnchantsAnalyzer from './pages/Debrief'
 import Loots from './pages/Loots'
 import LootsSummary from './pages/LootsSummary'
 import AdminAvailabilitites from './pages/AdminAvailabilities'
+import Raids from './pages/Raids'
 
 const App = () => {
   moment.locale('fr')
@@ -33,6 +34,7 @@ const App = () => {
         <Route exact path='/roster' component={Roster}/>
         <Route exact path="/character/:name" component={Character}/>
         <PrivateRoute exact path="/characters-comparator" roles={['member', 'apply', 'casu']} component={CharactersComparator}/>
+        <PrivateRoute exact path="/raids/all" component={Raids}/>
         <PrivateRoute exact path="/raids" component={NextRaids}/>
         <PrivateRoute exact path="/roadmap" component={Roadmap}/>
         <PrivateRoute exact path='/user' component={User} />

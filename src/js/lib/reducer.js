@@ -6,6 +6,7 @@ const initialState = {
   userLootsNeeds: [],
   users: [],
   nextRaids: [],
+  raids: [],
   raid: null,
   registrations: {},
   missingRegistrations: [],
@@ -20,7 +21,7 @@ const initialState = {
   basketForReroll: false,
   lang: 'fr',
   presences: [],
-  presencesUsers:[],
+  presencesUsers: [],
   character: null,
   characterItems: [],
   charactersComparatorData: {},
@@ -66,6 +67,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         nextRaids: action.result
+      }
+    case 'GET_RAIDS_SUCCESS':
+      return {
+        ...state,
+        raids: action.result
       }
     case 'GET_RAID_SUCCESS':
       return {
