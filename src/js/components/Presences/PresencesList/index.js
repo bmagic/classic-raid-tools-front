@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import './styles.scss'
+import { Link } from 'react-router-dom'
 
 class PresencesList extends React.Component {
   constructor (props) {
@@ -47,7 +48,6 @@ class PresencesList extends React.Component {
         presencesList[presencesUser._id]={}
       }
     }
-    console.log(presencesUsers)
 
     const userPercent = {}
     const tmpRaids = raids.slice(0).reverse()
@@ -64,7 +64,6 @@ class PresencesList extends React.Component {
       }
       userPercent[key] = isNaN(count / total)? 0 : count / total
     }
-    console.log(userPercent)
 
     const userPercentArray = Object.entries(userPercent).sort((a, b) => b[1] - a[1])
 
@@ -93,8 +92,10 @@ class PresencesList extends React.Component {
                 <th className='is-size-7'>Présence</th>
                 {raids.map((raid) => {
                   return <th className='is-size-7 has-text-centered' key={`head-${raid}`}>
+                    <Link to={`/raid/${raidsList[raid]._id}`}>
                     {instance === '' && <div>{raidsList[raid].instance}</div>}
                     <div>{moment(raidsList[raid].date).format('DD/MM')}</div>
+                    </Link>
                   </th>
                 })}
               </tr>
