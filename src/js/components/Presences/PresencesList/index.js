@@ -21,11 +21,12 @@ class PresencesList extends React.Component {
 
   render () {
     const { instance } = this.state
-    const { presences,user } = this.props
+    const { presences,presencesUsers,user } = this.props
     const usersList = {}
     const raidsList = {}
     const presencesList = {}
     const raids = []
+
 
     for (const presence of presences) {
       if (!raids.includes(presence.reportId)) {
@@ -39,6 +40,14 @@ class PresencesList extends React.Component {
         presencesList[presence.userId._id][presence.reportId] = presence
       }
     }
+    for (const presencesUser of presencesUsers){
+      if(presencesList[presencesUser._id]===undefined){
+
+        usersList[presencesUser._id] = presencesUser
+        presencesList[presencesUser._id]={}
+      }
+    }
+    console.log(presencesUsers)
 
     const userPercent = {}
     const tmpRaids = raids.slice(0).reverse()
@@ -53,10 +62,12 @@ class PresencesList extends React.Component {
           if (total !== 0) { total++ }
         }
       }
-      userPercent[key] = count / total
+      userPercent[key] = isNaN(count / total)? 0 : count / total
     }
+    console.log(userPercent)
 
     const userPercentArray = Object.entries(userPercent).sort((a, b) => b[1] - a[1])
+
 
     return (
       <div className='presences-list'>
@@ -135,12 +146,14 @@ class PresencesList extends React.Component {
 PresencesList.propTypes = {
   dispatch: PropTypes.func,
   presences: PropTypes.array,
+  presencesUsers: PropTypes.array,
   user:PropTypes.object
 }
 
 function mapStateToProps (state) {
   return {
     presences: state.presences,
+    presencesUsers: state.presencesUsers,
     user:state.user
   }
 }

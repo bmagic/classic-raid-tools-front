@@ -20,6 +20,7 @@ const initialState = {
   basketForReroll: false,
   lang: 'fr',
   presences: [],
+  presencesUsers:[],
   character: null,
   characterItems: [],
   charactersComparatorData: {},
@@ -154,7 +155,8 @@ const reducer = (state = initialState, action) => {
     case 'GET_PRESENCES_SUCCESS': {
       return {
         ...state,
-        presences: action.result
+        presences: action.result.presences,
+        presencesUsers: action.result.users
       }
     }
     case 'REDIRECT_404': {
