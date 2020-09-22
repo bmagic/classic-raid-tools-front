@@ -31,9 +31,9 @@ class BankItemsRequest extends React.Component {
         {bankItemsRequests.map((bankItemsRequest) => {
           let basketPrice = 0
           return (
-            <div className='box ' key={bankItemsRequest._id}>
+            <div className={`box ${bankItemsRequest.status==='asked'?'has-border-orange':''} ${bankItemsRequest.status==='ok'?'has-border-green':''} ${bankItemsRequest.status==='ko'?'has-border-red':''}`} key={bankItemsRequest._id}>
               <div className='level'>
-                <div className='item-level'>
+                <div className='item-level  '>
                   <div>{moment(bankItemsRequest.date).format('DD/MM/YYYY HH:mm')}</div>
                   <div>{bankItemsRequest?.userId?.username || 'Joueur inconnu'}</div>
                   {bankItemsRequest.reroll && <div><span className='tag is-light is-warning'>Demande pour un reroll</span> </div>}

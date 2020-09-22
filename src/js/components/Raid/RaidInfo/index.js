@@ -166,7 +166,7 @@ class RaidInfo extends React.Component {
                 </form>
               </div>}
             </div>
-            <CharactersRegistrationList raidId={raidId}/>
+            <CharactersRegistrationList raidId={raidId} raidDate={raid.date}/>
             <MissingRegistrations raidId={raidId}/>
 
           </div>

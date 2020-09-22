@@ -31,7 +31,8 @@ const initialState = {
   loots: [],
   lootsNeeds: [],
   userAvailabilities: null,
-  availabilities: []
+  availabilities: [],
+  lastItems: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -248,6 +249,13 @@ const reducer = (state = initialState, action) => {
         availabilities: action.result
       }
     }
+    case ('GET_LAST_ITEMS_SUCCESS'): {
+      return {
+        ...state,
+        lastItems: action.result
+      }
+    }
+
     default:
       return state
   }

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import WowClassImage from '../../Common/WowClassImage'
+import moment from 'moment'
 
 import './styles.scss'
 
@@ -23,10 +24,11 @@ class CharactersRegistrationList extends React.Component {
           <a onClick={() => this.props.dispatch({ type: 'UPDATE_REGISTRATION', raidId: this.props.raidId, id: registration._id, registration: { validated: true } })}><i className='fas fa-user-check'/></a>
         </div>
         }
-        <div className={`${registration.status === 'bench' && registration.validated === true ? 'has-text-warning' : ''}`}>
+        <div className={`${registration.status === 'bench' && registration.validated === true ? 'has-text-warning' : ''} ${this.uniqueUserValidated[registration.userId] && registration.validated === false ? 'line' : ''}`}>
           <i className='image is-16x16'><WowClassImage keyClass={registration.class} keySpec={registration.spec}/></i>&nbsp;{registration.main ? registration.name : `${registration.name} (${registration.username})`}&nbsp;
           {registration.favorite && <i title='Je souhaiterai jouer ce personnage en priorité' className='fas fa-star'/>}
           {registration.status === 'bench' && registration.validated === true && <i className="fas fa-umbrella-beach"/>}
+          {moment(registration.date).add(48, 'hours').isAfter(moment(this.props.raidDate)) && <i className="fas fa-clock"/>}
           {registration.roles.includes('casu') && <sup title='Casu'>c</sup>}
           {registration.roles.includes('apply') && <sup title='Apply'>a</sup>}
           {registration.roles.includes('guest') && <sup title='Guest'>g</sup>}
@@ -60,6 +62,7 @@ class CharactersRegistrationList extends React.Component {
     const uniqueUserValidated = {}
     const charactersuniqueUserRegistration = []
     const rosterError = []
+    this.uniqueUserValidated = uniqueUserValidated
 
     const characterClassCount = {}
     if (registrations[raidId] === undefined) return <div>Chargement en cours</div>
@@ -240,7 +243,8 @@ CharactersRegistrationList.propTypes = {
   dispatch: PropTypes.func,
   raidId: PropTypes.string,
   registrations: PropTypes.array,
-  user: PropTypes.object
+  user: PropTypes.object,
+  raidDate: PropTypes.string
 }
 
 function mapStateToProps (state) {

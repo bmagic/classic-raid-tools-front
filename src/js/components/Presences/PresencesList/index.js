@@ -76,6 +76,7 @@ class PresencesList extends React.Component {
               <option value='aq40'>Temple of Ahn'Qiraj</option>
               <option value='aq20'>Ruins of Ahn'Qiraj</option>
               <option value='bwl'>Black Wing Lair</option>
+              <option value='bwl+aq40'>BWL + AQ40</option>
               <option value='zg'>{'Zul\'Gurub'}</option>
               <option value='mc'>Molten Core</option>
               <option value='onyxia'>Onyxia</option>
@@ -93,7 +94,7 @@ class PresencesList extends React.Component {
                 {raids.map((raid) => {
                   return <th className='is-size-7 has-text-centered' key={`head-${raid}`}>
                     <Link to={`/raid/${raidsList[raid]._id}`}>
-                    {instance === '' && <div>{raidsList[raid].instance}</div>}
+                    {(instance === '' || instance==='bwl+aq40') && <div>{raidsList[raid].instance}</div>}
                     <div>{moment(raidsList[raid].date).format('DD/MM')}</div>
                     </Link>
                   </th>

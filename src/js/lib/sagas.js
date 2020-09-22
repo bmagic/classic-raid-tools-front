@@ -198,6 +198,9 @@ function * setAvailability (action) {
 function * getAvailabilities () {
   yield * request('GET', '/v1/availabilities/all', [{ type: 'GET_AVAILABILITIES_SUCCESS' }])
 }
+function * getLastItems () {
+  yield * request('GET', '/v1/items/last', [{ type: 'GET_LAST_ITEMS_SUCCESS' }])
+}
 function * request (type, url, actions, body) {
   try {
     let result
@@ -287,4 +290,5 @@ export default function * rootSaga () {
   yield takeLeading('GET_USER_AVAILABILITIES', getUserAvailabilities)
   yield takeLeading('SET_AVAILABILITY', setAvailability)
   yield takeLeading('GET_AVAILABILITIES', getAvailabilities)
+  yield takeLeading('GET_LAST_ITEMS', getLastItems)
 }
