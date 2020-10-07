@@ -22,11 +22,13 @@ const Roadmap = () => {
           <li>Implémentation de la BDG avec webhook et historique plus poussé que l'outil actuel</li>
           <li>Changement du thème pour un dark</li>
           <li>Gestion de la présence des joueurs</li>
+          <li>Gestion de l'historique des loots</li>
+          <li>Gestion du stuff des joueurs</li>
         </ul>
         <h2>A faire</h2>
         <ul>
-          <li>Gestion de l'historique des loots</li>
-          <li>Gestion du stuff des joueurs</li>
+          <li>Ajouter un status annulation sur les requêtes banque</li>
+          <li>Pouvoir filtrer les absences par classe</li>
         </ul>
       </p>
     </Layout>

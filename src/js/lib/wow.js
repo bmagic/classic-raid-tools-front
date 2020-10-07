@@ -85,10 +85,10 @@ export const enchantsList = {
     heal: {
       head: [2590],
       shoulder: [2604],
-      back: [1888],
+      back: [1888, 2620],
       chest: [1891, 1893],
       wrist: [2566],
-      hands: [],
+      hands: [2617],
       legs: [2590],
       feet: [911],
       'two-hand': [2505],
@@ -100,10 +100,10 @@ export const enchantsList = {
     dd: {
       head: [2544],
       shoulder: [2605],
-      back: [1888],
+      back: [1888, 2620, 2621],
       chest: [1891],
       wrist: [2565, 1883],
-      hands: [],
+      hands: [2614],
       legs: [2544],
       feet: [911],
       'two-hand': [2504],
@@ -117,7 +117,7 @@ export const enchantsList = {
     tank: {
       head: [2543, 2591, 1508, 1506, 1505],
       shoulder: [2483, 2606],
-      back: [849, 2463],
+      back: [849, 2463, 2620],
       chest: [1891, 1892],
       wrist: [1886, 1885],
       hands: [927, 1887, 931],
@@ -131,15 +131,30 @@ export const enchantsList = {
     heal: {
       head: [2591],
       shoulder: [2604],
-      back: [1888],
+      back: [1888, 2620],
       chest: [1891, 1893],
       wrist: [2566],
-      hands: [],
+      hands: [2617],
       legs: [2591],
       feet: [911],
       'two-hand': [2505],
       'one-hand': [2505],
       'main hand': [2505],
+      'held in off-hand': [],
+      ranged: []
+    },
+    cac: {
+      head: [1508],
+      shoulder: [2606],
+      back: [849],
+      chest: [1891],
+      wrist: [1885],
+      hands: [1887],
+      legs: [1508],
+      feet: [1887],
+      'two-hand': [2646],
+      'one-hand': [2564],
+      'main hand': [2564],
       'held in off-hand': [],
       ranged: []
     }
@@ -148,10 +163,10 @@ export const enchantsList = {
     tank: {
       head: [2543, 2583, 1508, 1506, 1505],
       shoulder: [2483, 2606],
-      back: [849, 2463],
+      back: [849, 2463, 2620],
       chest: [1891, 1892],
       wrist: [1886, 1885],
-      hands: [927, 1887, 931],
+      hands: [927, 1887, 931, 2613],
       legs: [2543, 2583, 1508, 1506, 1505],
       feet: [911, 1887, 929],
       'one-hand': [1900, 2564, 2563],
@@ -162,9 +177,9 @@ export const enchantsList = {
     cac: {
       head: [1506, 2543],
       shoulder: [2606],
-      back: [849],
+      back: [849, 2621, 2620],
       chest: [1891],
-      wrist: [1885],
+      wrist: [1885, 1887],
       hands: [927, 931],
       legs: [1506, 2543],
       feet: [911, 1887],
@@ -178,10 +193,10 @@ export const enchantsList = {
     heal: {
       head: [2587],
       shoulder: [2604],
-      back: [1888],
-      chest: [1893],
+      back: [1888, 2620],
+      chest: [1891, 1893],
       wrist: [2566],
-      hands: [],
+      hands: [2617],
       legs: [2587],
       feet: [911],
       'one-hand': [2505],
@@ -195,15 +210,15 @@ export const enchantsList = {
     dd: {
       head: [2586],
       shoulder: [2606],
-      back: [849],
+      back: [849, 2620, 2621],
       chest: [1891],
-      wrist: [1883, 586],
+      wrist: [1883, 586, 247, 928],
       hands: [1887],
       legs: [2586],
       feet: [1887],
       'one-hand': [2564],
       'main hand': [2564],
-      'two-hand': [2564],
+      'two-hand': [2564, 2646],
       ranged: [2523, 664]
     }
   },
@@ -211,7 +226,7 @@ export const enchantsList = {
     cac: {
       head: [2585],
       shoulder: [2606],
-      back: [849],
+      back: [849, 2620, 2621, 910],
       chest: [1891],
       wrist: [1885],
       hands: [1887],
@@ -226,10 +241,10 @@ export const enchantsList = {
     dd: {
       head: [2588],
       shoulder: [2605],
-      back: [1888],
+      back: [1888, 2620, 2621],
       chest: [1891],
       wrist: [1883],
-      hands: [],
+      hands: [2616],
       legs: [2588],
       feet: [911],
       'one-hand': [2504],
@@ -243,10 +258,10 @@ export const enchantsList = {
     dd: {
       head: [2589],
       shoulder: [2605],
-      back: [1888],
+      back: [1888, 2620, 2621],
       chest: [1891],
       wrist: [1883],
-      hands: [],
+      hands: [2614],
       legs: [2589],
       feet: [911, 929],
       'one-hand': [2504],
@@ -256,6 +271,103 @@ export const enchantsList = {
       ranged: []
     }
   }
+}
+
+export const tokens = {
+  // Tête d'Onyxia
+  18422: [18406, 18403, 18404],
+  // Tête de Nefarian
+  19003: [19383, 19366, 19384],
+  // Etançon primordial hakkari
+  19718: [19840, 19843, 19848],
+  // Egide primordiale hakkari
+  19724: [19834, 19841, 19831],
+  // Coeur d'Hakkar
+  8183: [19948, 19950, 19949],
+  // Anneau de magistrat qiraji
+  20884: [21393, 21396, 21399, 21408, 21414],
+  // Drapé martial qiraji
+  20885: [21394, 21406, 21415, 21412],
+  // Manche à pointes qiraji
+  20886: [21395, 21404, 21392, 21401, 21398],
+  // Anneau de cérémonie qiraji
+  20888: [21411, 21417, 21405, 21402],
+  // Manche orné qiraji
+  20890: [21410, 21416, 21407, 21413],
+  // Tête d'Ossirian l'Intouché
+  21220: [21504, 21507, 21505, 21506],
+  // Diadème de Vek'nilash
+  20926: [21329, 21348, 21337, 21347],
+  // Peau intacte d'Ouro
+  20927: [21352, 21332, 21346, 21362],
+  // Manchettes de commandement qiraji
+  20928: [21350, 21359, 21365, 21349, 21367, 21333, 21330, 21361],
+  // Carapace du Dieu très ancien
+  20929: [21331, 21389, 21364, 21374, 21370],
+  // Diadème de Vek'lor
+  20930: [21387, 21353, 21360, 21372, 21366],
+  // Peau du Grand ver des sables
+  20931: [21336, 21356, 21390, 21375, 21368],
+  // Manchettes de domination qiraji
+  20932: [21335, 21354, 21373, 21344, 21355, 21338, 21376, 21391, 21388, 21345],
+  // Carcasse du Dieu très ancien
+  20933: [21334, 21343, 21357, 21351],
+  // Oeil de C'Thun
+  21221: [21712, 21710, 21709],
+  // Armes impériales qiraji
+  21232: [21242, 21272, 21244, 21269],
+  // Tenue de parade impériale qiraji
+  21237: [21273, 21275, 21268],
+  // Cuirasse désacralisée
+  22349: [22416, 22476],
+  // Tunique désacralisée
+  22350: [22488, 22425, 22436],
+  // Robe désacralisée
+  22351: [22512, 22496, 22504],
+  // Cuissots désacralisés
+  22352: [22417, 22477],
+  // Heaume désacralisé
+  22353: [22418, 22478],
+  // Espauliers désacralisés
+  22354: [22419, 22479],
+  // Brassards désacralisées
+  22355: [22423, 22483],
+  // Sangle désacralisée
+  22356: [22482, 22422],
+  // Gantelets désacralisés
+  22357: [22421, 22481],
+  // Solerets désacralisés
+  22358: [22480, 22420],
+  // Cuissards désacralisés
+  22359: [22489, 22427, 22437],
+  // Couvre-chef désacralisé
+  22360: [22490, 22428, 22438],
+  // Spallières désacralisées
+  22361: [22467, 22491, 22429, 22439],
+  // Protège-poignets désacralisés
+  22362: [22495, 22424, 22443],
+  // Ceinturon désacralisé
+  22363: [22494, 22431, 22442],
+  // Garde-mains désacralisés
+  22364: [22493, 22426, 22441],
+  // Bottes désacralisées
+  22365: [22492, 22430, 22440],
+  // Jambières désacralisées
+  22366: [22513, 22497, 22505],
+  // Diadème désacralisé
+  22367: [22514, 22498, 22506],
+  // Protège-épaules désacralisés
+  22368: [22515, 22499, 22507],
+  // Manchettes désacralisées
+  22369: [22519, 22503, 22511],
+  // Ceinture désacralisée
+  22370: [22518, 22502, 22510],
+  // Gants désacralisés
+  22371: [22517, 22501, 22509],
+  // Sandales désacralisées
+  22372: [22516, 22500, 22508],
+  // Le phylactère of Kel'Thuzad
+  22520: [23206, 23207]
 }
 
 export const enchantToSpell = {

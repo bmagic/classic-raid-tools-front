@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 class PresencesList extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { instance: 'aq40' }
+    this.state = { instance: 'bwl+aq40', filter: ''}
   }
 
   componentDidMount () {
@@ -21,9 +21,10 @@ class PresencesList extends React.Component {
   }
 
   render () {
-    const { instance } = this.state
+    const { instance, filter } = this.state
     const { presences,presencesUsers,user } = this.props
     const usersList = {}
+    const charactersList = {}
     const raidsList = {}
     const presencesList = {}
     const raids = []
@@ -36,6 +37,10 @@ class PresencesList extends React.Component {
       }
       if (presence.userId && presence.userId._id) {
         usersList[presence.userId._id] = presence.userId
+
+        if(presence.characterId && presence.characterId.main){
+          charactersList[presence.userId._id] = presence.characterId
+        }
 
         if (presencesList[presence.userId._id] === undefined) { presencesList[presence.userId._id] = {} }
         presencesList[presence.userId._id][presence.reportId] = presence
@@ -73,14 +78,25 @@ class PresencesList extends React.Component {
         <div className='field'>
           <div className="select is-small" value={instance} onChange={(e) => this.onInstanceChange(e.target.value)}>
             <select>
+              <option value='bwl+aq40'>BWL + AQ40</option>
               <option value='aq40'>Temple of Ahn'Qiraj</option>
               <option value='aq20'>Ruins of Ahn'Qiraj</option>
               <option value='bwl'>Black Wing Lair</option>
-              <option value='bwl+aq40'>BWL + AQ40</option>
               <option value='zg'>{'Zul\'Gurub'}</option>
               <option value='mc'>Molten Core</option>
               <option value='onyxia'>Onyxia</option>
               <option value=''>Tous les raids</option>
+            </select>
+          </div>
+        </div>
+        <div className='field'>
+          <div className="select is-small" >
+            <select value={filter} onChange={(e) => this.setState({filter:e.target.value})}>
+              <option value=''>Tous</option>
+              <option value='tank'>Tank</option>
+              <option value='cac'>CaC</option>
+              <option value='dd'>DD</option>
+              <option value='heal'>Heal</option>
             </select>
           </div>
         </div>
@@ -106,6 +122,8 @@ class PresencesList extends React.Component {
                 const key = array[0]
                 if(!(usersList[key]?.roles?.includes('member')) && !(usersList[key]?.roles?.includes('apply')) && !(usersList[key]?.roles?.includes('casu'))) return null
 
+                if(filter!== '' && charactersList[key] === undefined) return null
+                if (filter!== '' && filter!==charactersList[key].spec) return null
                 return (
                   <tr key={key}>
                     <td className='is-size-7'>
