@@ -59,7 +59,7 @@ const Home = () => {
           </div>
           <div className='column is-4'>
             <div className='box has-background-success'>
-              <a href='https://discord.gg/j6pCmfC'>
+              <a href='https://discord.gg/weFYE6f'>
                 <div className='level'>
                   <div className='level-item'>
                     <i className='fab fa-discord'/>&nbsp;Rejoignez notre serveur discord
