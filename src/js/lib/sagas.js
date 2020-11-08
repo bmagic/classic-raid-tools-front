@@ -201,6 +201,15 @@ function * getAvailabilities () {
 function * getLastItems () {
   yield * request('GET', '/v1/items/last', [{ type: 'GET_LAST_ITEMS_SUCCESS' }])
 }
+
+function * importProfessionData (action) {
+  yield * request('POST', '/v1/professions/import', [{ type: 'GET_PROFESSION_DATA', profession: action.profession }], { data: action.data })
+}
+
+function * getProfessionData (action) {
+  yield * request('GET', `/v1/professions/${action.profession}`, [{ type: 'GET_PROFESSION_DATA_SUCCESS' }], { data: action.data })
+}
+
 function * request (type, url, actions, body) {
   try {
     let result
@@ -291,4 +300,6 @@ export default function * rootSaga () {
   yield takeLeading('SET_AVAILABILITY', setAvailability)
   yield takeLeading('GET_AVAILABILITIES', getAvailabilities)
   yield takeLeading('GET_LAST_ITEMS', getLastItems)
+  yield takeLeading('IMPORT_PROFESSION_DATA', importProfessionData)
+  yield takeLatest('GET_PROFESSION_DATA', getProfessionData)
 }

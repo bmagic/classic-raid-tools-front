@@ -32,7 +32,8 @@ const initialState = {
   lootsNeeds: [],
   userAvailabilities: null,
   availabilities: [],
-  lastItems: []
+  lastItems: [],
+  professionData: { list: [], characterNames: [] }
 }
 
 const reducer = (state = initialState, action) => {
@@ -253,6 +254,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         lastItems: action.result
+      }
+    }
+    case ('GET_PROFESSION_DATA_SUCCESS'): {
+      return {
+        ...state,
+        professionData: action.result
       }
     }
 

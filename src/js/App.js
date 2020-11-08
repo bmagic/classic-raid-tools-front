@@ -23,6 +23,7 @@ import Loots from './pages/Loots'
 import LootsSummary from './pages/LootsSummary'
 import AdminAvailabilitites from './pages/AdminAvailabilities'
 import Raids from './pages/Raids'
+import Professions from './pages/Professions'
 
 const App = () => {
   moment.locale('fr')
@@ -43,11 +44,11 @@ const App = () => {
         <PrivateRoute exact path="/loots-summary" roles={['member']} component={LootsSummary}/>
         <PrivateRoute exact path="/bank" roles={['member', 'apply', 'casu']} component={Bank}/>
         <PrivateRoute exact path="/debriefs" roles={['member', 'apply', 'casu']} component={EnchantsAnalyzer}/>
+        <PrivateRoute exact path='/professions' roles={['member', 'apply', 'casu']} component={Professions}/>
         <PrivateRoute exact path="/presences" roles={['member', 'apply', 'casu']} component={Presences}/>
         <PrivateRoute exact path='/raid/:id' roles={['member', 'apply', 'casu', 'guest']} component={Raid}/>
         <PrivateRoute exact path='/admin/users' roles={['admin']} component={AdminUsers}/>
         <PrivateRoute exact path='/admin/availabilities' roles={['admin']} component={AdminAvailabilitites}/>
-
         <Route exact path='/reset' component={Logout} />
         <Route component={E404} />
       </Switch>
