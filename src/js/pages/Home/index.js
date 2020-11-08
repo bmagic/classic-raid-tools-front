@@ -23,7 +23,7 @@ const Home = () => {
           <div className='column is-3'>
             <div className='has-text-centered'>
               <WowRaidImage instance='aq40' />
-              <div className='is-size-5 has-text-success'>9/9 en 1h39m07s</div>
+              <div className='is-size-5 has-text-success'>9/9 en 1h30m37s</div>
             </div>
           </div>
           <div className='column is-3'>
