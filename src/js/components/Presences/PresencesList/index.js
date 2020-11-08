@@ -28,9 +28,16 @@ class PresencesList extends React.Component {
     const raidsList = {}
     const presencesList = {}
     const raids = []
+    const raidsWeight={}
 
 
     for (const presence of presences) {
+      if(raidsWeight[moment(presence.date).format('L')]===undefined) {
+        raidsWeight[moment(presence.date).format('L')]=[presence.reportId]
+      }else{
+        if(!raidsWeight[moment(presence.date).format('L')].includes(presence.reportId))
+          raidsWeight[moment(presence.date).format('L')].push(presence.reportId)
+      }
       if (!raids.includes(presence.reportId)) {
         raids.push(presence.reportId)
         raidsList[presence.reportId] = presence
@@ -60,11 +67,13 @@ class PresencesList extends React.Component {
       let count = 0
       let total = 0
       for (const tmpRaid of tmpRaids) {
+
+        const raidWeight = 1 / (raidsWeight[moment(raidsList[tmpRaid].date).format('L')].length)
         if (presencesList[key][tmpRaid]) {
-          count++
-          total++
+          count = count + raidWeight
+          total = total + raidWeight
         } else {
-          if (total !== 0) { total++ }
+          if (total !== 0) { total = total + raidWeight }
         }
       }
       userPercent[key] = isNaN(count / total)? 0 : count / total
