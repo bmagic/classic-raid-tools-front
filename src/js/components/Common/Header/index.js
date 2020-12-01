@@ -47,6 +47,7 @@ class Header extends React.Component {
                     <Link to="/presences" className="navbar-item">Présences</Link>
                     <Link to="/characters-comparator" className="navbar-item">Comparateur de personnages</Link>
                     <Link to="/debriefs" className="navbar-item">Raids debriefings</Link>
+                    <Link to="/stats" className="navbar-item">Boss Kill Count</Link>
                     <a className='navbar-item' target='_blank' rel='noopener noreferrer' href='https://www.raidcalendar.com/'><i className="fas fa-external-link-alt"/>&nbsp;Raid Calendar</a>
                     <a className='navbar-item' target='_blank' rel='noopener noreferrer' href='https://classic.warcraftlogs.com/guild/eu/sulfuron/owls'><i className="fas fa-external-link-alt"/>&nbsp;Warcraft logs</a>
                     <a className='navbar-item' target='_blank' rel='noopener noreferrer' href='https://nexushub.co/wow-classic/sulfuron-horde'><i className="fas fa-external-link-alt"/>&nbsp;Prix HV</a>

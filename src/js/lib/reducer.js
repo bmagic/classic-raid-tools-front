@@ -33,7 +33,8 @@ const initialState = {
   userAvailabilities: null,
   availabilities: [],
   lastItems: [],
-  professionData: { list: [], characterNames: [] }
+  professionData: { list: [], characterNames: [] },
+  instanceStats: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -260,6 +261,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         professionData: action.result
+      }
+    }
+    case ('GET_INSTANCE_STATS_SUCCESS'): {
+      return {
+        ...state,
+        instanceStats: action.result
       }
     }
 

@@ -6,9 +6,9 @@ import moment from 'moment'
 import { enchantToSpell, wowClass } from '../../lib/wow'
 import { Link } from 'react-router-dom'
 import Spell from '../Common/Spell'
+const queryString = require('query-string')
 
 import './styles.scss'
-const queryString = require('query-string')
 
 class CharactersComparatorTable extends React.Component {
   constructor (props) {

@@ -24,6 +24,7 @@ import LootsSummary from './pages/LootsSummary'
 import AdminAvailabilitites from './pages/AdminAvailabilities'
 import Raids from './pages/Raids'
 import Professions from './pages/Professions'
+import InstanceStats from './pages/InstanceStats'
 
 const App = () => {
   moment.locale('fr')
@@ -46,6 +47,7 @@ const App = () => {
         <PrivateRoute exact path="/debriefs" roles={['member', 'apply', 'casu']} component={EnchantsAnalyzer}/>
         <PrivateRoute exact path='/professions' roles={['member', 'apply', 'casu']} component={Professions}/>
         <PrivateRoute exact path="/presences" roles={['member', 'apply', 'casu']} component={Presences}/>
+        <PrivateRoute exact path="/stats" roles={['member', 'apply', 'casu']} component={InstanceStats}/>
         <PrivateRoute exact path='/raid/:id' roles={['member', 'apply', 'casu', 'guest']} component={Raid}/>
         <PrivateRoute exact path='/admin/users' roles={['admin']} component={AdminUsers}/>
         <PrivateRoute exact path='/admin/availabilities' roles={['admin']} component={AdminAvailabilitites}/>

@@ -210,6 +210,10 @@ function * getProfessionData (action) {
   yield * request('GET', `/v1/professions/${action.profession}`, [{ type: 'GET_PROFESSION_DATA_SUCCESS' }], { data: action.data })
 }
 
+function * getInstanceStats (action) {
+  yield * request('GET', '/v1/presences/stats', [{ type: 'GET_INSTANCE_STATS_SUCCESS' }])
+}
+
 function * request (type, url, actions, body) {
   try {
     let result
@@ -302,4 +306,5 @@ export default function * rootSaga () {
   yield takeLeading('GET_LAST_ITEMS', getLastItems)
   yield takeLeading('IMPORT_PROFESSION_DATA', importProfessionData)
   yield takeLatest('GET_PROFESSION_DATA', getProfessionData)
+  yield takeLatest('GET_INSTANCE_STATS', getInstanceStats)
 }

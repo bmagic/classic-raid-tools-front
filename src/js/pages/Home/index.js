@@ -17,13 +17,13 @@ const Home = () => {
           <div className='column is-3'>
             <div className='has-text-centered'>
               <WowRaidImage instance='bwl' />
-              <div className='is-size-5 has-text-success'>8/8 en 48m05s</div>
+              <div className='is-size-5 has-text-success'>8/8 en 45m57s</div>
             </div>
           </div>
           <div className='column is-3'>
             <div className='has-text-centered'>
               <WowRaidImage instance='aq40' />
-              <div className='is-size-5 has-text-success'>9/9 en 1h22m41s</div>
+              <div className='is-size-5 has-text-success'>9/9 en 1h19m07s</div>
             </div>
           </div>
           <div className='column is-3'>

@@ -4,15 +4,28 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import './styles.scss'
 import { Link } from 'react-router-dom'
+import { wowClass } from '../../../lib/wow'
+const queryString = require('query-string')
 
 class PresencesList extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { instance: 'bwl+aq40', filter: ''}
+    this.state = { instance: 'bwl+aq40',  spec: '', wClass: ''}
   }
 
   componentDidMount () {
-    this.props.dispatch({ type: 'GET_PRESENCES', instance: this.state.instance })
+    const hash = queryString.parse(location.hash)
+    const wClass = hash.class || this.state.wClass
+    const spec = hash.spec || this.state.spec
+    const instance = hash.instance || this.state.instance
+
+    this.setState({ spec: spec, wClass: wClass, instance:instance })
+    this.props.dispatch({ type: 'GET_PRESENCES', instance: instance })
+  }
+
+  componentDidUpdate (prevProps, prevState, snapshot) {
+    const hash = queryString.stringify({ spec: this.state.spec, class: this.state.wClass, instance: this.state.instance })
+    location.hash = hash
   }
 
   onInstanceChange (instance) {
@@ -21,7 +34,7 @@ class PresencesList extends React.Component {
   }
 
   render () {
-    const { instance, filter } = this.state
+    const { instance, spec, wClass } = this.state
     const { presences,presencesUsers,user } = this.props
     const usersList = {}
     const charactersList = {}
@@ -98,16 +111,36 @@ class PresencesList extends React.Component {
             </select>
           </div>
         </div>
-        <div className='field'>
-          <div className="select is-small" >
-            <select value={filter} onChange={(e) => this.setState({filter:e.target.value})}>
-              <option value=''>Tous</option>
-              <option value='tank'>Tank</option>
-              <option value='cac'>CaC</option>
-              <option value='dd'>DD</option>
-              <option value='heal'>Heal</option>
-            </select>
+        <div className='field  is-grouped'>
+          <div className='control'>
+            <div className="select">
+              <select value={spec} onChange={(e) => { this.setState({ spec: e.target.value, wClass: '' }) }}>
+                <option value=''>All</option>
+                <option>tank</option>
+                <option>heal</option>
+                <option>dd</option>
+                <option>cac</option>
+              </select>
+            </div>
           </div>
+          <div className='control'>
+            <div className="select">
+              <select value={wClass} onChange={(e) => { this.setState({ wClass: e.target.value }) }}>
+                <option></option>
+                {Object.keys(wowClass).map((key, index) => {
+                  if (wowClass[key][spec] || spec === '') {
+                    return (
+                      <option key={index}>{key}</option>
+                    )
+                  } else {
+                    return null
+                  }
+                })
+                }
+              </select>
+            </div>
+          </div>
+
         </div>
         <div className="table-container">
 
@@ -131,8 +164,12 @@ class PresencesList extends React.Component {
                 const key = array[0]
                 if(!(usersList[key]?.roles?.includes('member')) && !(usersList[key]?.roles?.includes('apply')) && !(usersList[key]?.roles?.includes('casu'))) return null
 
-                if(filter!== '' && charactersList[key] === undefined) return null
-                if (filter!== '' && filter!==charactersList[key].spec) return null
+                if(spec!== '' && charactersList[key] === undefined) return null
+                if(wClass!== '' && charactersList[key] === undefined) return null
+
+                if (spec!== '' && spec!==charactersList[key].spec) return null
+                if (wClass!== '' && wClass!==charactersList[key].class) return null
+
                 return (
                   <tr key={key}>
                     <td className='is-size-7'>
