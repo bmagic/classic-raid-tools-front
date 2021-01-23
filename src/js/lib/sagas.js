@@ -1,5 +1,6 @@
 import { takeLeading, takeEvery, takeLatest, put } from 'redux-saga/effects'
 import { deleteUrl, getUrl, postUrl, putUrl } from './request'
+import { hideLoading, showLoading } from 'react-redux-loading-bar'
 
 function * login (action) {
   yield * request('GET', `/v1/oauth/discord?code=${action.code}`, [{ type: 'GET_USER' }])
@@ -217,6 +218,7 @@ function * getInstanceStats (action) {
 function * request (type, url, actions, body) {
   try {
     let result
+    //yield put(showLoading())
     switch (type) {
       case 'GET':
         result = yield getUrl(`${process.env.BACKEND_URL}${url}`)
@@ -246,6 +248,8 @@ function * request (type, url, actions, body) {
     } else {
       yield put({ type: 'ADD_ERROR', error: e.response ? e.response.data : e.message })
     }
+  } finally {
+    //yield put(hideLoading())
   }
 }
 

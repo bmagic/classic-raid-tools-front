@@ -4,6 +4,7 @@ import LogoutButton from '../../Menu/LogoutButton'
 import AdminMenu from '../../Menu/AdminMenu'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import LoadingBar from 'react-redux-loading-bar'
 
 class Header extends React.Component {
   constructor (props) {
@@ -36,7 +37,7 @@ class Header extends React.Component {
               <div className="navbar-start">
                 {user && (user.roles.includes('member') || user.roles.includes('apply') || user.roles.includes('casu') || user.roles.includes('guest')) && <Link to="/raids" className="navbar-item">Raids</Link>}
                 <Link to="/roster" className='navbar-item'>Roster</Link>
-                {user && user.roles.includes('member') && <Link to="/loots#instance=aq40" className="navbar-item">Loots</Link>}
+                {user && user.roles.includes('member') && <Link to="/loots#instance=naxxramas" className="navbar-item">Loots</Link>}
                 {user && (user.roles.includes('member') || user.roles.includes('casu')) && <Link to="/bank" className="navbar-item">Banque de guilde</Link>}
                 {user && user.roles && (user.roles.includes('member') || user.roles.includes('apply') || user.roles.includes('casu')) && <Link to="/professions" className="navbar-item">Professions</Link>}
                 {user && user.roles && (user.roles.includes('member') || user.roles.includes('apply') || user.roles.includes('casu')) && <div className='navbar-item has-dropdown is-hoverable'>
@@ -65,6 +66,7 @@ class Header extends React.Component {
             </div>
           </div>
         </nav>
+        {/*<LoadingBar style={{ backgroundColor: '#36b37e', height: '3px' }} />*/}
       </header>
     )
   }

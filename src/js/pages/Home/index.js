@@ -29,7 +29,7 @@ const Home = () => {
           <div className='column is-3'>
             <div className='has-text-centered'>
               <WowRaidImage instance='naxxramas' />
-              <div className='is-size-5 has-text-warning'>0/15 en attente de P6</div>
+              <div className='is-size-5 has-text-warning'>14/15</div>
             </div>
           </div>
         </div>
@@ -38,14 +38,14 @@ const Home = () => {
             <div className='box'>
               <h2 className='title'>Qui sommes nous ?</h2>
               <p className='content '>
-            OWLS est une guilde WoW Classic sur le serveur Sulfuron, nous avons pour objectif de nettoyer le contenu raid PvE de WoW Classic dans son intégralité, de manière sereine et efficace.
+            OWLS est une guilde WoW Classic sur le serveur Sulfuron, nous avons pour objectif de nettoyer le contenu raid PvE de WoW Classic dans son intégralité, de manière sereine et efficace mais sans speedrun.
             Pour cela, nous demandons à nos membres du roster un investissement conséquent dans les raids du palier actuel afin d'assurer des performances correctes.
               </p>
             </div>
             <div className='box'>
               <h2 className='title'>Jours de raids</h2>
               <p className='content '>
-            Nous raidons le Mercredi et le Dimanche soir (AQ40 + BWL + MC) à partir de 21h.<br/>
+            Nous raidons le Mercredi, le Dimanche et le Mardi soir (Naxxarams + AQ40 + BWL + MC) à partir de 21h.<br/>
             Des raids ZG & AQ20 optionnels sont également proposés dans la semaine.<br/>
               </p>
             </div>
