@@ -29,7 +29,7 @@ const Home = () => {
           <div className='column is-3'>
             <div className='has-text-centered'>
               <WowRaidImage instance='naxxramas' />
-              <div className='is-size-5 has-text-warning'>14/15</div>
+              <div className='is-size-5 has-text-success'>15/15</div>
             </div>
           </div>
         </div>
@@ -45,8 +45,8 @@ const Home = () => {
             <div className='box'>
               <h2 className='title'>Jours de raids</h2>
               <p className='content '>
-            Nous raidons le Mercredi, le Dimanche et le Mardi soir (Naxxarams + AQ40 + BWL + MC) à partir de 21h.<br/>
-            Des raids ZG & AQ20 optionnels sont également proposés dans la semaine.<br/>
+            Nous raidons à Naxxramas le Mercredi et le Dimanche à partir de 21h.<br/>
+            Des raids AQ40 / BWL / ZG / AQ20 optionnels sont également proposés dans la semaine avec des PU.<br/>
               </p>
             </div>
             <div className='box'>
