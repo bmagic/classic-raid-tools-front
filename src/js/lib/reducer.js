@@ -34,7 +34,8 @@ const initialState = {
   availabilities: [],
   lastItems: [],
   professionData: { list: [], characterNames: [] },
-  instanceStats: []
+  instanceStats: [],
+  attendances: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -269,7 +270,12 @@ const reducer = (state = initialState, action) => {
         instanceStats: action.result
       }
     }
-
+    case ('GET_ATTENDANCES_SUCCESS'): {
+      return {
+        ...state,
+        attendances: action.result
+      }
+    }
     default:
       return state
   }

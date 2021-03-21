@@ -214,11 +214,14 @@ function * getProfessionData (action) {
 function * getInstanceStats (action) {
   yield * request('GET', '/v1/presences/stats', [{ type: 'GET_INSTANCE_STATS_SUCCESS' }])
 }
+function * getAttendances (action) {
+  yield * request('GET', '/v1/attendances', [{ type: 'GET_ATTENDANCES_SUCCESS' }])
+}
 
 function * request (type, url, actions, body) {
   try {
     let result
-    //yield put(showLoading())
+    // yield put(showLoading())
     switch (type) {
       case 'GET':
         result = yield getUrl(`${process.env.BACKEND_URL}${url}`)
@@ -249,7 +252,7 @@ function * request (type, url, actions, body) {
       yield put({ type: 'ADD_ERROR', error: e.response ? e.response.data : e.message })
     }
   } finally {
-    //yield put(hideLoading())
+    // yield put(hideLoading())
   }
 }
 
@@ -311,4 +314,5 @@ export default function * rootSaga () {
   yield takeLeading('IMPORT_PROFESSION_DATA', importProfessionData)
   yield takeLatest('GET_PROFESSION_DATA', getProfessionData)
   yield takeLatest('GET_INSTANCE_STATS', getInstanceStats)
+  yield takeLatest('GET_ATTENDANCES', getAttendances)
 }

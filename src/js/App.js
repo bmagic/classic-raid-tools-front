@@ -24,7 +24,7 @@ import LootsSummary from './pages/LootsSummary'
 import AdminAvailabilitites from './pages/AdminAvailabilities'
 import Raids from './pages/Raids'
 import Professions from './pages/Professions'
-import InstanceStats from './pages/InstanceStats'
+import Attendance from './pages/Attendance'
 
 const App = () => {
   moment.locale('fr')
@@ -34,6 +34,8 @@ const App = () => {
         <Route path="/auth-discord"><AuthRedirect/></Route>
         <Route exact path='/' component={Home} />
         <Route exact path='/roster' component={Roster}/>
+        <Route exact path='/attendance' component={Attendance}/>
+
         <Route exact path="/character/:name" component={Character}/>
         <PrivateRoute exact path="/characters-comparator" roles={['member', 'apply', 'casu']} component={CharactersComparator}/>
         <PrivateRoute exact path="/raids/all" component={Raids}/>
@@ -47,7 +49,6 @@ const App = () => {
         <PrivateRoute exact path="/debriefs" roles={['member', 'apply', 'casu']} component={EnchantsAnalyzer}/>
         <PrivateRoute exact path='/professions' roles={['member', 'apply', 'casu']} component={Professions}/>
         <PrivateRoute exact path="/presences" roles={['member', 'apply', 'casu']} component={Presences}/>
-        <PrivateRoute exact path="/stats" roles={['member', 'apply', 'casu']} component={InstanceStats}/>
         <PrivateRoute exact path='/raid/:id' roles={['member', 'apply', 'casu', 'guest']} component={Raid}/>
         <PrivateRoute exact path='/admin/users' roles={['admin']} component={AdminUsers}/>
         <PrivateRoute exact path='/admin/availabilities' roles={['admin']} component={AdminAvailabilitites}/>
