@@ -1,11 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Layout from '../../components/Common/Layout'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import WowClassImage from '../../components/Common/WowClassImage'
 
 import './styles.scss'
-import { wowClass } from '../../lib/wow'
 
 class AdminUsers extends React.Component {
   componentDidMount () {
@@ -21,12 +20,8 @@ class AdminUsers extends React.Component {
     this.props.dispatch({ type: 'UPDATE_ROLES', roles: roles, id: id })
   }
 
-  onMdCChange (id, mdc) {
-    this.props.dispatch({ type: 'UPDATE_MDC', mdc: mdc, id: id })
-  }
-
   render () {
-    const roles = ['admin', 'modify_raid', 'banker', 'member', 'apply', 'casu', 'guest']
+    const roles = ['admin', 'banker', 'member', 'casu']
     const { users } = this.props
     if (users === null) return <div>Loading</div>
     return (
@@ -39,7 +34,6 @@ class AdminUsers extends React.Component {
                 <th>Username</th>
                 <th>Email</th>
                 <th>Characters</th>
-                <th>MdC</th>
                 {roles.map((role, index) => {
                   return (
                     <th key={index}>
@@ -64,24 +58,6 @@ class AdminUsers extends React.Component {
                           </span>
                         )
                       })}
-                    </td>
-                    <td>
-                      <div className="select is-small" >
-                        <select onChange={(e) => this.onMdCChange(user._id, e.target.value)} value={user.mdc}>
-                          <option value=''>Pas un MDC</option>
-                          {Object.keys(wowClass).map((wClass) => {
-                            return (
-                              <Fragment key={wClass}>
-                                {Object.keys(wowClass[wClass]).map((spec) => {
-                                  return (
-                                    <option key={`${wClass}-${spec}`} value={`${wClass}-${spec}`}>{wClass} {spec}</option>
-                                  )
-                                })}
-                              </Fragment>
-                            )
-                          })}
-                        </select>
-                      </div>
                     </td>
                     {roles.map((role, index) => {
                       return (

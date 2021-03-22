@@ -2,6 +2,7 @@
 FROM node:alpine AS builder
 
 WORKDIR /usr/src/client
+RUN apk --no-cache add pkgconfig autoconf automake libtool nasm build-base zlib-dev python
 
 COPY . .
 RUN npm install

@@ -3,15 +3,7 @@ const initialState = {
   errors: [],
   user: null,
   userCharacters: [],
-  userLootsNeeds: [],
   users: [],
-  nextRaids: [],
-  raids: [],
-  raid: null,
-  registrations: {},
-  missingRegistrations: [],
-  registrationLogs: [],
-  raidTab: 'infos',
   roster: [],
   displayBankModal: false,
   bankItems: [],
@@ -27,14 +19,8 @@ const initialState = {
   charactersComparatorData: {},
   debriefRaids: [],
   debrief: {},
-  loot: null,
-  loots: [],
-  lootsNeeds: [],
-  userAvailabilities: null,
-  availabilities: [],
   lastItems: [],
   professionData: { list: [], characterNames: [] },
-  instanceStats: [],
   attendances: []
 }
 
@@ -67,45 +53,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         users: action.result
       }
-    case 'GET_NEXT_RAIDS_SUCCESS':
-      return {
-        ...state,
-        nextRaids: action.result
-      }
-    case 'GET_RAIDS_SUCCESS':
-      return {
-        ...state,
-        raids: action.result
-      }
-    case 'GET_RAID_SUCCESS':
-      return {
-        ...state,
-        raid: action.result
-      }
-    case 'GET_REGISTRATIONS_SUCCESS': {
-      const registrations = Object.assign({}, state.registrations)
-      registrations[action.raidId] = action.result
-      return {
-        ...state,
-        registrations: registrations
-      }
-    }
-    case 'GET_MISSING_REGISTRATIONS_SUCCESS': {
-      return {
-        ...state,
-        missingRegistrations: action.result
-      }
-    }
-    case 'GET_REGISTRATION_LOGS_SUCCESS':
-      return {
-        ...state,
-        registrationLogs: action.result
-      }
-    case 'CHANGE_RAID_TAB':
-      return {
-        ...state,
-        raidTab: action.raidTab
-      }
+
     case 'GET_ROSTER_SUCCESS':
       return {
         ...state,
@@ -215,43 +163,7 @@ const reducer = (state = initialState, action) => {
         debrief: action.result
       }
     }
-    case 'GET_LOOTS_SUCCESS': {
-      return {
-        ...state,
-        loots: action.result
-      }
-    }
-    case 'SET_LOOT': {
-      return {
-        ...state,
-        loot: action.loot
-      }
-    }
 
-    case 'GET_LOOTS_NEEDS_SUCCESS': {
-      return {
-        ...state,
-        lootsNeeds: action.result
-      }
-    }
-    case ('GET_USER_LOOTS_NEEDS_SUCCESS'): {
-      return {
-        ...state,
-        userLootsNeeds: action.result
-      }
-    }
-    case ('GET_USER_AVAILABILITIES_SUCCESS'): {
-      return {
-        ...state,
-        userAvailabilities: action.result
-      }
-    }
-    case ('GET_AVAILABILITIES_SUCCESS'): {
-      return {
-        ...state,
-        availabilities: action.result
-      }
-    }
     case ('GET_LAST_ITEMS_SUCCESS'): {
       return {
         ...state,
@@ -264,12 +176,7 @@ const reducer = (state = initialState, action) => {
         professionData: action.result
       }
     }
-    case ('GET_INSTANCE_STATS_SUCCESS'): {
-      return {
-        ...state,
-        instanceStats: action.result
-      }
-    }
+
     case ('GET_ATTENDANCES_SUCCESS'): {
       return {
         ...state,

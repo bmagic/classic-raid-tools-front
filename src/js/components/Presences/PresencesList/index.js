@@ -10,7 +10,7 @@ const queryString = require('query-string')
 class PresencesList extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { instance: 'naxxramas+bwl+aq40',  spec: '', wClass: ''}
+    this.state = { instance: 'naxxramas', spec: '', wClass: '' }
   }
 
   componentDidMount () {
@@ -19,7 +19,7 @@ class PresencesList extends React.Component {
     const spec = hash.spec || this.state.spec
     const instance = hash.instance || this.state.instance
 
-    this.setState({ spec: spec, wClass: wClass, instance:instance })
+    this.setState({ spec: spec, wClass: wClass, instance: instance })
     this.props.dispatch({ type: 'GET_PRESENCES', instance: instance })
   }
 
@@ -35,21 +35,19 @@ class PresencesList extends React.Component {
 
   render () {
     const { instance, spec, wClass } = this.state
-    const { presences,presencesUsers,user } = this.props
+    const { presences, presencesUsers, user } = this.props
     const usersList = {}
     const charactersList = {}
     const raidsList = {}
     const presencesList = {}
     const raids = []
-    const raidsWeight={}
-
+    const raidsWeight = {}
 
     for (const presence of presences) {
-      if(raidsWeight[moment(presence.date).format('L')]===undefined) {
-        raidsWeight[moment(presence.date).format('L')]=[presence.reportId]
-      }else{
-        if(!raidsWeight[moment(presence.date).format('L')].includes(presence.reportId))
-          raidsWeight[moment(presence.date).format('L')].push(presence.reportId)
+      if (raidsWeight[moment(presence.date).format('L')] === undefined) {
+        raidsWeight[moment(presence.date).format('L')] = [presence.reportId]
+      } else {
+        if (!raidsWeight[moment(presence.date).format('L')].includes(presence.reportId)) { raidsWeight[moment(presence.date).format('L')].push(presence.reportId) }
       }
       if (!raids.includes(presence.reportId)) {
         raids.push(presence.reportId)
@@ -58,7 +56,7 @@ class PresencesList extends React.Component {
       if (presence.userId && presence.userId._id) {
         usersList[presence.userId._id] = presence.userId
 
-        if(presence.characterId && presence.characterId.main){
+        if (presence.characterId && presence.characterId.main) {
           charactersList[presence.userId._id] = presence.characterId
         }
 
@@ -66,11 +64,10 @@ class PresencesList extends React.Component {
         presencesList[presence.userId._id][presence.reportId] = presence
       }
     }
-    for (const presencesUser of presencesUsers){
-      if(presencesList[presencesUser._id]===undefined){
-
+    for (const presencesUser of presencesUsers) {
+      if (presencesList[presencesUser._id] === undefined) {
         usersList[presencesUser._id] = presencesUser
-        presencesList[presencesUser._id]={}
+        presencesList[presencesUser._id] = {}
       }
     }
 
@@ -80,7 +77,6 @@ class PresencesList extends React.Component {
       let count = 0
       let total = 0
       for (const tmpRaid of tmpRaids) {
-
         const raidWeight = 1 / (raidsWeight[moment(raidsList[tmpRaid].date).format('L')].length)
         if (presencesList[key][tmpRaid]) {
           count = count + raidWeight
@@ -89,11 +85,10 @@ class PresencesList extends React.Component {
           if (total !== 0) { total = total + raidWeight }
         }
       }
-      userPercent[key] = isNaN(count / total)? 0 : count / total
+      userPercent[key] = isNaN(count / total) ? 0 : count / total
     }
 
     const userPercentArray = Object.entries(userPercent).sort((a, b) => b[1] - a[1])
-
 
     return (
       <div className='presences-list'>
@@ -154,7 +149,7 @@ class PresencesList extends React.Component {
                 {raids.map((raid) => {
                   return <th className='is-size-7 has-text-centered' key={`head-${raid}`}>
                     <Link to={`/raid/${raidsList[raid]._id}`}>
-                    {(instance.indexOf('+') !== -1) && <div>{raidsList[raid].instance.substr(0,4)}</div>}
+                    {(instance.indexOf('+') !== -1) && <div>{raidsList[raid].instance.substr(0, 4)}</div>}
                     <div>{moment(raidsList[raid].date).format('DD/MM')}</div>
                     </Link>
                   </th>
@@ -164,13 +159,13 @@ class PresencesList extends React.Component {
             <tbody>
               {userPercentArray.map((array) => {
                 const key = array[0]
-                if(!(usersList[key]?.roles?.includes('member')) && !(usersList[key]?.roles?.includes('apply')) && !(usersList[key]?.roles?.includes('casu'))) return null
+                if (!(usersList[key]?.roles?.includes('member')) && !(usersList[key]?.roles?.includes('apply')) && !(usersList[key]?.roles?.includes('casu'))) return null
 
-                if(spec!== '' && charactersList[key] === undefined) return null
-                if(wClass!== '' && charactersList[key] === undefined) return null
+                if (spec !== '' && charactersList[key] === undefined) return null
+                if (wClass !== '' && charactersList[key] === undefined) return null
 
-                if (spec!== '' && spec!==charactersList[key].spec) return null
-                if (wClass!== '' && wClass!==charactersList[key].class) return null
+                if (spec !== '' && spec !== charactersList[key].spec) return null
+                if (wClass !== '' && wClass !== charactersList[key].class) return null
 
                 return (
                   <tr key={key}>
@@ -181,22 +176,20 @@ class PresencesList extends React.Component {
                     </td>
                     <td>{(userPercent[key] * 100).toFixed(0)}%</td>
                     {raids.map((raid) => {
-
-                      if (presencesList[key][raid]  && presencesList[key][raid].status==='ok') {
+                      if (presencesList[key][raid] && presencesList[key][raid].status === 'ok') {
                         return <td className='has-background-success has-text-centered' key={raid} title={presencesList[key][raid]?.characterId ? presencesList[key][raid]?.characterId?.name : 'Personnage inconnu'}>{presencesList[key][raid]?.characterId && !presencesList[key][raid]?.characterId?.main && <span className='has-text-black'>R</span>}</td>
-                      } else if(presencesList[key][raid] && presencesList[key][raid].status==='bench' ){
-                        if(user && user.roles && user.roles.includes('modify_raid')){
-                          return <td className='has-background-warning' key={raid} onClick={()=>this.props.dispatch({type:'DELETE_PRESENCE_BENCH', id: presencesList[key][raid]._id, instance:raidsList[raid].instance})}/>
-                        }else {
+                      } else if (presencesList[key][raid] && presencesList[key][raid].status === 'bench') {
+                        if (user && user.roles && user.roles.includes('modify_raid')) {
+                          return <td className='has-background-warning' key={raid} onClick={() => this.props.dispatch({ type: 'DELETE_PRESENCE_BENCH', id: presencesList[key][raid]._id, instance: raidsList[raid].instance })}/>
+                        } else {
                           return <td className='has-background-warning' key={raid}/>
                         }
-                      }else{
-                        if(user && user.roles && user.roles.includes('modify_raid')){
-                          return <td className='has-background-danger' key={raid} onClick={()=>this.props.dispatch({type:'CREATE_PRESENCE_BENCH', presence: {userId:usersList[key]._id, status:'bench', reportId:raid, date:raidsList[raid].date,instance:raidsList[raid].instance}})}/>
-                        }else {
+                      } else {
+                        if (user && user.roles && user.roles.includes('modify_raid')) {
+                          return <td className='has-background-danger' key={raid} onClick={() => this.props.dispatch({ type: 'CREATE_PRESENCE_BENCH', presence: { userId: usersList[key]._id, status: 'bench', reportId: raid, date: raidsList[raid].date, instance: raidsList[raid].instance } })}/>
+                        } else {
                           return <td className='has-background-danger' key={raid}/>
                         }
-
                       }
                     })}
 
@@ -215,14 +208,14 @@ PresencesList.propTypes = {
   dispatch: PropTypes.func,
   presences: PropTypes.array,
   presencesUsers: PropTypes.array,
-  user:PropTypes.object
+  user: PropTypes.object
 }
 
 function mapStateToProps (state) {
   return {
     presences: state.presences,
     presencesUsers: state.presencesUsers,
-    user:state.user
+    user: state.user
   }
 }
 export default connect(mapStateToProps)(PresencesList)

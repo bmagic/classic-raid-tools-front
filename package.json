@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "docker": "docker build -t bmagic/classic-raid-tools-front:latest .;docker push  bmagic/classic-raid-tools-front:latest"
+    "docker": "docker buildx build --platform linux/arm64 -t bmagic/classic-raid-tools-front:latest .;docker push  bmagic/classic-raid-tools-front:latest"
   },
   "keywords": [],
   "author": "Bmagic <baptiste@bmagic.fr>",
