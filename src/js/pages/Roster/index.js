@@ -20,9 +20,9 @@ class Roster extends React.Component {
           </ul>
         </div>
 
-        {tab === 'main' && <RosterList main={true} roles={['member', 'apply']}/>}
+        {tab === 'main' && <RosterList main={true} roles={['member']}/>}
         {tab === 'casu' && <RosterList main={true} roles={['casu']}/> }
-        {tab === 'reroll' && <RosterList main={false} roles={['member', 'apply', 'casu']}/> }
+        {tab === 'reroll' && <RosterList main={false} roles={['member', 'casu']}/> }
 
       </Layout>
     )

@@ -14,7 +14,6 @@ class User extends React.Component {
 
   componentDidMount () {
     this.props.dispatch({ type: 'GET_USER' })
-    this.props.dispatch({ type: 'GET_USER_AVAILABILITIES' })
 
     const { username, email } = this.props.user
 

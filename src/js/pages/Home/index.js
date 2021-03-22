@@ -29,30 +29,32 @@ const Home = () => {
           <div className='column is-3'>
             <div className='has-text-centered'>
               <WowRaidImage instance='naxxramas' />
-              <div className='is-size-5 has-text-success'>15/15</div>
+              <div className='is-size-5 has-text-success'>15/15 en 3h38m07s</div>
             </div>
           </div>
         </div>
         <div className='columns'>
           <div className='column is-8'>
             <div className='box'>
-              <h2 className='title'>Qui sommes nous ?</h2>
+              <h2 className='title '>Qui sommes nous ?</h2>
               <p className='content '>
-            OWLS est une guilde WoW Classic sur le serveur Sulfuron, nous avons pour objectif de nettoyer le contenu raid PvE de WoW Classic dans son intégralité, de manière sereine et efficace mais sans speedrun.
-            Pour cela, nous demandons à nos membres du roster un investissement conséquent dans les raids du palier actuel afin d'assurer des performances correctes.
+                <strong className='has-text-white'>Notre guilde</strong> a pour objectif de nettoyer le contenu raid PvE de WoW Classic dans son intégralité, de manière sereine, efficace et dans une bonne ambiance.
+              </p>
+              <p className='content '>
+                <strong className='has-text-white'>Nous demandons  à nos membres</strong> un investissement conséquent dans les raids du palier actuel afin d'assurer des performances correctes : Consommables et World Buff.
+              </p>
+              <p className='content '>
+                <strong className='has-text-white'>Notre objectif actuel</strong> est de continuer de farmer Naxxramas en 1 soirée et de s’organiser pour faire le meilleur roster possible pour The Burning Crusade en restant sur 2 soirs de raid par semaine (sans faire de “speedrun” pour autant).
               </p>
             </div>
             <div className='box'>
-              <h2 className='title'>Jours de raids</h2>
+              <h2 className='title '>Jours de raids</h2>
               <p className='content '>
-            Nous raidons à Naxxramas le Mercredi et le Dimanche à partir de 21h.<br/>
-            Des raids AQ40 / BWL / ZG / AQ20 optionnels sont également proposés dans la semaine avec des PU.<br/>
+                <strong className='has-text-white'>Soir de Raid obligatoire :</strong>  Mercredi 20h45 (Naxxramass 15/15)<br/>
+                (Si l’ID n’est pas clean en un soir, la suite est le Dimanche 20h45 et est obligatoire).
               </p>
-            </div>
-            <div className='box'>
-              <h2 className='title'>Charte de Guilde</h2>
-              <p className='content'>
-            Notre charte de guilde est consultable <a href='https://docs.google.com/document/d/e/2PACX-1vQIYi9AFtHWRXcnY1q6Vd_PoYCofkgefp1KlFVAAmec7Ng8ahZRBiajFECZqguWrHGvk51D91jZOxgs/pub'>ici</a>.
+              <p className='content '>
+                <strong className='has-text-white'>Soirs de Raid optionnels :</strong> Vendredi 21h (Gbid AQ40) - Jeudi 21h BWL - Dimanche 21h MC
               </p>
             </div>
 

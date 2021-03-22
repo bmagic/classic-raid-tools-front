@@ -95,8 +95,6 @@ class PresencesList extends React.Component {
         <div className='field'>
           <div className="select is-small" value={instance} onChange={(e) => this.onInstanceChange(e.target.value)}>
             <select>
-              <option value='naxxramas+bwl+aq40'>Naxxramas + BWL + AQ40</option>
-              <option value='bwl+aq40'>BWL + AQ40</option>
               <option value='naxxramas'>Naxxramas</option>
               <option value='aq40'>AQ40</option>
               <option value='aq20'>AQ20</option>
@@ -159,7 +157,7 @@ class PresencesList extends React.Component {
             <tbody>
               {userPercentArray.map((array) => {
                 const key = array[0]
-                if (!(usersList[key]?.roles?.includes('member')) && !(usersList[key]?.roles?.includes('apply')) && !(usersList[key]?.roles?.includes('casu'))) return null
+                if (!(usersList[key]?.roles?.includes('member')) && !(usersList[key]?.roles?.includes('casu'))) return null
 
                 if (spec !== '' && charactersList[key] === undefined) return null
                 if (wClass !== '' && charactersList[key] === undefined) return null
@@ -179,13 +177,13 @@ class PresencesList extends React.Component {
                       if (presencesList[key][raid] && presencesList[key][raid].status === 'ok') {
                         return <td className='has-background-success has-text-centered' key={raid} title={presencesList[key][raid]?.characterId ? presencesList[key][raid]?.characterId?.name : 'Personnage inconnu'}>{presencesList[key][raid]?.characterId && !presencesList[key][raid]?.characterId?.main && <span className='has-text-black'>R</span>}</td>
                       } else if (presencesList[key][raid] && presencesList[key][raid].status === 'bench') {
-                        if (user && user.roles && user.roles.includes('modify_raid')) {
+                        if (user && user.roles && user.roles.includes('admin')) {
                           return <td className='has-background-warning' key={raid} onClick={() => this.props.dispatch({ type: 'DELETE_PRESENCE_BENCH', id: presencesList[key][raid]._id, instance: raidsList[raid].instance })}/>
                         } else {
                           return <td className='has-background-warning' key={raid}/>
                         }
                       } else {
-                        if (user && user.roles && user.roles.includes('modify_raid')) {
+                        if (user && user.roles && user.roles.includes('admin')) {
                           return <td className='has-background-danger' key={raid} onClick={() => this.props.dispatch({ type: 'CREATE_PRESENCE_BENCH', presence: { userId: usersList[key]._id, status: 'bench', reportId: raid, date: raidsList[raid].date, instance: raidsList[raid].instance } })}/>
                         } else {
                           return <td className='has-background-danger' key={raid}/>
