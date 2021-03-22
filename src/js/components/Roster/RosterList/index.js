@@ -53,19 +53,19 @@ class RosterList extends React.Component {
           <hr/>
           <div className='columns is-multiline'>
             <div className='column is-4 has-text-centered'>
-              <h2 className='subtitle'>Tank: {roleCount.tank}/3</h2>
-              <span>{(roleCount.tank / 3 * 100).toFixed(0)}%</span>
-              <progress className={`progress ${roleCount.tank / 3 < 0.5 ? 'is-danger' : roleCount.tank / 3 < 0.7 ? 'is-warning' : 'is-success'}`} value={roleCount.tank} max={3}/>
+              <h2 className='subtitle'>Tank: {roleCount.tank}/4</h2>
+              <span>{(roleCount.tank / 4 * 100).toFixed(0)}%</span>
+              <progress className={`progress ${roleCount.tank / 4 < 0.5 ? 'is-danger' : roleCount.tank / 4 < 0.7 ? 'is-warning' : 'is-success'}`} value={roleCount.tank} max={4}/>
             </div>
             <div className='column is-4 has-text-centered'>
-              <h2 className='subtitle'>Heal: {roleCount.heal}/10</h2>
-              <span>{(roleCount.heal / 10 * 100).toFixed(0)}%</span>
-              <progress className={`progress ${roleCount.heal / 10 < 0.5 ? 'is-danger' : roleCount.heal / 10 < 0.7 ? 'is-warning' : 'is-success'}`} value={roleCount.heal} max={10}/>
+              <h2 className='subtitle'>Heal: {roleCount.heal}/12</h2>
+              <span>{(roleCount.heal / 12 * 100).toFixed(0)}%</span>
+              <progress className={`progress ${roleCount.heal / 12 < 0.5 ? 'is-danger' : roleCount.heal / 12 < 0.7 ? 'is-warning' : 'is-success'}`} value={roleCount.heal} max={12}/>
             </div>
             <div className='column is-4 has-text-centered'>
-              <h2 className='subtitle'>Dps: {roleCount.dd + roleCount.cac}/27</h2>
-              <span>{((roleCount.dd + roleCount.cac) / 27 * 100).toFixed(0)}%</span>
-              <progress className={`progress ${(roleCount.dd + roleCount.cac) / 27 < 0.5 ? 'is-danger' : (roleCount.dd + roleCount.cac) / 27 < 0.7 ? 'is-warning' : 'is-success'}`} value={roleCount.dd + roleCount.cac} max={27}/>
+              <h2 className='subtitle'>Dps: {roleCount.dd + roleCount.cac}/24</h2>
+              <span>{((roleCount.dd + roleCount.cac) / 24 * 100).toFixed(0)}%</span>
+              <progress className={`progress ${(roleCount.dd + roleCount.cac) / 24 < 0.5 ? 'is-danger' : (roleCount.dd + roleCount.cac) / 24 < 0.7 ? 'is-warning' : 'is-success'}`} value={roleCount.dd + roleCount.cac} max={24}/>
             </div>
           </div>
         </div>}

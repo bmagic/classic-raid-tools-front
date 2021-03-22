@@ -32,13 +32,15 @@ class LastItems extends React.Component {
       <div className='last-items '>
         {lastItems.map((lastItem) => {
           if (!lastItem.characterId) return null
-          if (!lastItem.loot) {
-            let isToken = false
-            Object.keys(tokens).map((wid) => {
-              if (tokens[wid].includes(lastItem.wid)) { isToken = true }
-            })
-            if (isToken === false) { return null }
-          }
+
+          let isToken = false
+          Object.keys(tokens).map((wid) => {
+            if (tokens[wid].includes(lastItem.wid)) {
+              isToken = true
+            }
+          })
+          if (isToken === false) { return null }
+
           return <div key={lastItem._id}>
             <Item wid={lastItem.wid}/> par <Link to={`/character/${lastItem.characterId.name}`}><a>{lastItem.characterId.name}</a></Link>
           </div>

@@ -34,60 +34,8 @@ function * updateRoles (action) {
   yield * request('PUT', `/v1/users/roles/${action.id}`, [{ type: 'GET_USERS' }], { roles: action.roles })
 }
 
-function * updateMdC (action) {
-  yield * request('PUT', `/v1/users/mdc/${action.id}`, [{ type: 'GET_USERS' }], { mdc: action.mdc })
-}
-
-function * getNextRaids () {
-  yield * request('GET', '/v1/raids/next', [{ type: 'GET_NEXT_RAIDS_SUCCESS' }])
-}
-
-function * getRaids () {
-  yield * request('GET', '/v1/raids', [{ type: 'GET_RAIDS_SUCCESS' }])
-}
-
-function * createRaid (action) {
-  yield * request('POST', '/v1/raids', [{ type: 'GET_NEXT_RAIDS' }], { date: action.date, instance: action.instance })
-}
-
-function * getRaid (action) {
-  yield * request('GET', `/v1/raids/${action.id}`, [{ type: 'GET_RAID_SUCCESS' }])
-}
-
-function * createRegistration (action) {
-  yield * request('POST', '/v1/raids/registration', [{ type: 'GET_REGISTRATIONS', raidId: action.raidId }, { type: 'GET_NEXT_RAIDS' }], { characterId: action.characterId, raidId: action.raidId, status: action.status, favorite: action.favorite })
-}
-
-function * updateRegistration (action) {
-  yield * request('PUT', `/v1/raids/registration/${action.id}`, [{ type: 'GET_REGISTRATIONS', raidId: action.raidId }], action.registration)
-}
-
-function * deleteRegistration (action) {
-  yield * request('DELETE', `/v1/raids/registration/${action.id}`, [{ type: 'GET_REGISTRATIONS', raidId: action.raidId }])
-}
-
-function * getRegistrations (action) {
-  yield * request('GET', `/v1/raids/${action.raidId}/registrations`, [{ type: 'GET_REGISTRATIONS_SUCCESS', raidId: action.raidId }])
-}
-
-function * getMissingRegistrations (action) {
-  yield * request('GET', `/v1/raids/${action.raidId}/missing-registrations`, [{ type: 'GET_MISSING_REGISTRATIONS_SUCCESS' }])
-}
-
-function * getRegistrationLogs (action) {
-  yield * request('GET', `/v1/raids/${action.raidId}/registration-logs`, [{ type: 'GET_REGISTRATION_LOGS_SUCCESS' }])
-}
-
 function * updateUser (action) {
   yield * request('PUT', '/v1/user', [{ type: 'GET_USER' }], action.user)
-}
-
-function * updateRaid (action) {
-  yield * request('PUT', `/v1/raids/${action.id}`, [], action.raid)
-}
-
-function * deleteRaid (action) {
-  yield * request('DELETE', `/v1/raids/${action.id}`, [{ type: 'GET_NEXT_RAIDS' }])
 }
 
 function * setUserMainCharacter (action) {
@@ -147,58 +95,7 @@ function * getDebriefRaids (action) {
 function * getDebrief (action) {
   yield * request('GET', `/v1/debriefs/${action.instance}/${action.date}`, [{ type: 'GET_DEBRIEF_SUCCESS' }])
 }
-function * createLoot (action) {
-  yield * request('POST', '/v1/loots', [{ type: 'GET_LOOTS', filter: action.filter }], action.loot)
-}
-function * updateLoot (action) {
-  yield * request('PUT', `/v1/loots/${action.id}`, [{ type: 'GET_LOOTS', filter: action.filter }], action.loot)
-}
-function * updateLootAssign (action) {
-  yield * request('PUT', `/v1/loots/${action.id}/assign-text`, [{ type: 'GET_LOOTS', filter: action.filter }], { value: action.value })
-}
 
-function * setMdcClassSpec (action) {
-  yield * request('PUT', `/v1/loots/${action.id}/mdc`, [{ type: 'GET_LOOTS', filter: action.filter }], { value: action.value })
-}
-
-function * getLoots (action) {
-  yield * request('GET', `/v1/loots/?
-${action.filter && action.filter.instance ? `&instance=${action.filter.instance}` : ''}
-${action.filter && action.filter.slot ? `&slot=${action.filter.slot}` : ''}
-${action.filter && action.filter.classSpec ? `&classSpec=${action.filter.classSpec}` : ''}
-${action.filter && action.filter.whClass ? `&whClass=${action.filter.whClass}` : ''}
-${action.filter && action.filter.whSubClass ? `&whSubClass=${action.filter.whSubClass}` : ''}`
-
-  , [{ type: 'GET_LOOTS_SUCCESS' }])
-}
-
-function * deleteLoot (action) {
-  yield * request('DELETE', `/v1/loots/${action.id}`, [{ type: 'GET_LOOTS', filter: action.filter }])
-}
-
-function * setLootNeed (action) {
-  yield * request('PUT', '/v1/loots/need', [{ type: 'GET_LOOTS', filter: action.filter }], { wid: action.wid, type: action.ltype })
-}
-function * getLootsNeeds () {
-  yield * request('GET', '/v1/loots/needs', [{ type: 'GET_LOOTS_NEEDS_SUCCESS' }])
-}
-
-function * getUserLootsNeeds () {
-  yield * request('GET', '/v1/loots/user/needs', [{ type: 'GET_USER_LOOTS_NEEDS_SUCCESS' }])
-}
-function * deleteUserLootNeed (action) {
-  yield * request('DELETE', `/v1/loots/needs/${action.id}`, [{ type: 'GET_USER_LOOTS_NEEDS' }])
-}
-
-function * getUserAvailabilities () {
-  yield * request('GET', '/v1/availabilities', [{ type: 'GET_USER_AVAILABILITIES_SUCCESS' }])
-}
-function * setAvailability (action) {
-  yield * request('PUT', '/v1/availabilities', [{ type: 'GET_USER_AVAILABILITIES' }], { day: action.day, status: action.status })
-}
-function * getAvailabilities () {
-  yield * request('GET', '/v1/availabilities/all', [{ type: 'GET_AVAILABILITIES_SUCCESS' }])
-}
 function * getLastItems () {
   yield * request('GET', '/v1/items/last', [{ type: 'GET_LAST_ITEMS_SUCCESS' }])
 }
@@ -211,9 +108,6 @@ function * getProfessionData (action) {
   yield * request('GET', `/v1/professions/${action.profession}`, [{ type: 'GET_PROFESSION_DATA_SUCCESS' }], { data: action.data })
 }
 
-function * getInstanceStats (action) {
-  yield * request('GET', '/v1/presences/stats', [{ type: 'GET_INSTANCE_STATS_SUCCESS' }])
-}
 function * getAttendances (action) {
   yield * request('GET', '/v1/attendances', [{ type: 'GET_ATTENDANCES_SUCCESS' }])
 }

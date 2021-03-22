@@ -168,8 +168,7 @@ class PresencesList extends React.Component {
                 return (
                   <tr key={key}>
                     <td className='is-size-7'>
-                      {usersList[key].username}
-                      {usersList[key]?.roles?.includes('apply') && <sup>a</sup>}
+                      {usersList[key]._id && charactersList[usersList[key]._id] ? charactersList[usersList[key]._id].name : usersList[key].username}
                       {usersList[key]?.roles?.includes('casu') && <sup>c</sup>}
                     </td>
                     <td>{(userPercent[key] * 100).toFixed(0)}%</td>
